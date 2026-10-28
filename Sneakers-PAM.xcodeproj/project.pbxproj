@@ -6,10 +6,23 @@
 	objectVersion = 90;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BBBD178E30925217005E64B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* ContentView.swift */; };
+		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
+		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
+		BBBD179830925620005E64B7 /* SneakersPAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD179730925620005E64B7 /* SneakersPAMTests.swift */; };
+		BBBD17A330925620005E64B7 /* SneakersPAMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* Sneakers-PAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sneakers-PAM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBBD178C30925217005E64B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
 		BBBD179530925620005E64B7 /* Sneakers-PAMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sneakers-PAMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBBD179730925620005E64B7 /* SneakersPAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMTests.swift; sourceTree = "<group>"; };
 		BBBD17A030925620005E64B7 /* Sneakers-PAMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sneakers-PAMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -56,6 +69,9 @@
 				BBBD179630925620005E64B7 /* Sneakers-PAMTests */,
 				BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */,
 				000000000000000000000020 /* Products */,
+				BBBD17A7309257D8005E64B7 /* Tests */,
+				BBBD17A8309257D8005E64B7 /* UITests */,
+				BBBD17A9309257DB005E64B7 /* App */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +83,48 @@
 				BBBD17A030925620005E64B7 /* Sneakers-PAMUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BBBD17A7309257D8005E64B7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				BBBD179730925620005E64B7 /* SneakersPAMTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		BBBD17A8309257D8005E64B7 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		BBBD17A9309257DB005E64B7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BBBD17AA309257DD005E64B7 /* Shell */,
+				BBBD17AB309257DD005E64B7 /* Resources */,
+				BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BBBD17AA309257DD005E64B7 /* Shell */ = {
+			isa = PBXGroup;
+			children = (
+				BBBD178C30925217005E64B7 /* ContentView.swift */,
+			);
+			path = Shell;
+			sourceTree = "<group>";
+		};
+		BBBD17AB309257DD005E64B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BBBD178B30925217005E64B7 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +230,7 @@
 		000000000000000140000000 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				BBBD179030925217005E64B7 /* Assets.xcassets in Resources */,
 			);
 		};
 		BBBD179330925620005E64B7 /* Resources */ = {
@@ -190,16 +249,20 @@
 		000000000000000120000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BBBD178E30925217005E64B7 /* ContentView.swift in Sources */,
+				BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */,
 			);
 		};
 		BBBD179130925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BBBD179830925620005E64B7 /* SneakersPAMTests.swift in Sources */,
 			);
 		};
 		BBBD179C30925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BBBD17A330925620005E64B7 /* SneakersPAMUITests.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
@@ -363,7 +426,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.sneakers-pam";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.apple.sneakers-pam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -404,7 +467,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.sneakers-pam";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.apple.sneakers-pam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -422,14 +485,13 @@
 		BBBD179A30925620005E64B7 /* Debug configuration for PBXNativeTarget "Sneakers-PAMTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				MACOSX_DEPLOYMENT_TARGET = 26.7;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.apple.Sneakers-PAMTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -447,14 +509,13 @@
 		BBBD179B30925620005E64B7 /* Release configuration for PBXNativeTarget "Sneakers-PAMTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				MACOSX_DEPLOYMENT_TARGET = 26.7;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.apple.Sneakers-PAMTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -478,7 +539,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				MACOSX_DEPLOYMENT_TARGET = 26.7;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.apple.Sneakers-PAMUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -501,7 +562,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
 				MACOSX_DEPLOYMENT_TARGET = 26.7;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.apple.Sneakers-PAMUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;

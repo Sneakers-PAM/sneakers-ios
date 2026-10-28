@@ -4,8 +4,8 @@
 import Foundation
 import Testing
 
-struct Sneakers_PAMTests {
+struct SneakersPAMTests {
     @Test func appBundleIdentifierIsStable() {
-        #expect(Bundle.main.bundleIdentifier == "com.therabbithole.app.ios.sneakers-pam")
+        #expect(Bundle.main.bundleIdentifier == "com.therabbithole.app.apple.sneakers-pam")
     }
 }

@@ -3,15 +3,15 @@
 
 import XCTest
 
-final class Sneakers_PAMUITests: XCTestCase {
-    private static let appBundleIdentifier = "com.therabbithole.app.ios.sneakers-pam"
+final class SneakersPAMUITests: XCTestCase {
+    private static let appBundleIdentifier = "com.therabbithole.app.apple.sneakers-pam"
 
-    override func setUpWithError() throws {
+    override func setUp() {
         continueAfterFailure = false
     }
 
     @MainActor
-    func testLaunchShowsContent() throws {
+    func testLaunchShowsContent() {
         let app = XCUIApplication(bundleIdentifier: Self.appBundleIdentifier)
         app.launch()
 
