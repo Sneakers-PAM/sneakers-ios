@@ -1,0 +1,81 @@
+name: Swift CI
+# Pull requests only, and not while the PR is a draft. There is no push trigger:
+# the PR run already tested the tree being merged.
+#
+# Lint and format run on ubuntu with pinned release binaries, each checked against
+# the SHA-256 GitHub records for the release asset, so the versions never drift
+# with a runner image. The macOS job (billed at a multiple of an ubuntu minute)
+# starts only after lint passes. It runs xcodebuild on an iPhone and an iPad
+# simulator when the repo has an Xcode project, otherwise swift test.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  lint:
+    name: 🧹 Lint
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SWIFTLINT_VERSION: 0.65.1
+      # SHA-256 of swiftlint_linux_amd64.zip. Update it together with SWIFTLINT_VERSION.
+      SWIFTLINT_SHA256: caeed6f4a679c35539ffaf124f6c4ab4a8416917f7d8796279dc52b74026059d
+      SWIFTFORMAT_VERSION: 0.64.4
+      # SHA-256 of swiftformat_linux.zip. Update it together with SWIFTFORMAT_VERSION.
+      SWIFTFORMAT_SHA256: d2ca3c1017bd6421871ac9728f48e0485814e06142bd5b4f7f4a9c76f7fd9c5f
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v6
+      - name: 🧰 Install SwiftLint and SwiftFormat
+        run: |
+          set -euo pipefail
+          bin="$RUNNER_TEMP/swift-lint/bin"
+          mkdir -p "$bin"
+          curl -sSfL -o "$RUNNER_TEMP/swiftlint.zip" \
+            "https://github.com/realm/SwiftLint/releases/download/${SWIFTLINT_VERSION}/swiftlint_linux_amd64.zip"
+          echo "${SWIFTLINT_SHA256}  $RUNNER_TEMP/swiftlint.zip" | sha256sum -c -
+          curl -sSfL -o "$RUNNER_TEMP/swiftformat.zip" \
+            "https://github.com/nicklockwood/SwiftFormat/releases/download/${SWIFTFORMAT_VERSION}/swiftformat_linux.zip"
+          echo "${SWIFTFORMAT_SHA256}  $RUNNER_TEMP/swiftformat.zip" | sha256sum -c -
+          unzip -q -o "$RUNNER_TEMP/swiftlint.zip" -d "$RUNNER_TEMP/swiftlint"
+          unzip -q -o "$RUNNER_TEMP/swiftformat.zip" -d "$RUNNER_TEMP/swiftformat"
+          # The static build needs no Swift runtime on the runner.
+          install -m 0755 "$RUNNER_TEMP/swiftlint/swiftlint-static" "$bin/swiftlint"
+          install -m 0755 "$RUNNER_TEMP/swiftformat/swiftformat_linux" "$bin/swiftformat"
+          echo "$bin" >> "$GITHUB_PATH"
+      - name: 🧹 SwiftLint
+        run: swiftlint lint --strict
+      - name: 🎨 SwiftFormat
+        if: ${{ !cancelled() }}
+        run: swiftformat --lint .
+  test:
+    name: 🧪 Build & Test
+    needs: lint
+    if: github.event.pull_request.draft == false
+    runs-on: macos-26
+    timeout-minutes: 30
+    env:
+      # The shared scheme of the app's Xcode project; unused for a package.
+      SCHEME: sneakers-ios
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v6
+      - name: 🧪 Test
+        run: |
+          set -euo pipefail
+          if ls -d ./*.xcodeproj >/dev/null 2>&1; then
+            for device in 'iPhone 17' 'iPad (A16)'; do
+              xcodebuild test -scheme "$SCHEME" \
+                -destination "platform=iOS Simulator,name=${device}"
+            done
+          elif [ -f Package.swift ]; then
+            swift test
+          else
+            echo "No Xcode project or Package.swift yet; nothing to build."
+          fi

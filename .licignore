@@ -1,0 +1,9 @@
+# GoLic, for more details see: https://github.com/Bugs5382/golic
+# Ignore everything
+*
+
+# But inject license into Go, proto, SQL and Swift sources...
+!*.go
+!*.proto
+!*.sql
+!*.swift

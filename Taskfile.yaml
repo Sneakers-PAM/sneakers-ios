@@ -1,0 +1,44 @@
+version: '3'
+vars:
+  GOLIC_VERSION: v0.3.0
+  COMMON_LIC: "2026 The Sneakers-PAM Authors"
+  TEMPLATE_LIC: "spdx-apache2"
+  # Set to the app's shared scheme once the Xcode project exists.
+  SCHEME: sneakers-ios
+tasks:
+  default:
+    cmds:
+      - task: lint
+  format:
+    desc: Format Swift sources
+    cmds:
+      - swiftformat .
+  lint:
+    desc: Run SwiftLint and the SwiftFormat check
+    cmds:
+      - swiftlint lint --strict
+      - swiftformat --lint .
+  lint-init:
+    desc: Install lint dependencies
+    cmds:
+      - brew install swiftlint swiftformat gitleaks
+  test:
+    desc: Run the tests (swift test for a package, xcodebuild on an iPhone and an iPad simulator for an app)
+    cmds:
+      - |
+        if ls -d ./*.xcodeproj >/dev/null 2>&1; then
+          xcodebuild test -scheme "{{.SCHEME}}" -destination 'platform=iOS Simulator,name=iPhone 17'
+          xcodebuild test -scheme "{{.SCHEME}}" -destination 'platform=iOS Simulator,name=iPad (A16)'
+        else
+          swift test
+        fi
+  license:
+    desc: Verify every source file carries the Apache-2.0 license header (CI; never writes).
+    cmds:
+      - go install github.com/Bugs5382/golic/cmd/golic@{{.GOLIC_VERSION}}
+      - golic inject -t {{.TEMPLATE_LIC}} -c "{{.COMMON_LIC}}" --dry -x
+  license:fix:
+    desc: Inject the Apache-2.0 header into any source file missing it.
+    cmds:
+      - go install github.com/Bugs5382/golic/cmd/golic@{{.GOLIC_VERSION}}
+      - golic inject -t {{.TEMPLATE_LIC}} -c "{{.COMMON_LIC}}"

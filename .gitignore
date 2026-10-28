@@ -1,0 +1,17 @@
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcresult
+coverage.*
+
+# local design notes - never committed
+.local/
+
+.DS_Store
+.idea/
+.vscode/
+
+# local environment - copy .env.example to .env
+.env
