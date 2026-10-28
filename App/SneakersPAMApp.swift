@@ -7,7 +7,7 @@ import SwiftUI
 struct SneakersPAMApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
