@@ -17,3 +17,5 @@ jobs:
   checks:
     if: github.event.pull_request.draft != true
     uses: Sneakers-PAM/.github/.github/workflows/scrub.yml@main
+    with:
+      allowed-domains: Sneakers-PAM.app
