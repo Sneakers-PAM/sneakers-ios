@@ -48,24 +48,6 @@
 		BBBD17B03092623E005E64B7 /* SectionPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		000000000000000000000010 /* Sneakers-PAM */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sneakers-PAM";
-			sourceTree = "<group>";
-		};
-		BBBD179630925620005E64B7 /* Sneakers-PAMTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sneakers-PAMTests";
-			sourceTree = "<group>";
-		};
-		BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sneakers-PAMUITests";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		000000000000000130000000 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -88,9 +70,6 @@
 		000000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				000000000000000000000010 /* Sneakers-PAM */,
-				BBBD179630925620005E64B7 /* Sneakers-PAMTests */,
-				BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */,
 				000000000000000000000020 /* Products */,
 				BBBD17A7309257D8005E64B7 /* Tests */,
 				BBBD17A8309257D8005E64B7 /* UITests */,
@@ -166,9 +145,6 @@
 			);
 			buildRules = (
 			);
-			fileSystemSynchronizedGroups = (
-				000000000000000000000010 /* Sneakers-PAM */,
-			);
 			name = "Sneakers-PAM";
 			productName = MyApp;
 			productReference = 000000000000000000000120 /* Sneakers-PAM.app */;
@@ -187,9 +163,6 @@
 			dependencies = (
 				BBBD17B130925620005E64B7 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				BBBD179630925620005E64B7 /* Sneakers-PAMTests */,
-			);
 			name = "Sneakers-PAMTests";
 			productName = "Sneakers-PAMTests";
 			productReference = BBBD179530925620005E64B7 /* Sneakers-PAMTests.xctest */;
@@ -207,9 +180,6 @@
 			);
 			dependencies = (
 				BBBD17B330925620005E64B7 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */,
 			);
 			name = "Sneakers-PAMUITests";
 			productName = "Sneakers-PAMUITests";
