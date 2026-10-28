@@ -1,5 +1,7 @@
+// Copyright 2026 The Sneakers-PAM Authors
+// SPDX-License-Identifier: Apache-2.0
+
 import SwiftUI
-import Playgrounds
 
 struct ContentView: View {
     var body: some View {
@@ -10,8 +12,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-}
-
-#Playground {
-    _ = 1 + 2
 }
