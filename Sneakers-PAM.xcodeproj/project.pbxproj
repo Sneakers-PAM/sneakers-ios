@@ -8,6 +8,8 @@
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* Sneakers-PAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sneakers-PAM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBBD179530925620005E64B7 /* Sneakers-PAMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sneakers-PAMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBBD17A030925620005E64B7 /* Sneakers-PAMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sneakers-PAMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +18,30 @@
 			path = "Sneakers-PAM";
 			sourceTree = "<group>";
 		};
+		BBBD179630925620005E64B7 /* Sneakers-PAMTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Sneakers-PAMTests";
+			sourceTree = "<group>";
+		};
+		BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Sneakers-PAMUITests";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		000000000000000130000000 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		BBBD179230925620005E64B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		BBBD179D30925620005E64B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
 			);
@@ -31,6 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				000000000000000000000010 /* Sneakers-PAM */,
+				BBBD179630925620005E64B7 /* Sneakers-PAMTests */,
+				BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */,
 				000000000000000000000020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,6 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				000000000000000000000120 /* Sneakers-PAM.app */,
+				BBBD179530925620005E64B7 /* Sneakers-PAMTests.xctest */,
+				BBBD17A030925620005E64B7 /* Sneakers-PAMUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +90,42 @@
 			productReference = 000000000000000000000120 /* Sneakers-PAM.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BBBD179430925620005E64B7 /* Sneakers-PAMTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBBD179930925620005E64B7 /* Build configuration list for PBXNativeTarget "Sneakers-PAMTests" */;
+			buildPhases = (
+				BBBD179130925620005E64B7 /* Sources */,
+				BBBD179230925620005E64B7 /* Frameworks */,
+				BBBD179330925620005E64B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				BBBD179630925620005E64B7 /* Sneakers-PAMTests */,
+			);
+			name = "Sneakers-PAMTests";
+			productName = "Sneakers-PAMTests";
+			productReference = BBBD179530925620005E64B7 /* Sneakers-PAMTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BBBD179F30925620005E64B7 /* Sneakers-PAMUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBBD17A430925620005E64B7 /* Build configuration list for PBXNativeTarget "Sneakers-PAMUITests" */;
+			buildPhases = (
+				BBBD179C30925620005E64B7 /* Sources */,
+				BBBD179D30925620005E64B7 /* Frameworks */,
+				BBBD179E30925620005E64B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				BBBD17A130925620005E64B7 /* Sneakers-PAMUITests */,
+			);
+			name = "Sneakers-PAMUITests";
+			productName = "Sneakers-PAMUITests";
+			productReference = BBBD17A030925620005E64B7 /* Sneakers-PAMUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -71,11 +133,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2710;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					000000000000000100000000 = {
 						CreatedOnToolsVersion = 26.3;
+					};
+					BBBD179430925620005E64B7 = {
+						CreatedOnToolsVersion = 27.1;
+					};
+					BBBD179F30925620005E64B7 = {
+						CreatedOnToolsVersion = 27.1;
 					};
 				};
 			};
@@ -94,6 +162,8 @@
 			projectRoot = "";
 			targets = (
 				000000000000000100000000 /* Sneakers-PAM */,
+				BBBD179430925620005E64B7 /* Sneakers-PAMTests */,
+				BBBD179F30925620005E64B7 /* Sneakers-PAMUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -104,10 +174,30 @@
 			files = (
 			);
 		};
+		BBBD179330925620005E64B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		BBBD179E30925620005E64B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		000000000000000120000000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		BBBD179130925620005E64B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		BBBD179C30925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 			);
@@ -284,7 +374,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -325,7 +415,103 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BBBD179A30925620005E64B7 /* Debug configuration for PBXNativeTarget "Sneakers-PAMTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sneakers-PAM.app/Sneakers-PAM";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		BBBD179B30925620005E64B7 /* Release configuration for PBXNativeTarget "Sneakers-PAMTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sneakers-PAM.app/Sneakers-PAM";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
+		BBBD17A530925620005E64B7 /* Debug configuration for PBXNativeTarget "Sneakers-PAMUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		BBBD17A630925620005E64B7 /* Release configuration for PBXNativeTarget "Sneakers-PAMUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.therabbithole.app.ios.Sneakers-PAMUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
 			};
 			name = Release;
 		};
@@ -345,6 +531,22 @@
 			buildConfigurations = (
 				000000000000000111000000 /* Debug configuration for PBXNativeTarget "Sneakers-PAM" */,
 				000000000000000112000000 /* Release configuration for PBXNativeTarget "Sneakers-PAM" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		BBBD179930925620005E64B7 /* Build configuration list for PBXNativeTarget "Sneakers-PAMTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBBD179A30925620005E64B7 /* Debug configuration for PBXNativeTarget "Sneakers-PAMTests" */,
+				BBBD179B30925620005E64B7 /* Release configuration for PBXNativeTarget "Sneakers-PAMTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		BBBD17A430925620005E64B7 /* Build configuration list for PBXNativeTarget "Sneakers-PAMUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBBD17A530925620005E64B7 /* Debug configuration for PBXNativeTarget "Sneakers-PAMUITests" */,
+				BBBD17A630925620005E64B7 /* Release configuration for PBXNativeTarget "Sneakers-PAMUITests" */,
 			);
 			defaultConfigurationName = Release;
 		};

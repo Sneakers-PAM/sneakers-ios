@@ -62,7 +62,7 @@ jobs:
     timeout-minutes: 30
     env:
       # The shared scheme of the app's Xcode project; unused for a package.
-      SCHEME: sneakers-ios
+      SCHEME: Sneakers-PAM
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v6
