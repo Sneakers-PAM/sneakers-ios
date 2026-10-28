@@ -11,10 +11,10 @@ final class SneakersPAMUITests: XCTestCase {
     }
 
     @MainActor
-    func testLaunchShowsContent() {
+    func testLaunchShowsHome() {
         let app = XCUIApplication(bundleIdentifier: Self.appBundleIdentifier)
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Hello, world!"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Home"].waitForExistence(timeout: 5))
     }
 }
