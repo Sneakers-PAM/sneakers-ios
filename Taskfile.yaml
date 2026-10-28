@@ -4,7 +4,7 @@ vars:
   COMMON_LIC: "2026 The Sneakers-PAM Authors"
   TEMPLATE_LIC: "spdx-apache2"
   # Set to the app's shared scheme once the Xcode project exists.
-  SCHEME: sneakers-ios
+  SCHEME: Sneakers-PAM
 tasks:
   default:
     cmds:
