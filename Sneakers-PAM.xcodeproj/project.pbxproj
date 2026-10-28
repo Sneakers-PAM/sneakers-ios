@@ -15,6 +15,12 @@
 		BBBD17AD30926228005E64B7 /* AppSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17AC30926228005E64B7 /* AppSectionTests.swift */; };
 		BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17AE3092623D005E64B7 /* AppSection.swift */; };
 		BBBD17B13092623E005E64B7 /* SectionPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17B03092623E005E64B7 /* SectionPlaceholderView.swift */; };
+		BBBD17B33092A4EE005E64B7 /* SneakerLoaderProgressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17B23092A4EE005E64B7 /* SneakerLoaderProgressTests.swift */; };
+		BBBD17B53092A4FB005E64B7 /* SneakerLoaderProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17B43092A4FB005E64B7 /* SneakerLoaderProgress.swift */; };
+		BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17B63092A51D005E64B7 /* SneakerLoaderView.swift */; };
+		BBBD17B93092A85A005E64B7 /* SplashContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17B83092A85A005E64B7 /* SplashContentTests.swift */; };
+		BBBD17BB3092A866005E64B7 /* SplashContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17BA3092A866005E64B7 /* SplashContent.swift */; };
+		BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17BC3092A86A005E64B7 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,12 @@
 		BBBD17AC30926228005E64B7 /* AppSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSectionTests.swift; sourceTree = "<group>"; };
 		BBBD17AE3092623D005E64B7 /* AppSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSection.swift; sourceTree = "<group>"; };
 		BBBD17B03092623E005E64B7 /* SectionPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPlaceholderView.swift; sourceTree = "<group>"; };
+		BBBD17B23092A4EE005E64B7 /* SneakerLoaderProgressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakerLoaderProgressTests.swift; sourceTree = "<group>"; };
+		BBBD17B43092A4FB005E64B7 /* SneakerLoaderProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakerLoaderProgress.swift; sourceTree = "<group>"; };
+		BBBD17B63092A51D005E64B7 /* SneakerLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakerLoaderView.swift; sourceTree = "<group>"; };
+		BBBD17B83092A85A005E64B7 /* SplashContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashContentTests.swift; sourceTree = "<group>"; };
+		BBBD17BA3092A866005E64B7 /* SplashContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashContent.swift; sourceTree = "<group>"; };
+		BBBD17BC3092A86A005E64B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +104,8 @@
 			children = (
 				BBBD179730925620005E64B7 /* SneakersPAMTests.swift */,
 				BBBD17AC30926228005E64B7 /* AppSectionTests.swift */,
+				BBBD17B23092A4EE005E64B7 /* SneakerLoaderProgressTests.swift */,
+				BBBD17B83092A85A005E64B7 /* SplashContentTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -120,6 +134,10 @@
 				BBBD178C30925217005E64B7 /* RootView.swift */,
 				BBBD17AE3092623D005E64B7 /* AppSection.swift */,
 				BBBD17B03092623E005E64B7 /* SectionPlaceholderView.swift */,
+				BBBD17B43092A4FB005E64B7 /* SneakerLoaderProgress.swift */,
+				BBBD17B63092A51D005E64B7 /* SneakerLoaderView.swift */,
+				BBBD17BA3092A866005E64B7 /* SplashContent.swift */,
+				BBBD17BC3092A86A005E64B7 /* SplashView.swift */,
 			);
 			path = Shell;
 			sourceTree = "<group>";
@@ -251,15 +269,21 @@
 		000000000000000120000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BBBD17BB3092A866005E64B7 /* SplashContent.swift in Sources */,
+				BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
 				BBBD17B13092623E005E64B7 /* SectionPlaceholderView.swift in Sources */,
 				BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */,
+				BBBD17B53092A4FB005E64B7 /* SneakerLoaderProgress.swift in Sources */,
+				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
 			);
 		};
 		BBBD179130925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BBBD17B93092A85A005E64B7 /* SplashContentTests.swift in Sources */,
+				BBBD17B33092A4EE005E64B7 /* SneakerLoaderProgressTests.swift in Sources */,
 				BBBD179830925620005E64B7 /* SneakersPAMTests.swift in Sources */,
 				BBBD17AD30926228005E64B7 /* AppSectionTests.swift in Sources */,
 			);
@@ -421,6 +445,7 @@
 		000000000000000111000000 /* Debug configuration for PBXNativeTarget "Sneakers-PAM" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 37PA6CT656;
@@ -428,6 +453,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -462,6 +488,7 @@
 		000000000000000112000000 /* Release configuration for PBXNativeTarget "Sneakers-PAM" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 37PA6CT656;
@@ -469,6 +496,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
