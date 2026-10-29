@@ -76,6 +76,7 @@
 		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
 		BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A733092F19500783AE2 /* BrowseModels.swift */; };
 		BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */; };
+		BBB37D27F937389CDEFFF0BE /* HealthCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D2AD1F1D2ECD0FD57BA94 /* HealthCards.swift */; };
 		BBE7F6923478E39956799140 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5B366313957322E8702695 /* HistoryView.swift */; };
 		BB141C2687A8450D7F02330E /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAEF7DE7E0C893E4DD24C48 /* HistoryModel.swift */; };
 		BB7B1CEE86490950FCA35038 /* EditSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2CC284FD141C8F4E51F83 /* EditSecretView.swift */; };
@@ -215,6 +216,7 @@
 		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
 		BB5D2A733092F19500783AE2 /* BrowseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModels.swift; sourceTree = "<group>"; };
 		BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModel.swift; sourceTree = "<group>"; };
+		BB3D2AD1F1D2ECD0FD57BA94 /* HealthCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCards.swift; sourceTree = "<group>"; };
 		BB5B366313957322E8702695 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		BBAEF7DE7E0C893E4DD24C48 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		BBA2CC284FD141C8F4E51F83 /* EditSecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSecretView.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			children = (
 				BB5D2A733092F19500783AE2 /* BrowseModels.swift */,
 				BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */,
+				BB3D2AD1F1D2ECD0FD57BA94 /* HealthCards.swift */,
 				BB5B366313957322E8702695 /* HistoryView.swift */,
 				BBAEF7DE7E0C893E4DD24C48 /* HistoryModel.swift */,
 				BBA2CC284FD141C8F4E51F83 /* EditSecretView.swift */,
@@ -695,6 +698,7 @@
 				BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */,
 				BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */,
 				BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */,
+				BBB37D27F937389CDEFFF0BE /* HealthCards.swift in Sources */,
 				BBE7F6923478E39956799140 /* HistoryView.swift in Sources */,
 				BB141C2687A8450D7F02330E /* HistoryModel.swift in Sources */,
 				BB7B1CEE86490950FCA35038 /* EditSecretView.swift in Sources */,

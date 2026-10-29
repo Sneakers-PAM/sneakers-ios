@@ -56,6 +56,11 @@ final class SecretDetailModel {
         self.secretID = secretID
     }
 
+    /// The secret once it has loaded.
+    var loadedDetail: SecretDetail? {
+        detail
+    }
+
     private var detail: SecretDetail? {
         if case let .loaded(detail) = phase {
             detail

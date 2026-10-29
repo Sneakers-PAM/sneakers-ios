@@ -75,7 +75,6 @@ struct SecretDetailView: View {
     private func loaded(_ detail: SecretDetail) -> some View {
         List {
             Section {
-                LabeledContent("Health", value: detail.summary.health.label)
                 if let path = detail.folderPath {
                     LabeledContent("Folder", value: path)
                 }
@@ -86,12 +85,15 @@ struct SecretDetailView: View {
                         .accessibilityIdentifier("noAccess")
                 }
             } else {
+                HeartbeatCard(model: model)
+                RotationCard(model: model)
                 leaseSection
                 Section("Fields") {
                     ForEach(model.fieldRows) { row in
                         FieldRowView(secretID: secretID, row: row)
                     }
                 }
+                LifecycleCard(model: model)
                 Section {
                     NavigationLink(value: HistoryRoute(secretID: secretID)) {
                         Label("History", systemImage: "clock.arrow.circlepath")

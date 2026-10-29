@@ -60,6 +60,15 @@ final class VaultUITests: XCTestCase {
         tapWhenSettled(row)
     }
 
+    /// Scrolls a long screen until the element is on it, since a list only builds the rows it shows.
+    private func scrollTo(_ app: XCUIApplication, _ identifier: String) -> XCUIElement {
+        let target = element(app, identifier)
+        for _ in 0 ..< 6 where !(target.exists && target.isHittable) {
+            app.swipeUp()
+        }
+        return target
+    }
+
     /// Goes from Home to the demo secret's detail screen.
     private func openDemoSecret(_ app: XCUIApplication) {
         openFolders(app)
@@ -209,6 +218,55 @@ final class VaultUITests: XCTestCase {
         copy.tap()
 
         XCTAssertTrue(element(app, "notice").waitForExistence(timeout: 5), "the copy notice did not show")
+    }
+
+    @MainActor
+    func testTheHeartbeatShowsItsStatusAndCanBeSwitchedOff() {
+        let app = launchSignedIn()
+        openDemoSecret(app)
+
+        XCTAssertTrue(element(app, "healthPill").waitForExistence(timeout: 8), "the heartbeat status is missing")
+        let toggle = scrollTo(app, "heartbeatToggle")
+        XCTAssertTrue(toggle.exists, "the heartbeat switch is missing")
+        XCTAssertEqual(toggle.value as? String, "1", "checking should start on")
+        toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.92, dy: 0.5)).tap()
+        XCTAssertTrue(
+            app.staticTexts["Checking is switched off for this secret."].waitForExistence(timeout: 8),
+            "the heartbeat did not switch off"
+        )
+    }
+
+    @MainActor
+    func testRotatingNowAsksFirstAndThenShowsItRotated() {
+        let app = launchSignedIn()
+        openDemoSecret(app)
+
+        let rotate = scrollTo(app, "rotateNow")
+        XCTAssertTrue(rotate.exists, "Rotate now is missing")
+        rotate.tap()
+        let confirm = scrollTo(app, "rotateConfirm")
+        XCTAssertTrue(confirm.waitForExistence(timeout: 5), "the confirmation is missing")
+        confirm.tap()
+
+        XCTAssertTrue(app.staticTexts["Rotated"].waitForExistence(timeout: 8), "the rotation did not show")
+    }
+
+    @MainActor
+    func testARetiredSecretShowsItAndCanBeRestored() {
+        let app = launchSignedIn()
+        openDemoSecret(app)
+
+        let retire = scrollTo(app, "retire")
+        XCTAssertTrue(retire.exists, "Retire is missing")
+        retire.tap()
+        let confirm = scrollTo(app, "retireConfirm")
+        XCTAssertTrue(confirm.waitForExistence(timeout: 5), "the confirmation is missing")
+        confirm.tap()
+
+        XCTAssertTrue(scrollTo(app, "retiredBanner").waitForExistence(timeout: 8), "the secret is not shown retired")
+        let reinstate = scrollTo(app, "reinstate")
+        reinstate.tap()
+        XCTAssertTrue(scrollTo(app, "retire").waitForExistence(timeout: 8), "the secret was not restored")
     }
 
     @MainActor
