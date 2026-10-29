@@ -15,6 +15,7 @@
             var rotatedAt: Date?
             var rotationOptOut = false
             var heartbeatOptOut = false
+            var redeemPolls = 0
             var savedRules: [AccessRule]?
             var addedFolders: [Folder] = []
             var renamedFolders: [String: String] = [:]
@@ -193,6 +194,22 @@
         func createSecret(_ secret: NewSecret, _: ServerContext) async throws -> String {
             state.withLock { $0.addedSecrets.append((secret.name, secret.folderID)) }
             return "s-new"
+        }
+
+        func prepareReveal(_ key: RevealKey, runID: String, _: ServerContext) async throws -> HeldReveal {
+            HeldReveal(
+                id: "use-\(key.secretID)", state: "PENDING", confirm: false,
+                expiresAt: Date().addingTimeInterval(600), runID: runID
+            )
+        }
+
+        func redeemReveal(useID _: String, _: ServerContext) async throws -> String {
+            let polls = state.withLock { state -> Int in
+                state.redeemPolls += 1
+                return state.redeemPolls
+            }
+            guard polls >= 2 else { throw VaultError.approvalPending }
+            return Self.revealedValue
         }
 
         func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {

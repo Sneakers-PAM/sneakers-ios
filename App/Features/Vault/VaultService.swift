@@ -76,6 +76,8 @@ nonisolated protocol VaultServicing: Sendable {
     func requestMove(_ request: MoveRequest, _ context: ServerContext) async throws
     func secretTypes(_ context: ServerContext) async throws -> [SecretType]
     func createSecret(_ secret: NewSecret, _ context: ServerContext) async throws -> String
+    func prepareReveal(_ key: RevealKey, runID: String, _ context: ServerContext) async throws -> HeldReveal
+    func redeemReveal(useID: String, _ context: ServerContext) async throws -> String
     func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion]
     /// An earlier version's value: the key names the secret, the field and the version.
     func revealVersion(_ key: RevealKey, _ context: ServerContext) async throws -> String
@@ -86,6 +88,7 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
     case noAccess
     case stepUpRequired
     case approvalRequired
+    case approvalPending
     case recoveryRoleRequired
     case retired
     case leaseHeld
@@ -102,6 +105,7 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
         case .noAccess: "You don't have access to that."
         case .stepUpRequired: "Confirm it's you with a code to continue."
         case .approvalRequired: "This secret needs approval before it can be revealed."
+        case .approvalPending: "Still waiting for approval."
         case .recoveryRoleRequired: "Reading or restoring an earlier version needs the recovery role."
         case .retired: "This secret is retired."
         case .leaseHeld: "Someone else has this checked out."

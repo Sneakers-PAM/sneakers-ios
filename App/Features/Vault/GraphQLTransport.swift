@@ -52,6 +52,10 @@ nonisolated enum GraphQLResponse {
         if let errors = object["errors"] as? [[String: Any]], let first = errors.first {
             let extensions = first["extensions"] as? [String: Any]
             let code = extensions?["code"] as? String ?? ""
+            // A use that is still waiting answers with a failed precondition naming its state, which is not a failure.
+            if code == "FAILED_PRECONDITION", (first["message"] as? String ?? "").contains("PENDING") {
+                throw VaultError.approvalPending
+            }
             throw VaultError(code: code, reason: extensions?["reason"] as? String)
         }
         guard let data = object["data"], !(data is NSNull),

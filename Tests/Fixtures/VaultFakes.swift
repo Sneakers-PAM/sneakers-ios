@@ -73,6 +73,11 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
 
     private(set) var savedSecretRules: [(secretID: String, rules: [AccessRule])] = []
     private(set) var savedFolderRules: [(folderID: String, update: RulesUpdate)] = []
+    var prepareResults: [Result<HeldReveal, VaultError>] = []
+    var redeemResults: [Result<String, VaultError>] = []
+
+    private(set) var prepared: [PreparedReveal] = []
+    private(set) var redeemed: [String] = []
     private(set) var rotations: [String] = []
     private(set) var retirements: [String] = []
     private(set) var reinstatements: [String] = []
@@ -212,6 +217,18 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         return createdSecretID
     }
 
+    func prepareReveal(_ key: RevealKey, runID: String, _: ServerContext) async throws -> HeldReveal {
+        prepared.append(PreparedReveal(secretID: key.secretID, fieldKey: key.fieldKey, runID: runID))
+        guard !prepareResults.isEmpty else { throw VaultError.unexpected }
+        return try prepareResults.removeFirst().get()
+    }
+
+    func redeemReveal(useID: String, _: ServerContext) async throws -> String {
+        redeemed.append(useID)
+        guard !redeemResults.isEmpty else { throw VaultError.approvalPending }
+        return try redeemResults.removeFirst().get()
+    }
+
     func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
         try versionsResult.get()
     }
@@ -227,6 +244,12 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         guard !restoreResults.isEmpty else { return }
         try restoreResults.removeFirst().get()
     }
+}
+
+struct PreparedReveal: Equatable {
+    let secretID: String
+    let fieldKey: String
+    let runID: String
 }
 
 struct AutomationRequest: Equatable {
