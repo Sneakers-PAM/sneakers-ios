@@ -258,3 +258,9 @@ final class MoveModel {
         }
     }
 }
+
+extension MoveModel: Identifiable {
+    nonisolated var id: String {
+        "move"
+    }
+}

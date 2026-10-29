@@ -31,6 +31,8 @@ struct FieldEditor: View {
     let definition: FieldDefinition
     @Binding var text: String
     let error: String?
+    /// Whether this is a new secret, where a sensitive field has no old value to keep.
+    var isNew = false
 
     @State private var showsSecret = false
 
@@ -41,7 +43,7 @@ struct FieldEditor: View {
                 Text(error)
                     .font(.footnote)
                     .foregroundStyle(.red)
-            } else if definition.isSensitive {
+            } else if definition.isSensitive, !isNew {
                 Text("Leave empty to keep the current value.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)

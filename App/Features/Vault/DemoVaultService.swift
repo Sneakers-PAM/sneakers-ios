@@ -17,7 +17,7 @@
             var heartbeatOptOut = false
             var addedFolders: [Folder] = []
             var renamedFolders: [String: String] = [:]
-            var addedSecretNames: [String] = []
+            var addedSecrets: [(name: String, folderID: String)] = []
             var editedName: String?
             var editedFields: [String: String] = [:]
         }
@@ -48,10 +48,20 @@
             let platform = Folder(id: "1", name: "Platform", parentId: nil, subtreeSecretCount: 2)
             let databases = Folder(id: "2", name: "Databases", parentId: "1", subtreeSecretCount: 2)
             let apps = Folder(id: "3", name: "Apps", parentId: nil, subtreeSecretCount: 1)
-            return [platform, databases, apps]
+            let extra = state.withLock { $0.addedFolders }
+            let renames = state.withLock { $0.renamedFolders }
+            return ([platform, databases, apps] + extra).map { folder in
+                guard let name = renames[folder.id] else { return folder }
+                return Folder(
+                    id: folder.id, name: name, parentId: folder.parentId,
+                    subtreeSecretCount: folder.subtreeSecretCount, canManage: true
+                )
+            }
         }
 
         func contents(ofFolder folderID: String, _: ServerContext) async throws -> FolderContents {
+            let added = state.withLock { $0.addedSecrets }.filter { $0.folderID == folderID }
+                .map { summary("added-\($0.name)", $0.name, views: 0) }
             switch folderID {
             case "3":
                 let vendor = SecretSummary(
@@ -59,13 +69,15 @@
                     lastHeartbeatResult: nil, retired: false, canRead: false, viewCount: 0, lastAccessedAt: nil
                 )
                 return FolderContents(
-                    secrets: [summary("s1", "DB admin", views: 42), vendor],
+                    secrets: [summary("s1", "DB admin", views: 42), vendor] + added,
                     types: [Self.databaseType]
                 )
             case "2":
-                return FolderContents(secrets: [summary("s2", "Deploy key", views: 17)], types: [Self.databaseType])
+                return FolderContents(
+                    secrets: [summary("s2", "Deploy key", views: 17)] + added, types: [Self.databaseType]
+                )
             default:
-                return FolderContents(secrets: [], types: [])
+                return FolderContents(secrets: added, types: [Self.databaseType])
             }
         }
 
@@ -178,7 +190,7 @@
         }
 
         func createSecret(_ secret: NewSecret, _: ServerContext) async throws -> String {
-            state.withLock { $0.addedSecretNames.append(secret.name) }
+            state.withLock { $0.addedSecrets.append((secret.name, secret.folderID)) }
             return "s-new"
         }
 

@@ -16,6 +16,7 @@ struct FolderContentView: View {
     @Environment(RevealCoordinator.self) private var reveal
     @State private var secrets: SecretListModel?
     @State private var search = ""
+    @State private var sheet: FolderSheet?
 
     init(folderID: String?, folders: FoldersModel, selection: Binding<String?>, pushesSecrets: Bool) {
         self.folderID = folderID
@@ -49,10 +50,63 @@ struct FolderContentView: View {
             .toolbar {
                 if folderID == nil {
                     AccountToolbarButton()
+                } else if secrets?.access.manage == true {
+                    ToolbarItem(placement: .primaryAction) { actionsMenu }
                 }
+            }
+            .sheet(item: $sheet) { sheet in
+                sheetContent(sheet)
             }
             .task { await secrets?.load(access) }
             .safeAreaInset(edge: .bottom) { CopyNotice() }
+    }
+
+    private var actionsMenu: some View {
+        Menu("Folder", systemImage: "ellipsis.circle") {
+            Button("New folder", systemImage: "folder.badge.plus") {
+                sheet = .name(FolderNameModel(mode: .create(parentID: folderID)))
+            }
+            .accessibilityIdentifier("newFolder")
+            Button("New secret", systemImage: "key.fill") { Task { await openNewSecret() } }
+                .accessibilityIdentifier("newSecret")
+            Button("Rename folder", systemImage: "pencil") { sheet = renameSheet() }
+                .accessibilityIdentifier("renameFolder")
+            Button("Move folder", systemImage: "folder") { sheet = moveSheet() }
+                .accessibilityIdentifier("moveFolder")
+        }
+        .accessibilityIdentifier("folderActions")
+    }
+
+    private func renameSheet() -> FolderSheet? {
+        guard let folderID, let folder = folders.tree.folder(folderID) else { return nil }
+        return .name(FolderNameModel(mode: .rename(id: folderID, currentName: folder.name)))
+    }
+
+    private func moveSheet() -> FolderSheet? {
+        guard let folderID, let folder = folders.tree.folder(folderID) else { return nil }
+        let subject = MoveModel.Subject.folder(id: folderID, name: folder.name, parentID: folder.parentId)
+        return .move(MoveModel(subject: subject, tree: folders.tree))
+    }
+
+    private func openNewSecret() async {
+        guard let folderID, let types = await CreateSecretModel.loadTypes(access) else { return }
+        sheet = .newSecret(CreateSecretModel(folderID: folderID, types: types))
+    }
+
+    @ViewBuilder
+    private func sheetContent(_ sheet: FolderSheet) -> some View {
+        switch sheet {
+        case let .name(model): FolderNameView(model: model) { refresh() }
+        case let .newSecret(model): CreateSecretView(model: model) { _ in refresh() }
+        case let .move(model): MoveView(model: model) { refresh() }
+        }
+    }
+
+    private func refresh() {
+        Task {
+            await folders.load(access)
+            await secrets?.load(access)
+        }
     }
 
     @ViewBuilder
@@ -203,5 +257,20 @@ private struct SecretRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("secret.\(secret.name)")
+    }
+}
+
+/// The sheet a folder screen is showing, if any.
+private enum FolderSheet: Identifiable {
+    case name(FolderNameModel)
+    case newSecret(CreateSecretModel)
+    case move(MoveModel)
+
+    var id: String {
+        switch self {
+        case .name: "name"
+        case .newSecret: "newSecret"
+        case .move: "move"
+        }
     }
 }

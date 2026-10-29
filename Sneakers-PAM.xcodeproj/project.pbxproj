@@ -81,6 +81,7 @@
 		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
 		BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A733092F19500783AE2 /* BrowseModels.swift */; };
 		BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */; };
+		BB79384FBC376ED9DD2FAAD4 /* FolderActionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD63BFBB4F837517C3C9C3A /* FolderActionViews.swift */; };
 		BB461A67F7A22D450275DB9C /* FolderEditModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D032787B3CC21748C1B81 /* FolderEditModels.swift */; };
 		BBCCCC61A914F22F528ED51E /* FolderMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4234CE16D6BCA38671075B /* FolderMove.swift */; };
 		BBB37D27F937389CDEFFF0BE /* HealthCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D2AD1F1D2ECD0FD57BA94 /* HealthCards.swift */; };
@@ -98,6 +99,8 @@
 		BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A853092F28400783AE2 /* SecretDetailView.swift */; };
 		BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A873092F28800783AE2 /* StepUpView.swift */; };
 		BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A893092F2B300783AE2 /* VaultUITests.swift */; };
+		BBDA2DA80F670A09406C6FA7 /* ManageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB51C71C2384F931319F73DE /* ManageUITests.swift */; };
+		BBA0B0F3E416B61294DC9E45 /* VaultUITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */; };
 		BB5D2A8C30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */; };
 		BB5D2A8E30934DA300783AE2 /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A8D30934DA300783AE2 /* FolderContentView.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
@@ -228,6 +231,7 @@
 		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
 		BB5D2A733092F19500783AE2 /* BrowseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModels.swift; sourceTree = "<group>"; };
 		BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModel.swift; sourceTree = "<group>"; };
+		BBD63BFBB4F837517C3C9C3A /* FolderActionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderActionViews.swift"; sourceTree = "<group>"; };
 		BB3D032787B3CC21748C1B81 /* FolderEditModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderEditModels.swift"; sourceTree = "<group>"; };
 		BB4234CE16D6BCA38671075B /* FolderMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderMove.swift; sourceTree = "<group>"; };
 		BB3D2AD1F1D2ECD0FD57BA94 /* HealthCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCards.swift; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 		BB5D2A853092F28400783AE2 /* SecretDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailView.swift; sourceTree = "<group>"; };
 		BB5D2A873092F28800783AE2 /* StepUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUpView.swift; sourceTree = "<group>"; };
 		BB5D2A893092F2B300783AE2 /* VaultUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultUITests.swift; sourceTree = "<group>"; };
+		BB51C71C2384F931319F73DE /* ManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManageUITests.swift"; sourceTree = "<group>"; };
+		BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultUITestCase.swift"; sourceTree = "<group>"; };
 		BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransportTests.swift; sourceTree = "<group>"; };
 		BB5D2A8D30934DA300783AE2 /* FolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentView.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -400,6 +406,7 @@
 			children = (
 				BB5D2A733092F19500783AE2 /* BrowseModels.swift */,
 				BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */,
+				BBD63BFBB4F837517C3C9C3A /* FolderActionViews.swift */,
 				BB3D032787B3CC21748C1B81 /* FolderEditModels.swift */,
 				BB4234CE16D6BCA38671075B /* FolderMove.swift */,
 				BB3D2AD1F1D2ECD0FD57BA94 /* HealthCards.swift */,
@@ -471,6 +478,8 @@
 			children = (
 				BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */,
 				BB5D2A893092F2B300783AE2 /* VaultUITests.swift */,
+				BB51C71C2384F931319F73DE /* ManageUITests.swift */,
+				BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */,
 			);
 			path = UITests;
 			sourceTree = "<group>";
@@ -719,6 +728,7 @@
 				BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */,
 				BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */,
 				BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */,
+				BB79384FBC376ED9DD2FAAD4 /* FolderActionViews.swift in Sources */,
 				BB461A67F7A22D450275DB9C /* FolderEditModels.swift in Sources */,
 				BBCCCC61A914F22F528ED51E /* FolderMove.swift in Sources */,
 				BBB37D27F937389CDEFFF0BE /* HealthCards.swift in Sources */,
@@ -827,6 +837,8 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */,
+				BBDA2DA80F670A09406C6FA7 /* ManageUITests.swift in Sources */,
+				BBA0B0F3E416B61294DC9E45 /* VaultUITestCase.swift in Sources */,
 				BBBD17A330925620005E64B7 /* SneakersPAMUITests.swift in Sources */,
 			);
 		};

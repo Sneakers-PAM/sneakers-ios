@@ -12,11 +12,20 @@ struct SecretDetailView: View {
     @Environment(RevealCoordinator.self) private var reveal
     @State private var model: SecretDetailModel
     @State private var editing: EditSecretModel?
+    @State private var moving: MoveModel?
 
     init(secretID: String, title: String) {
         self.secretID = secretID
         self.title = title
         _model = State(initialValue: SecretDetailModel(secretID: secretID))
+    }
+
+    private func openMove() async {
+        guard let detail = model.loadedDetail, let folderID = detail.summary.folderId,
+              let folders = try? await access.perform({ try await access.service.folders($0) })
+        else { return }
+        let subject = MoveModel.Subject.secret(id: secretID, name: detail.summary.name, folderID: folderID)
+        moving = MoveModel(subject: subject, tree: FolderTree(folders: folders))
     }
 
     private var userID: String {
@@ -45,7 +54,14 @@ struct SecretDetailView: View {
                         Button("Edit") { editing = model.makeEditModel() }
                             .accessibilityIdentifier("editSecret")
                     }
+                    ToolbarItem(placement: .secondaryAction) {
+                        Button("Move", systemImage: "folder") { Task { await openMove() } }
+                            .accessibilityIdentifier("moveSecret")
+                    }
                 }
+            }
+            .sheet(item: $moving) { move in
+                MoveView(model: move) { Task { await model.load(access) } }
             }
             .sheet(item: $editing) { draft in
                 EditSecretView(model: draft) { Task { await model.load(access) } }
