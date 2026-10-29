@@ -58,6 +58,14 @@
 		BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */; };
 		BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */; };
 		BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A593092F04200783AE2 /* VaultOperations.swift */; };
+		BB5D2A5C3092F0E700783AE2 /* HTTPAuthStepUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */; };
+		BB5D2A5E3092F10700783AE2 /* RevealFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */; };
+		BB5D2A603092F10800783AE2 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */; };
+		BB5D2A623092F10C00783AE2 /* VaultAccessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */; };
+		BB5D2A643092F11A00783AE2 /* RevealCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */; };
+		BB5D2A663092F12A00783AE2 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A653092F12A00783AE2 /* Clipboard.swift */; };
+		BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A673092F12D00783AE2 /* VaultAccess.swift */; };
+		BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
 		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
 		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
@@ -163,6 +171,14 @@
 		BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransport.swift; sourceTree = "<group>"; };
 		BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultService.swift; sourceTree = "<group>"; };
 		BB5D2A593092F04200783AE2 /* VaultOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultOperations.swift; sourceTree = "<group>"; };
+		BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuthStepUpTests.swift; sourceTree = "<group>"; };
+		BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealFakes.swift; sourceTree = "<group>"; };
+		BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTests.swift; sourceTree = "<group>"; };
+		BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultAccessTests.swift; sourceTree = "<group>"; };
+		BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCoordinatorTests.swift; sourceTree = "<group>"; };
+		BB5D2A653092F12A00783AE2 /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
+		BB5D2A673092F12D00783AE2 /* VaultAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultAccess.swift; sourceTree = "<group>"; };
+		BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCoordinator.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBBD178C30925217005E64B7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
@@ -291,6 +307,9 @@
 				BB5D2A493092EFD200783AE2 /* VaultModels.swift */,
 				BB5D2A513092F01D00783AE2 /* VaultService.swift */,
 				BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */,
+				BB5D2A653092F12A00783AE2 /* Clipboard.swift */,
+				BB5D2A673092F12D00783AE2 /* VaultAccess.swift */,
+				BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */,
 			);
 			path = Vault;
 			sourceTree = "<group>";
@@ -327,6 +346,10 @@
 				BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */,
 				BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */,
 				BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */,
+				BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */,
+				BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */,
+				BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */,
+				BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -428,6 +451,7 @@
 				BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */,
 				BB5D2A123092E0CA00783AE2 /* LockFakes.swift */,
 				BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */,
+				BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -563,6 +587,7 @@
 				BB5D29FE3092DBA500783AE2 /* AuthModels.swift in Sources */,
 				BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */,
 				BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */,
+				BB5D2A663092F12A00783AE2 /* Clipboard.swift in Sources */,
 				BB5D2A1B3092E0E300783AE2 /* AppLockModel.swift in Sources */,
 				BB5D2A3D3092E3D100783AE2 /* BrandFonts.swift in Sources */,
 				BB5D2A0E3092DE1900783AE2 /* SignInView.swift in Sources */,
@@ -572,6 +597,7 @@
 				BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
 				BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */,
+				BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */,
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
 				BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */,
 				BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */,
@@ -601,6 +627,7 @@
 				BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */,
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
 				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
+				BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */,
 			);
 		};
 		BBBD179130925620005E64B7 /* Sources */ = {
@@ -610,12 +637,14 @@
 				BB5D2A263092E1F100783AE2 /* ReminderPolicyTests.swift in Sources */,
 				BB5D2A3B3092E3C300783AE2 /* BrandFontsTests.swift in Sources */,
 				BB5D2A283092E1F400783AE2 /* QRCodeTests.swift in Sources */,
+				BB5D2A643092F11A00783AE2 /* RevealCoordinatorTests.swift in Sources */,
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
 				BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */,
 				BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */,
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
 				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
+				BB5D2A623092F10C00783AE2 /* VaultAccessTests.swift in Sources */,
 				BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */,
 				BBBD17B93092A85A005E64B7 /* SplashContentTests.swift in Sources */,
 				BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */,
@@ -635,7 +664,10 @@
 				BB5D2A133092E0CA00783AE2 /* LockFakes.swift in Sources */,
 				BB5D29FC3092DB6A00783AE2 /* SignInModelTests.swift in Sources */,
 				BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */,
+				BB5D2A5E3092F10700783AE2 /* RevealFakes.swift in Sources */,
+				BB5D2A5C3092F0E700783AE2 /* HTTPAuthStepUpTests.swift in Sources */,
 				BB5D29F83092DB5200783AE2 /* KeychainSessionStoreTests.swift in Sources */,
+				BB5D2A603092F10800783AE2 /* ClipboardTests.swift in Sources */,
 				BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */,
 				BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */,
 			);

@@ -89,5 +89,18 @@ extension SessionManager {
         func confirmSetup(on _: ServerURL, session _: AuthenticatedSession, code _: String) async throws {
             throw AuthError.unreachable
         }
+
+        func stepUp(
+            on _: ServerURL,
+            session _: AuthenticatedSession,
+            kind _: SecondFactorKind,
+            code _: String
+        ) async throws {
+            throw AuthError.unreachable
+        }
+
+        func sendStepUpEmail(on _: ServerURL, session _: AuthenticatedSession) async throws {
+            throw AuthError.unreachable
+        }
     }
 #endif
