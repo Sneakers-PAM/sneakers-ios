@@ -56,14 +56,17 @@
 		BB5D2A4C3092EFED00783AE2 /* VaultFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */; };
 		BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */; };
 		BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */; };
+		BBA1F43303F0051D9092C153 /* HTTPVaultSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4C620E497F7C4C2AA46C3 /* HTTPVaultSharingTests.swift */; };
 		BB8DAE691FBA8E33D1530DCC /* HTTPVaultFolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB35E83F6D17A86015062FD /* HTTPVaultFolderTests.swift */; };
 		BBEC3F51728B7B709561BA0F /* HTTPVaultLifecycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF9839DE6DBD956A74A3CBA /* HTTPVaultLifecycleTests.swift */; };
 		BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A513092F01D00783AE2 /* VaultService.swift */; };
 		BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */; };
 		BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */; };
 		BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */; };
+		BBAEADE703FC7A54C0521BAA /* HTTPVaultService+Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB8D61F87DF86B30CC44E88 /* HTTPVaultService+Sharing.swift */; };
 		BBA9F6842914585B1C78F0D2 /* HTTPVaultService+Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB70920357F783002DE6776A /* HTTPVaultService+Folders.swift */; };
 		BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A593092F04200783AE2 /* VaultOperations.swift */; };
+		BB25832144C45B513FB8AFAE /* VaultOperations+Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCE102BDC8550BE362F697E /* VaultOperations+Sharing.swift */; };
 		BBE8FC36295E316310CCAC3C /* VaultOperations+Folders.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6C79F02D449DB7B9EEE712 /* VaultOperations+Folders.swift */; };
 		BB5D2A5C3092F0E700783AE2 /* HTTPAuthStepUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */; };
 		BB5D2A5E3092F10700783AE2 /* RevealFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */; };
@@ -93,6 +96,7 @@
 		BBB7A610860735B24068E400 /* FieldComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2E400ED9D601240A288D6 /* FieldComponents.swift */; };
 		BB948E5676D8201F0E17ADDC /* EditSecretModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB134290052BF4FE22053B83 /* EditSecretModel.swift */; };
 		BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */; };
+		BB2C531B6DD39D8F6250FDAE /* DemoVaultService+Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C9A084CDC75EA418371BD /* DemoVaultService+Sharing.swift */; };
 		BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */; };
 		BB5D2A7C3092F26800783AE2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7B3092F26800783AE2 /* HomeView.swift */; };
 		BB5D2A7E3092F26A00783AE2 /* AccountToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */; };
@@ -208,14 +212,17 @@
 		BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFakes.swift; sourceTree = "<group>"; };
 		BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransportTests.swift; sourceTree = "<group>"; };
 		BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultServiceTests.swift; sourceTree = "<group>"; };
+		BBD4C620E497F7C4C2AA46C3 /* HTTPVaultSharingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPVaultSharingTests.swift"; sourceTree = "<group>"; };
 		BBB35E83F6D17A86015062FD /* HTTPVaultFolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultFolderTests.swift; sourceTree = "<group>"; };
 		BBF9839DE6DBD956A74A3CBA /* HTTPVaultLifecycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultLifecycleTests.swift; sourceTree = "<group>"; };
 		BB5D2A513092F01D00783AE2 /* VaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultService.swift; sourceTree = "<group>"; };
 		BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransport.swift; sourceTree = "<group>"; };
 		BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransport.swift; sourceTree = "<group>"; };
 		BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultService.swift; sourceTree = "<group>"; };
+		BBB8D61F87DF86B30CC44E88 /* HTTPVaultService+Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPVaultService+Sharing.swift"; sourceTree = "<group>"; };
 		BB70920357F783002DE6776A /* HTTPVaultService+Folders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPVaultService+Folders.swift"; sourceTree = "<group>"; };
 		BB5D2A593092F04200783AE2 /* VaultOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultOperations.swift; sourceTree = "<group>"; };
+		BBCE102BDC8550BE362F697E /* VaultOperations+Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultOperations+Sharing.swift"; sourceTree = "<group>"; };
 		BB6C79F02D449DB7B9EEE712 /* VaultOperations+Folders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultOperations+Folders.swift"; sourceTree = "<group>"; };
 		BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuthStepUpTests.swift; sourceTree = "<group>"; };
 		BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealFakes.swift; sourceTree = "<group>"; };
@@ -245,6 +252,7 @@
 		BBE2E400ED9D601240A288D6 /* FieldComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponents.swift; sourceTree = "<group>"; };
 		BB134290052BF4FE22053B83 /* EditSecretModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSecretModel.swift; sourceTree = "<group>"; };
 		BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVaultService.swift; sourceTree = "<group>"; };
+		BB4C9A084CDC75EA418371BD /* DemoVaultService+Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DemoVaultService+Sharing.swift"; sourceTree = "<group>"; };
 		BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultEnvironment.swift; sourceTree = "<group>"; };
 		BB5D2A7B3092F26800783AE2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountToolbarButton.swift; sourceTree = "<group>"; };
@@ -391,6 +399,7 @@
 				BB5D2A673092F12D00783AE2 /* VaultAccess.swift */,
 				BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */,
 				BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */,
+				BB4C9A084CDC75EA418371BD /* DemoVaultService+Sharing.swift */,
 				BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */,
 				BB5D2A873092F28800783AE2 /* StepUpView.swift */,
 			);
@@ -461,6 +470,7 @@
 				BB2BCBFA253D5A2545A84B32 /* SharingModelsTests.swift */,
 				BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */,
 				BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */,
+				BBD4C620E497F7C4C2AA46C3 /* HTTPVaultSharingTests.swift */,
 				BBB35E83F6D17A86015062FD /* HTTPVaultFolderTests.swift */,
 				BBF9839DE6DBD956A74A3CBA /* HTTPVaultLifecycleTests.swift */,
 				BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */,
@@ -570,8 +580,10 @@
 				BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */,
 				BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */,
 				BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */,
+				BBB8D61F87DF86B30CC44E88 /* HTTPVaultService+Sharing.swift */,
 				BB70920357F783002DE6776A /* HTTPVaultService+Folders.swift */,
 				BB5D2A593092F04200783AE2 /* VaultOperations.swift */,
+				BBCE102BDC8550BE362F697E /* VaultOperations+Sharing.swift */,
 				BB6C79F02D449DB7B9EEE712 /* VaultOperations+Folders.swift */,
 			);
 			path = Services;
@@ -748,6 +760,7 @@
 				BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */,
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
 				BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */,
+				BBAEADE703FC7A54C0521BAA /* HTTPVaultService+Sharing.swift in Sources */,
 				BBA9F6842914585B1C78F0D2 /* HTTPVaultService+Folders.swift in Sources */,
 				BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */,
 				BB5D2A2E3092E21600783AE2 /* QRCode.swift in Sources */,
@@ -780,9 +793,11 @@
 				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
 				BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */,
 				BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */,
+				BB25832144C45B513FB8AFAE /* VaultOperations+Sharing.swift in Sources */,
 				BBE8FC36295E316310CCAC3C /* VaultOperations+Folders.swift in Sources */,
 				BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */,
 				BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */,
+				BB2C531B6DD39D8F6250FDAE /* DemoVaultService+Sharing.swift in Sources */,
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
 				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
 				BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */,
@@ -801,6 +816,7 @@
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
 				BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */,
 				BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */,
+				BBA1F43303F0051D9092C153 /* HTTPVaultSharingTests.swift in Sources */,
 				BB8DAE691FBA8E33D1530DCC /* HTTPVaultFolderTests.swift in Sources */,
 				BBEC3F51728B7B709561BA0F /* HTTPVaultLifecycleTests.swift in Sources */,
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,

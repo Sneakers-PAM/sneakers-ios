@@ -8,13 +8,14 @@
     /// A vault of made-up data for the UI tests. Debug builds only, and only when a test launch argument asks for it.
     /// Its first reveal asks for a fresh second factor, so the step-up flow can be driven end to end.
     final nonisolated class DemoVaultService: VaultServicing, @unchecked Sendable {
-        private struct State {
+        struct State {
             var revealAttempts = 0
             var lease: Lease?
             var retired = false
             var rotatedAt: Date?
             var rotationOptOut = false
             var heartbeatOptOut = false
+            var savedRules: [AccessRule]?
             var addedFolders: [Folder] = []
             var renamedFolders: [String: String] = [:]
             var addedSecrets: [(name: String, folderID: String)] = []
@@ -22,7 +23,7 @@
             var editedFields: [String: String] = [:]
         }
 
-        private let state = OSAllocatedUnfairLock(initialState: State())
+        let state = OSAllocatedUnfairLock(initialState: State())
 
         static let revealedValue = "demo-value-123"
 

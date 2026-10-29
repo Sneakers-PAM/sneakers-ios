@@ -142,7 +142,7 @@ nonisolated struct HTTPVaultService: VaultServicing {
 
     // MARK: Answers
 
-    private struct NameNode: Decodable {
+    struct NameNode: Decodable {
         let id: String
         let name: String
     }

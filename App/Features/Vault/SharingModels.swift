@@ -102,6 +102,12 @@ nonisolated struct AccessRule: Equatable, Identifiable, Sendable {
     }
 }
 
+/// What a folder's rules save as: the rules, and the owners kept alongside them.
+nonisolated struct RulesUpdate: Equatable, Sendable {
+    var rules: [AccessRule]
+    var owners: [String]
+}
+
 /// A rule from a folder above, shown but not editable here.
 nonisolated struct InheritedRule: Equatable, Identifiable, Sendable {
     let rule: AccessRule

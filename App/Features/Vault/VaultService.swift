@@ -41,6 +41,13 @@ nonisolated struct MoveRequest: Equatable, Sendable {
     var reason: String
 }
 
+/// Someone a rule can be about.
+nonisolated struct Person: Decodable, Equatable, Identifiable, Sendable {
+    let id: String
+    let name: String
+    let username: String
+}
+
 /// Reads and acts on the vault through the gateway. The real one calls the network; tests fake it.
 nonisolated protocol VaultServicing: Sendable {
     func dashboard(_ context: ServerContext) async throws -> DashboardData
@@ -57,6 +64,11 @@ nonisolated protocol VaultServicing: Sendable {
     func retire(secretID: String, _ context: ServerContext) async throws
     func reinstate(secretID: String, _ context: ServerContext) async throws
     func setAutomation(secretID: String, _ setting: AutomationSetting, _ context: ServerContext) async throws
+    func ruleset(forSecret secretID: String, _ context: ServerContext) async throws -> Ruleset
+    func ruleset(forFolder folderID: String, _ context: ServerContext) async throws -> Ruleset
+    func saveRules(forSecret secretID: String, _ rules: [AccessRule], _ context: ServerContext) async throws
+    func saveRules(forFolder folderID: String, _ update: RulesUpdate, _ context: ServerContext) async throws
+    func searchPeople(_ query: String, _ context: ServerContext) async throws -> [Person]
     func createFolder(parentID: String?, name: String, _ context: ServerContext) async throws -> Folder
     func renameFolder(id: String, name: String, _ context: ServerContext) async throws
     func moveFolder(id: String, to parentID: String?, _ context: ServerContext) async throws

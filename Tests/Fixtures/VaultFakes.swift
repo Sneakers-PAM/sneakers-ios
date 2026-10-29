@@ -67,6 +67,12 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     private(set) var movedSecrets: [(id: String, folderID: String)] = []
     private(set) var moveRequests: [MoveRequest] = []
     private(set) var createdSecrets: [NewSecret] = []
+    var rulesetResult: Result<Ruleset, VaultError> = .success(Ruleset(rules: [], inherited: [], owners: []))
+    var saveRulesResult: Result<Void, VaultError> = .success(())
+    var peopleResult: Result<[Person], VaultError> = .success([])
+
+    private(set) var savedSecretRules: [(secretID: String, rules: [AccessRule])] = []
+    private(set) var savedFolderRules: [(folderID: String, update: RulesUpdate)] = []
     private(set) var rotations: [String] = []
     private(set) var retirements: [String] = []
     private(set) var reinstatements: [String] = []
@@ -147,6 +153,28 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func setAutomation(secretID: String, _ setting: AutomationSetting, _: ServerContext) async throws {
         automations.append(AutomationRequest(secretID: secretID, setting: setting))
         try lifecycleResult.get()
+    }
+
+    func ruleset(forSecret _: String, _: ServerContext) async throws -> Ruleset {
+        try rulesetResult.get()
+    }
+
+    func ruleset(forFolder _: String, _: ServerContext) async throws -> Ruleset {
+        try rulesetResult.get()
+    }
+
+    func saveRules(forSecret secretID: String, _ rules: [AccessRule], _: ServerContext) async throws {
+        savedSecretRules.append((secretID, rules))
+        try saveRulesResult.get()
+    }
+
+    func saveRules(forFolder folderID: String, _ update: RulesUpdate, _: ServerContext) async throws {
+        savedFolderRules.append((folderID, update))
+        try saveRulesResult.get()
+    }
+
+    func searchPeople(_: String, _: ServerContext) async throws -> [Person] {
+        try peopleResult.get()
     }
 
     func createFolder(parentID: String?, name: String, _: ServerContext) async throws -> Folder {
