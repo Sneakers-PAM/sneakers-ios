@@ -11,6 +11,7 @@ struct SecretDetailView: View {
     @Environment(VaultAccess.self) private var access
     @Environment(RevealCoordinator.self) private var reveal
     @State private var model: SecretDetailModel
+    @State private var editing: EditSecretModel?
 
     init(secretID: String, title: String) {
         self.secretID = secretID
@@ -35,6 +36,17 @@ struct SecretDetailView: View {
             .navigationTitle(loadedName ?? title)
             .navigationBarTitleDisplayMode(.inline)
             .task { await model.load(access) }
+            .toolbar {
+                if model.canEdit {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Edit") { editing = model.makeEditModel() }
+                            .accessibilityIdentifier("editSecret")
+                    }
+                }
+            }
+            .sheet(item: $editing) { draft in
+                EditSecretView(model: draft) { Task { await model.load(access) } }
+            }
             .safeAreaInset(edge: .bottom) { CopyNotice() }
     }
 
@@ -141,9 +153,9 @@ private struct FieldRowView: View {
     @ViewBuilder
     private var value: some View {
         if let plain = row.plainValue {
-            Text(plain)
+            FieldValueText(kind: row.kind, value: plain)
         } else if let shown = reveal.revealed[key] {
-            Text(shown)
+            FieldValueText(kind: row.kind == .multiline ? .multiline : .text, value: shown)
                 .textSelection(.disabled)
                 .accessibilityIdentifier("revealedValue")
         } else {

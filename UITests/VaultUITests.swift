@@ -149,6 +149,39 @@ final class VaultUITests: XCTestCase {
     }
 
     @MainActor
+    func testEditingAFieldSavesAndShowsTheNewValue() {
+        let app = launchSignedIn()
+        openDemoSecret(app)
+
+        let edit = element(app, "editSecret")
+        XCTAssertTrue(edit.waitForExistence(timeout: 8), "the Edit button is missing")
+        edit.tap()
+
+        let username = app.textFields["Username"]
+        XCTAssertTrue(username.waitForExistence(timeout: 5), "the username control is missing")
+        username.tap()
+        username.press(forDuration: 1.0)
+        if app.menuItems["Select All"].waitForExistence(timeout: 2) {
+            app.menuItems["Select All"].tap()
+        }
+        username.typeText("bob")
+        element(app, "editSave").tap()
+
+        XCTAssertTrue(app.staticTexts["bob"].waitForExistence(timeout: 8), "the new value did not show")
+    }
+
+    @MainActor
+    func testASecretIMayOnlyReadHasNoEditButton() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Apps")
+        tapSecret(app, "Vendor key")
+
+        XCTAssertTrue(element(app, "noAccess").waitForExistence(timeout: 8))
+        XCTAssertFalse(element(app, "editSecret").exists)
+    }
+
+    @MainActor
     func testAnUnreadableSecretShowsALockInsteadOfFields() {
         let app = launchSignedIn()
         openFolders(app)

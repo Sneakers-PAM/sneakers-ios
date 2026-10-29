@@ -200,4 +200,34 @@ struct SecretDetailModelTests {
         #expect(!model.canEdit)
         #expect(model.phase == .loaded(detail()))
     }
+
+    @Test func theEditDraftStartsFromTheSecretsNameAndPlainValues() async throws {
+        vault.detailResult = .success(detail())
+        vault.secretAccessResult = .success(.fixtureFull)
+        let model = SecretDetailModel(secretID: "s1")
+        await model.load(makeAccess())
+
+        let edit = try #require(model.makeEditModel())
+
+        #expect(edit.name == "DB admin")
+        #expect(edit.value(for: "username") == "app_admin")
+        #expect(edit.value(for: "password") == "")
+    }
+
+    @Test func thereIsNoEditDraftForASecretIMayNotManage() async {
+        vault.detailResult = .success(detail())
+        vault.secretAccessResult = .success(.fixtureReadOnly)
+        let model = SecretDetailModel(secretID: "s1")
+        await model.load(makeAccess())
+
+        #expect(model.makeEditModel() == nil)
+    }
+
+    @Test func eachFieldRowKnowsItsKind() async {
+        vault.detailResult = .success(detail())
+        let model = SecretDetailModel(secretID: "s1")
+        await model.load(makeAccess())
+
+        #expect(model.fieldRows.map(\.kind) == [.text, .text])
+    }
 }

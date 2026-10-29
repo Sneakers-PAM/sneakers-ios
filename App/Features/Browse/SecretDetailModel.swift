@@ -11,6 +11,7 @@ nonisolated struct FieldRow: Equatable, Identifiable, Sendable {
     let isSensitive: Bool
     /// The value, only for a field the server marks as safe to show. Sensitive values are never kept here.
     let plainValue: String?
+    var kind = FieldKind.text
 
     var id: String {
         key
@@ -75,9 +76,18 @@ final class SecretDetailModel {
                 key: field.key,
                 label: field.label,
                 isSensitive: field.isSensitive,
-                plainValue: field.isSensitive ? nil : detail.values[field.key]
+                plainValue: field.isSensitive ? nil : detail.values[field.key],
+                kind: field.fieldKind
             )
         }
+    }
+
+    /// A draft for the edit screen, or nil when I may not change this secret.
+    func makeEditModel() -> EditSecretModel? {
+        guard canEdit, let detail, let fields = detail.type?.fields else { return nil }
+        return EditSecretModel(
+            secretID: secretID, name: detail.summary.name, fields: fields, values: detail.values
+        )
     }
 
     func leaseState(userID: String) -> LeaseState {

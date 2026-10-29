@@ -109,12 +109,18 @@ struct FolderContentView: View {
 
     private var isEmpty: Bool {
         guard let secrets else { return folders.tree.children(of: nil).isEmpty }
-        return secrets.hasLoaded && secrets.secrets.isEmpty && folders.tree.children(of: folderID).isEmpty
+        return secrets.hasLoaded && !secrets.isNoAccess && secrets.secrets.isEmpty && folders.tree
+            .children(of: folderID).isEmpty
     }
 
     @ViewBuilder
     private func secretsSection(_ model: SecretListModel) -> some View {
-        if let message = model.message, !model.hasLoaded {
+        if model.isNoAccess {
+            Section("Secrets") {
+                Label("You don't have access to the secrets in this folder.", systemImage: "lock.fill")
+                    .accessibilityIdentifier("folderNoAccess")
+            }
+        } else if let message = model.message, !model.hasLoaded {
             Section("Secrets") {
                 Text(message).foregroundStyle(.red)
                 Button("Try again") { Task { await model.load(access) } }

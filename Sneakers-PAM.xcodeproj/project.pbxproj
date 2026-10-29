@@ -72,6 +72,8 @@
 		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
 		BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A733092F19500783AE2 /* BrowseModels.swift */; };
 		BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */; };
+		BB7B1CEE86490950FCA35038 /* EditSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2CC284FD141C8F4E51F83 /* EditSecretView.swift */; };
+		BBB7A610860735B24068E400 /* FieldComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2E400ED9D601240A288D6 /* FieldComponents.swift */; };
 		BB948E5676D8201F0E17ADDC /* EditSecretModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB134290052BF4FE22053B83 /* EditSecretModel.swift */; };
 		BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */; };
 		BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */; };
@@ -203,6 +205,8 @@
 		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
 		BB5D2A733092F19500783AE2 /* BrowseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModels.swift; sourceTree = "<group>"; };
 		BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModel.swift; sourceTree = "<group>"; };
+		BBA2CC284FD141C8F4E51F83 /* EditSecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSecretView.swift; sourceTree = "<group>"; };
+		BBE2E400ED9D601240A288D6 /* FieldComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponents.swift; sourceTree = "<group>"; };
 		BB134290052BF4FE22053B83 /* EditSecretModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSecretModel.swift; sourceTree = "<group>"; };
 		BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVaultService.swift; sourceTree = "<group>"; };
 		BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultEnvironment.swift; sourceTree = "<group>"; };
@@ -367,6 +371,8 @@
 			children = (
 				BB5D2A733092F19500783AE2 /* BrowseModels.swift */,
 				BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */,
+				BBA2CC284FD141C8F4E51F83 /* EditSecretView.swift */,
+				BBE2E400ED9D601240A288D6 /* FieldComponents.swift */,
 				BB134290052BF4FE22053B83 /* EditSecretModel.swift */,
 				BB5D2A7F3092F27100783AE2 /* FoldersView.swift */,
 				BB5D2A833092F27800783AE2 /* CopyNotice.swift */,
@@ -671,6 +677,8 @@
 				BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */,
 				BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */,
 				BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */,
+				BB7B1CEE86490950FCA35038 /* EditSecretView.swift in Sources */,
+				BBB7A610860735B24068E400 /* FieldComponents.swift in Sources */,
 				BB948E5676D8201F0E17ADDC /* EditSecretModel.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
 				BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */,

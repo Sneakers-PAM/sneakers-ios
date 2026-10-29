@@ -102,3 +102,9 @@ final class EditSecretModel {
         }
     }
 }
+
+extension EditSecretModel: Identifiable {
+    nonisolated var id: String {
+        secretID
+    }
+}
