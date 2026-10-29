@@ -18,7 +18,8 @@ struct CopyNotice: View {
                 .transition(.opacity)
                 .accessibilityIdentifier("notice")
                 .task(id: notice) {
-                    try? await Task.sleep(for: .seconds(4))
+                    // A task cancelled by a redraw must not clear a notice nobody has had time to read.
+                    guard await (try? Task.sleep(for: .seconds(4))) != nil else { return }
                     reveal.clearNotice()
                 }
         }

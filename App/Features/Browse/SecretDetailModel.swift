@@ -82,6 +82,11 @@ final class SecretDetailModel {
         }
     }
 
+    /// Field labels by key, for naming what a version changed.
+    var fieldLabels: [String: String] {
+        Dictionary(uniqueKeysWithValues: (detail?.type?.fields ?? []).map { ($0.key, $0.label) })
+    }
+
     /// A draft for the edit screen, or nil when I may not change this secret.
     func makeEditModel() -> EditSecretModel? {
         guard canEdit, let detail, let fields = detail.type?.fields else { return nil }

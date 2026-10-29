@@ -36,6 +36,9 @@ struct SecretDetailView: View {
             .navigationTitle(loadedName ?? title)
             .navigationBarTitleDisplayMode(.inline)
             .task { await model.load(access) }
+            .navigationDestination(for: HistoryRoute.self) { route in
+                HistoryView(secretID: route.secretID, labels: model.fieldLabels)
+            }
             .toolbar {
                 if model.canEdit {
                     ToolbarItem(placement: .primaryAction) {
@@ -88,6 +91,12 @@ struct SecretDetailView: View {
                     ForEach(model.fieldRows) { row in
                         FieldRowView(secretID: secretID, row: row)
                     }
+                }
+                Section {
+                    NavigationLink(value: HistoryRoute(secretID: secretID)) {
+                        Label("History", systemImage: "clock.arrow.circlepath")
+                    }
+                    .accessibilityIdentifier("history")
                 }
             }
             if let message = model.message {

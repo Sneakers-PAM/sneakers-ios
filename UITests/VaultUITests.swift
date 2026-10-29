@@ -171,6 +171,47 @@ final class VaultUITests: XCTestCase {
     }
 
     @MainActor
+    func testTheHistoryListsVersionsAndAnOldValueCanBeRevealedAndRestored() {
+        let app = launchSignedIn()
+        openDemoSecret(app)
+
+        let history = element(app, "history")
+        XCTAssertTrue(history.waitForExistence(timeout: 8), "the History link is missing")
+        history.tap()
+
+        let first = element(app, "version.1")
+        XCTAssertTrue(first.waitForExistence(timeout: 8), "the versions are missing")
+        XCTAssertTrue(element(app, "version.2").exists)
+        first.tap()
+
+        let reveal = element(app, "revealOld.password.1")
+        XCTAssertTrue(reveal.waitForExistence(timeout: 5), "the old value cannot be revealed")
+        reveal.tap()
+        XCTAssertTrue(element(app, "oldValue").waitForExistence(timeout: 8), "the old value did not show")
+
+        let restore = element(app, "restore.1")
+        XCTAssertTrue(restore.waitForExistence(timeout: 5), "the restore button is missing")
+        restore.tap()
+        let confirm = app.buttons["restoreConfirm"].firstMatch
+        XCTAssertTrue(confirm.waitForExistence(timeout: 5), "the confirmation is missing")
+        Thread.sleep(forTimeInterval: 0.5)
+        confirm.tap()
+        XCTAssertTrue(app.staticTexts["Restored version 1."].waitForExistence(timeout: 8), "restore did not report")
+    }
+
+    @MainActor
+    func testCopyingAPlainFieldSaysItCopiedAndWhenItClears() {
+        let app = launchSignedIn()
+        openDemoSecret(app)
+
+        let copy = element(app, "copy.username")
+        XCTAssertTrue(copy.waitForExistence(timeout: 8), "the Copy button is missing")
+        copy.tap()
+
+        XCTAssertTrue(element(app, "notice").waitForExistence(timeout: 5), "the copy notice did not show")
+    }
+
+    @MainActor
     func testASecretIMayOnlyReadHasNoEditButton() {
         let app = launchSignedIn()
         openFolders(app)
