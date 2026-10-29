@@ -184,14 +184,14 @@ final class VaultUITests: XCTestCase {
         let app = launchSignedIn()
         openDemoSecret(app)
 
-        let history = element(app, "history")
+        let history = scrollTo(app, "history")
         XCTAssertTrue(history.waitForExistence(timeout: 8), "the History link is missing")
-        history.tap()
+        tapWhenSettled(history)
 
         let first = element(app, "version.1")
         XCTAssertTrue(first.waitForExistence(timeout: 8), "the versions are missing")
         XCTAssertTrue(element(app, "version.2").exists)
-        first.tap()
+        tapWhenSettled(first)
 
         let reveal = element(app, "revealOld.password.1")
         XCTAssertTrue(reveal.waitForExistence(timeout: 5), "the old value cannot be revealed")

@@ -77,6 +77,8 @@ private struct VersionRow: View {
                 isOpen.toggle()
             } label: {
                 header
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("version.\(version.versionNo)")
