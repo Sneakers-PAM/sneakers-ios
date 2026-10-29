@@ -9,9 +9,12 @@
 - 🌐 **Several servers:** add more than one, check each one's release, and switch between them.
 - 🔒 **App lock:** Face ID, Touch ID or the passcode on launch and after a short time out of sight, with a cover over the app switcher.
 - 🛡 **Second factor setup:** scan a QR code or type a key, and the app asks for it when the server requires one.
+- 🏠 **Home:** what you have checked out with a live countdown, the four counts, and the most accessed secrets.
+- 📁 **Folders and secrets:** browse the folder tree, filter a folder by name, open a secret, and check it out or in. On an iPad the folders, the list and the secret sit side by side, and Account is a toolbar button.
+- 👁 **Reveal and copy:** a sensitive value is shown or copied only after the server agrees, asking for a fresh code when it wants one. Revealed values hide after 20 seconds, on lock and in the background. A copy stays on this device and clears after 60 seconds.
 - 🎨 **Laces design:** the brand icon, the opening screen and the brand fonts.
 
-Passkey and single sign-on sign-in, and the vault screens themselves, are still to come.
+Passkey and single sign-on sign-in, access requests and approvals are still to come.
 
 ## ▶️ Run it
 

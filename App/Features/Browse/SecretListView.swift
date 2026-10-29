@@ -8,9 +8,9 @@ struct SecretListView: View {
     @Environment(VaultAccess.self) private var access
     @Environment(RevealCoordinator.self) private var reveal
     @State private var model: SecretListModel
-    @Binding var selection: SecretRoute?
+    @Binding var selection: String?
 
-    init(folderID: String, selection: Binding<SecretRoute?>) {
+    init(folderID: String, selection: Binding<String?>) {
         _model = State(initialValue: SecretListModel(folderID: folderID))
         _selection = selection
     }
@@ -45,7 +45,6 @@ struct SecretListView: View {
         } else {
             List(model.visibleSecrets, selection: $selection) { secret in
                 row(secret)
-                    .tag(SecretRoute(id: secret.id, name: secret.name))
             }
             .refreshable { await model.load(access) }
         }

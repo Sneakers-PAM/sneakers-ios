@@ -8,8 +8,8 @@ struct FoldersView: View {
     @Environment(VaultAccess.self) private var access
     @State private var model = FoldersModel()
     @State private var folderID: String?
-    @State private var secret: SecretRoute?
-    @State private var visibility = NavigationSplitViewVisibility.automatic
+    @State private var secretID: String?
+    @State private var visibility = NavigationSplitViewVisibility.all
 
     var body: some View {
         NavigationSplitView(columnVisibility: $visibility) {
@@ -18,23 +18,26 @@ struct FoldersView: View {
                 .toolbar { AccountToolbarButton() }
         } content: {
             if let folderID {
-                SecretListView(folderID: folderID, selection: $secret)
+                SecretListView(folderID: folderID, selection: $secretID)
                     .id(folderID)
             } else {
                 ContentUnavailableView("Pick a folder", systemImage: "folder")
             }
         } detail: {
-            if let secret {
+            if let secretID {
                 NavigationStack {
-                    SecretDetailView(secretID: secret.id, title: secret.name)
+                    SecretDetailView(secretID: secretID, title: "Secret")
                 }
-                .id(secret.id)
+                .id(secretID)
             } else {
                 ContentUnavailableView("Pick a secret", systemImage: "key")
             }
         }
         .task { await model.load(access) }
-        .onChange(of: folderID) { secret = nil }
+        .onChange(of: folderID) {
+            secretID = nil
+            visibility = .doubleColumn
+        }
     }
 
     @ViewBuilder

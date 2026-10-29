@@ -32,15 +32,31 @@ final class VaultUITests: XCTestCase {
         tab.tap()
     }
 
+    /// Taps a top-level folder. A portrait iPad keeps the folder column folded away until it is asked for.
+    private func openFolder(_ app: XCUIApplication, _ name: String) {
+        let folder = element(app, "folder.\(name)")
+        if !folder.waitForExistence(timeout: 4) {
+            let sidebar = app.buttons["Show Sidebar"].firstMatch
+            if sidebar.exists {
+                sidebar.tap()
+            }
+        }
+        XCTAssertTrue(folder.waitForExistence(timeout: 8), "the folder list is missing")
+        folder.tap()
+    }
+
+    /// Taps the list row, not the text inside it: an iPad ignores a tap on the combined text element.
+    private func tapSecret(_ app: XCUIApplication, _ name: String) {
+        let row = app.cells.containing(.staticText, identifier: "secret.\(name)").firstMatch
+        XCTAssertTrue(row.waitForExistence(timeout: 8), "the secret list is missing")
+        row.tap()
+    }
+
     /// Goes from Home to the demo secret's detail screen.
     private func openDemoSecret(_ app: XCUIApplication) {
         openFolders(app)
-        let apps = element(app, "folder.Apps")
-        XCTAssertTrue(apps.waitForExistence(timeout: 8), "the folder list is missing")
-        apps.tap()
-        let secret = element(app, "secret.DB admin")
-        XCTAssertTrue(secret.waitForExistence(timeout: 8), "the secret list is missing")
-        secret.tap()
+        openFolder(app, "Apps")
+        tapSecret(app, "DB admin")
     }
 
     @MainActor
@@ -102,12 +118,8 @@ final class VaultUITests: XCTestCase {
     func testAnUnreadableSecretShowsALockInsteadOfFields() {
         let app = launchSignedIn()
         openFolders(app)
-        let apps = element(app, "folder.Apps")
-        XCTAssertTrue(apps.waitForExistence(timeout: 8), "the folder list is missing")
-        apps.tap()
-        let vendor = element(app, "secret.Vendor key")
-        XCTAssertTrue(vendor.waitForExistence(timeout: 8), "the locked secret is missing")
-        vendor.tap()
+        openFolder(app, "Apps")
+        tapSecret(app, "Vendor key")
 
         XCTAssertTrue(element(app, "noAccess").waitForExistence(timeout: 8), "the no-access note is missing")
         XCTAssertFalse(element(app, "field.password").exists)

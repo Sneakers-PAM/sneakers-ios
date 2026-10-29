@@ -63,6 +63,12 @@
         func secret(id: String, _: ServerContext) async throws -> SecretDetail {
             let name = id == "s2" ? "Deploy key" : "DB admin"
             let held = state.withLock { $0.lease }
+            if id == "s8" {
+                return SecretDetail(
+                    summary: lockedSummary, type: Self.databaseType, values: [:], lease: nil,
+                    folderPath: "Apps", expiresAt: nil, verifiedAt: nil, nextRotationAt: nil
+                )
+            }
             return SecretDetail(
                 summary: summary(id, name, views: 3),
                 type: Self.databaseType,
@@ -102,6 +108,11 @@
         func checkin(secretID _: String, _: ServerContext) async throws {
             state.withLock { $0.lease = nil }
         }
+
+        private let lockedSummary = SecretSummary(
+            id: "s8", name: "Vendor key", folderId: "3", typeId: "t1", targetId: nil,
+            lastHeartbeatResult: nil, retired: false, canRead: false, viewCount: 0, lastAccessedAt: nil
+        )
 
         private func summary(_ id: String, _ name: String, views: Int) -> SecretSummary {
             SecretSummary(

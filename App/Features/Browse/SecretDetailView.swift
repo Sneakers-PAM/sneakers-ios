@@ -22,9 +22,17 @@ struct SecretDetailView: View {
         (try? access.context().session.userID) ?? ""
     }
 
+    private var loadedName: String? {
+        if case let .loaded(detail) = model.phase {
+            detail.summary.name
+        } else {
+            nil
+        }
+    }
+
     var body: some View {
         content
-            .navigationTitle(title)
+            .navigationTitle(loadedName ?? title)
             .navigationBarTitleDisplayMode(.inline)
             .task { await model.load(access) }
             .safeAreaInset(edge: .bottom) { CopyNotice() }
