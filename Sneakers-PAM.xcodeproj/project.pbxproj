@@ -87,6 +87,7 @@
 		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
 		BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A733092F19500783AE2 /* BrowseModels.swift */; };
 		BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */; };
+		BB2C8AD404F4CCA0E8D4D2AA /* SharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C2DD6E6846BE33AFCA75E /* SharingView.swift */; };
 		BB18B6BF9F8253EE673C15EE /* SharingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB26C46FBE89C7AC1290523B /* SharingModel.swift */; };
 		BB79384FBC376ED9DD2FAAD4 /* FolderActionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD63BFBB4F837517C3C9C3A /* FolderActionViews.swift */; };
 		BB461A67F7A22D450275DB9C /* FolderEditModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D032787B3CC21748C1B81 /* FolderEditModels.swift */; };
@@ -245,6 +246,7 @@
 		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
 		BB5D2A733092F19500783AE2 /* BrowseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModels.swift; sourceTree = "<group>"; };
 		BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModel.swift; sourceTree = "<group>"; };
+		BB8C2DD6E6846BE33AFCA75E /* SharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharingView.swift"; sourceTree = "<group>"; };
 		BB26C46FBE89C7AC1290523B /* SharingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharingModel.swift"; sourceTree = "<group>"; };
 		BBD63BFBB4F837517C3C9C3A /* FolderActionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderActionViews.swift"; sourceTree = "<group>"; };
 		BB3D032787B3CC21748C1B81 /* FolderEditModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FolderEditModels.swift"; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 			children = (
 				BB5D2A733092F19500783AE2 /* BrowseModels.swift */,
 				BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */,
+				BB8C2DD6E6846BE33AFCA75E /* SharingView.swift */,
 				BB26C46FBE89C7AC1290523B /* SharingModel.swift */,
 				BBD63BFBB4F837517C3C9C3A /* FolderActionViews.swift */,
 				BB3D032787B3CC21748C1B81 /* FolderEditModels.swift */,
@@ -752,6 +755,7 @@
 				BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */,
 				BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */,
 				BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */,
+				BB2C8AD404F4CCA0E8D4D2AA /* SharingView.swift in Sources */,
 				BB18B6BF9F8253EE673C15EE /* SharingModel.swift in Sources */,
 				BB79384FBC376ED9DD2FAAD4 /* FolderActionViews.swift in Sources */,
 				BB461A67F7A22D450275DB9C /* FolderEditModels.swift in Sources */,

@@ -73,6 +73,8 @@ struct FolderContentView: View {
                 .accessibilityIdentifier("renameFolder")
             Button("Move folder", systemImage: "folder") { sheet = moveSheet() }
                 .accessibilityIdentifier("moveFolder")
+            Button("Who has access", systemImage: "person.2") { sheet = sharingSheet() }
+                .accessibilityIdentifier("folderSharing")
         }
         .accessibilityIdentifier("folderActions")
     }
@@ -80,6 +82,11 @@ struct FolderContentView: View {
     private func renameSheet() -> FolderSheet? {
         guard let folderID, let folder = folders.tree.folder(folderID) else { return nil }
         return .name(FolderNameModel(mode: .rename(id: folderID, currentName: folder.name)))
+    }
+
+    private func sharingSheet() -> FolderSheet? {
+        guard let folderID else { return nil }
+        return .sharing(folderID: folderID, canEdit: secrets?.access.manageRuleset == true)
     }
 
     private func moveSheet() -> FolderSheet? {
@@ -99,6 +106,8 @@ struct FolderContentView: View {
         case let .name(model): FolderNameView(model: model) { refresh() }
         case let .newSecret(model): CreateSecretView(model: model) { _ in refresh() }
         case let .move(model): MoveView(model: model) { refresh() }
+        case let .sharing(folderID, canEdit):
+            NavigationStack { SharingView(target: .folder(id: folderID), canEdit: canEdit) }
         }
     }
 
@@ -265,12 +274,14 @@ private enum FolderSheet: Identifiable {
     case name(FolderNameModel)
     case newSecret(CreateSecretModel)
     case move(MoveModel)
+    case sharing(folderID: String, canEdit: Bool)
 
     var id: String {
         switch self {
         case .name: "name"
         case .newSecret: "newSecret"
         case .move: "move"
+        case .sharing: "sharing"
         }
     }
 }

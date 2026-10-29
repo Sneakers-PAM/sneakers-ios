@@ -45,6 +45,9 @@ struct SecretDetailView: View {
             .navigationTitle(loadedName ?? title)
             .navigationBarTitleDisplayMode(.inline)
             .task { await model.load(access) }
+            .navigationDestination(for: SharingRoute.self) { route in
+                SharingView(target: .secret(id: route.secretID), canEdit: model.access.manageRuleset)
+            }
             .navigationDestination(for: HistoryRoute.self) { route in
                 HistoryView(secretID: route.secretID, labels: model.fieldLabels)
             }
@@ -112,6 +115,10 @@ struct SecretDetailView: View {
                 }
                 LifecycleCard(model: model)
                 Section {
+                    NavigationLink(value: SharingRoute(secretID: secretID)) {
+                        Label("Who has access", systemImage: "person.2")
+                    }
+                    .accessibilityIdentifier("sharing")
                     NavigationLink(value: HistoryRoute(secretID: secretID)) {
                         Label("History", systemImage: "clock.arrow.circlepath")
                     }

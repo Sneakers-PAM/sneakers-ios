@@ -136,14 +136,14 @@
         }
 
         func access(forFolder _: String, _: ServerContext) async throws -> Access {
-            Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+            Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: true)
         }
 
         func access(forSecret secretID: String, _: ServerContext) async throws -> Access {
             if secretID == "s8" {
                 return .none
             }
-            return Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+            return Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: true)
         }
 
         func rotate(secretID _: String, _: ServerContext) async throws {
