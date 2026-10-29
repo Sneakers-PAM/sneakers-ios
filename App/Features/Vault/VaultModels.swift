@@ -8,6 +8,13 @@ nonisolated struct Folder: Decodable, Equatable, Identifiable, Sendable {
     let name: String
     let parentId: String?
     let subtreeSecretCount: Int?
+    var scope: String?
+    var ownerUserId: String?
+    var canManage: Bool?
+
+    var isPersonal: Bool {
+        scope == "personal"
+    }
 
     /// How many secrets the folder holds, counting its subfolders. Empty when the server did not say.
     var secretCountText: String {
@@ -247,6 +254,27 @@ nonisolated struct FolderTree: Sendable {
             current = folder.parentId?.isEmpty == false ? folder.parentId : nil
         }
         return names.reversed().joined(separator: " / ")
+    }
+
+    /// Every folder, in the order of their paths.
+    func everyFolder() -> [Folder] {
+        folders.sorted {
+            (path(of: $0.id) ?? $0.name)
+                .localizedCaseInsensitiveCompare(path(of: $1.id) ?? $1.name) == .orderedAscending
+        }
+    }
+
+    /// The ids of every folder below one, however deep.
+    func descendants(of folderID: String) -> [String] {
+        var found: [String] = []
+        var queue = [folderID]
+        while let next = queue.popLast() {
+            for child in children(of: next) where !found.contains(child.id) && child.id != folderID {
+                found.append(child.id)
+                queue.append(child.id)
+            }
+        }
+        return found
     }
 
     func folder(_ id: String) -> Folder? {
