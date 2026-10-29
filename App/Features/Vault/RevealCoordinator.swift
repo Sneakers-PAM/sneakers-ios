@@ -8,17 +8,14 @@ import os
 nonisolated struct RevealKey: Hashable, Sendable {
     let secretID: String
     let fieldKey: String
+    /// Set to read an earlier version's value instead of the current one.
+    var versionNo: Int?
 }
 
 nonisolated enum PendingReveal: Equatable, Sendable {
     case show(RevealKey)
     case copy(RevealKey)
-
-    var key: RevealKey {
-        switch self {
-        case let .show(key), let .copy(key): key
-        }
-    }
+    case restore(secretID: String, versionNo: Int)
 }
 
 /// The server wants a fresh second factor before it will reveal a value.
@@ -38,6 +35,8 @@ final class RevealCoordinator {
     private(set) var revealed: [RevealKey: String] = [:]
     private(set) var notice: String?
     private(set) var stepUp: StepUpPrompt?
+    /// Goes up each time a version is restored, so a screen showing the secret knows to reload.
+    private(set) var restoredCount = 0
 
     private let access: VaultAccess
     private let auth: AuthServicing
@@ -64,6 +63,10 @@ final class RevealCoordinator {
     func copyKnown(_ value: String) {
         clipboard.copy(value, clearAfter: ClipboardPolicy.clearAfter)
         notice = ClipboardPolicy.copiedNotice
+    }
+
+    func restore(secretID: String, versionNo: Int) async {
+        await run(.restore(secretID: secretID, versionNo: versionNo))
     }
 
     func hide(_ key: RevealKey) {
@@ -125,31 +128,38 @@ final class RevealCoordinator {
 
     private func run(_ action: PendingReveal) async {
         notice = nil
-        let key = action.key
-        let value: String
         do {
-            value = try await access.perform { context in
-                try await self.access.service.reveal(secretID: key.secretID, fieldKey: key.fieldKey, context)
+            switch action {
+            case let .show(key):
+                revealed[key] = try await fetch(key)
+                scheduleHide(key)
+            case let .copy(key):
+                try await clipboard.copy(fetch(key), clearAfter: ClipboardPolicy.clearAfter)
+                notice = ClipboardPolicy.copiedNotice
+            case let .restore(secretID, versionNo):
+                try await access.perform { context in
+                    try await self.access.service.restore(secretID: secretID, versionNo: versionNo, context)
+                }
+                restoredCount += 1
+                notice = "Restored version \(versionNo)."
             }
         } catch VaultError.stepUpRequired {
-            Self.logger.info("a fresh second factor is needed to reveal")
+            Self.logger.info("a fresh second factor is needed")
             stepUp = StepUpPrompt(action: action)
-            return
         } catch let error as VaultError {
             notice = error.message
-            return
         } catch {
             notice = VaultError.unexpected.message
-            return
         }
+    }
 
-        switch action {
-        case .show:
-            revealed[key] = value
-            scheduleHide(key)
-        case .copy:
-            clipboard.copy(value, clearAfter: ClipboardPolicy.clearAfter)
-            notice = ClipboardPolicy.copiedNotice
+    /// The current value of a field, or an earlier version's when the key names one.
+    private func fetch(_ key: RevealKey) async throws -> String {
+        try await access.perform { context in
+            if key.versionNo != nil {
+                return try await self.access.service.revealVersion(key, context)
+            }
+            return try await self.access.service.reveal(secretID: key.secretID, fieldKey: key.fieldKey, context)
         }
     }
 

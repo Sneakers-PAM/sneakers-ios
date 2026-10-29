@@ -163,4 +163,42 @@ nonisolated enum Operations {
             variables: ["id": .string(secretID), "input": .object(input)]
         )
     }
+
+    static func versions(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretVersions",
+            query: """
+            query SecretVersions($secretId: ID!) {
+              secretVersions(secretId: $secretId) {
+                versionNo createdBy createdByName createdAt active fieldKeys changedFieldKeys changeLabel
+              }
+            }
+            """,
+            variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func revealVersion(secretID: String, versionNo: Int, fieldKey: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRevealVersion",
+            query: """
+            mutation SecretRevealVersion($secretId: ID!, $versionNo: Int!, $fieldKey: String!) {
+              revealSecretVersionField(secretId: $secretId, versionNo: $versionNo, fieldKey: $fieldKey)
+            }
+            """,
+            variables: ["secretId": .string(secretID), "versionNo": .int(versionNo), "fieldKey": .string(fieldKey)]
+        )
+    }
+
+    static func restore(secretID: String, versionNo: Int) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRestoreVersion",
+            query: """
+            mutation SecretRestoreVersion($secretId: ID!, $versionNo: Int!) {
+              restoreSecretVersion(secretId: $secretId, versionNo: $versionNo) { id }
+            }
+            """,
+            variables: ["secretId": .string(secretID), "versionNo": .int(versionNo)]
+        )
+    }
 }

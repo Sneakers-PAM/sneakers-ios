@@ -32,12 +32,17 @@ nonisolated protocol VaultServicing: Sendable {
     func access(forFolder folderID: String, _ context: ServerContext) async throws -> Access
     func access(forSecret secretID: String, _ context: ServerContext) async throws -> Access
     func update(secretID: String, _ change: SecretChange, _ context: ServerContext) async throws
+    func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion]
+    /// An earlier version's value: the key names the secret, the field and the version.
+    func revealVersion(_ key: RevealKey, _ context: ServerContext) async throws -> String
+    func restore(secretID: String, versionNo: Int, _ context: ServerContext) async throws
 }
 
 nonisolated enum VaultError: Error, Equatable, Sendable {
     case noAccess
     case stepUpRequired
     case approvalRequired
+    case recoveryRoleRequired
     case retired
     case leaseHeld
     case notHolder
@@ -53,6 +58,7 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
         case .noAccess: "You don't have access to that."
         case .stepUpRequired: "Confirm it's you with a code to continue."
         case .approvalRequired: "This secret needs approval before it can be revealed."
+        case .recoveryRoleRequired: "Reading or restoring an earlier version needs the recovery role."
         case .retired: "This secret is retired."
         case .leaseHeld: "Someone else has this checked out."
         case .notHolder: "Only the person who checked it out can check it in."
@@ -79,6 +85,7 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
         table["CHECKIN_NOT_HOLDER"] = .notHolder
         table["STEP_UP_REQUIRED"] = .stepUpRequired
         table["APPROVAL_REQUIRED"] = .approvalRequired
+        table["RECOVERY_ROLE_REQUIRED"] = .recoveryRoleRequired
         table["RETIRED"] = .retired
         table["CHECKOUT_LEASE_HELD"] = .leaseHeld
         table["CHECKOUT_TYPE_DISABLED"] = .checkoutNotAllowed

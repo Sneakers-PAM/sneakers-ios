@@ -86,6 +86,22 @@ nonisolated struct HTTPVaultService: VaultServicing {
         _ = try await run(Operations.update(secretID: secretID, change), as: UpdateResponse.self, in: context)
     }
 
+    func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion] {
+        try await run(Operations.versions(secretID: secretID), as: VersionsResponse.self, in: context).secretVersions
+    }
+
+    func revealVersion(_ key: RevealKey, _ context: ServerContext) async throws -> String {
+        guard let versionNo = key.versionNo else { throw VaultError.unexpected }
+        let operation = Operations.revealVersion(secretID: key.secretID, versionNo: versionNo, fieldKey: key.fieldKey)
+        return try await run(operation, as: RevealVersionResponse.self, in: context).revealSecretVersionField
+    }
+
+    func restore(secretID: String, versionNo: Int, _ context: ServerContext) async throws {
+        _ = try await run(
+            Operations.restore(secretID: secretID, versionNo: versionNo), as: RestoreResponse.self, in: context
+        )
+    }
+
     // MARK: Helpers
 
     private func run<T: Decodable>(
@@ -189,6 +205,18 @@ nonisolated struct HTTPVaultService: VaultServicing {
 
     private struct UpdateResponse: Decodable {
         let updateSecret: UpdatedSecret
+    }
+
+    private struct VersionsResponse: Decodable {
+        let secretVersions: [SecretVersion]
+    }
+
+    private struct RevealVersionResponse: Decodable {
+        let revealSecretVersionField: String
+    }
+
+    private struct RestoreResponse: Decodable {
+        let restoreSecretVersion: UpdatedSecret
     }
 
     private struct CheckinResponse: Decodable {

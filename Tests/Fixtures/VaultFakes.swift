@@ -48,6 +48,12 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var secretAccessResult: Result<Access, VaultError> = .success(.fixtureFull)
     var updateResult: Result<Void, VaultError> = .success(())
 
+    var versionsResult: Result<[SecretVersion], VaultError> = .success([])
+    var versionRevealResults: [Result<String, VaultError>] = []
+    var restoreResults: [Result<Void, VaultError>] = []
+
+    private(set) var versionRevealRequests: [RevealKey] = []
+    private(set) var restores: [(secretID: String, versionNo: Int)] = []
     private(set) var updates: [(secretID: String, change: SecretChange)] = []
     private(set) var dashboardCalls = 0
     private(set) var folderCalls = 0
@@ -102,6 +108,22 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func update(secretID: String, _ change: SecretChange, _: ServerContext) async throws {
         updates.append((secretID, change))
         try updateResult.get()
+    }
+
+    func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
+        try versionsResult.get()
+    }
+
+    func revealVersion(_ key: RevealKey, _: ServerContext) async throws -> String {
+        versionRevealRequests.append(key)
+        guard !versionRevealResults.isEmpty else { throw VaultError.unexpected }
+        return try versionRevealResults.removeFirst().get()
+    }
+
+    func restore(secretID: String, versionNo: Int, _: ServerContext) async throws {
+        restores.append((secretID, versionNo))
+        guard !restoreResults.isEmpty else { return }
+        try restoreResults.removeFirst().get()
     }
 }
 

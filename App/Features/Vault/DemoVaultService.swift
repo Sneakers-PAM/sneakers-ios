@@ -119,6 +119,26 @@
             return Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
         }
 
+        func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
+            let now = ISO8601DateFormatter().string(from: Date())
+            let keys = ["username", "password"]
+            let current = SecretVersion(
+                versionNo: 2, createdBy: "u1", createdByName: "Alice", createdAt: now, active: true,
+                fieldKeys: keys, changedFieldKeys: ["password"], changeLabel: nil
+            )
+            let first = SecretVersion(
+                versionNo: 1, createdBy: "u1", createdByName: "Alice", createdAt: now, active: false,
+                fieldKeys: keys, changedFieldKeys: keys, changeLabel: nil
+            )
+            return [current, first]
+        }
+
+        func revealVersion(_: RevealKey, _: ServerContext) async throws -> String {
+            "old-demo-value"
+        }
+
+        func restore(secretID _: String, versionNo _: Int, _: ServerContext) async throws {}
+
         func update(secretID _: String, _ change: SecretChange, _: ServerContext) async throws {
             state.withLock { state in
                 if let name = change.name {

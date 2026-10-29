@@ -253,4 +253,54 @@ struct HTTPVaultServiceTests {
             try await service.update(secretID: "s1", SecretChange(name: "x", fields: [:]), .fixture)
         }
     }
+
+    // MARK: History
+
+    @Test func theVersionsOfASecretAreListedWithoutValues() async throws {
+        transport.answer("SecretVersions", """
+        {"secretVersions":[{"versionNo":2,"createdBy":"u1","createdByName":"Alice","createdAt":"2026-10-28T12:00:00Z",
+          "active":true,"fieldKeys":["password"],"changedFieldKeys":["password"],"changeLabel":null},
+         {"versionNo":1,"createdBy":"u1","createdByName":"Alice","createdAt":"2026-10-27T12:00:00Z",
+          "active":false,"fieldKeys":["password"],"changedFieldKeys":["password"],"changeLabel":null}]}
+        """)
+
+        let versions = try await service.versions(secretID: "s1", .fixture)
+
+        #expect(versions.map(\.versionNo) == [2, 1])
+        #expect(versions.first?.active == true)
+        #expect(versions.first?.createdByName == "Alice")
+        #expect(transport.operation(named: "SecretVersions")?.variables["secretId"] == .string("s1"))
+    }
+
+    @Test func anOldValueIsRevealedByVersionAndField() async throws {
+        transport.answer("SecretRevealVersion", #"{"revealSecretVersionField":"old-value"}"#)
+
+        let value = try await service.revealVersion(
+            RevealKey(secretID: "s1", fieldKey: "password", versionNo: 2),
+            .fixture
+        )
+
+        #expect(value == "old-value")
+        let variables = transport.operation(named: "SecretRevealVersion")?.variables
+        #expect(variables?["versionNo"] == .int(2))
+        #expect(variables?["fieldKey"] == .string("password"))
+    }
+
+    @Test func restoringAVersionSendsTheSecretAndTheVersion() async throws {
+        transport.answer("SecretRestoreVersion", #"{"restoreSecretVersion":{"id":"s1"}}"#)
+
+        try await service.restore(secretID: "s1", versionNo: 2, .fixture)
+
+        let variables = transport.operation(named: "SecretRestoreVersion")?.variables
+        #expect(variables?["secretId"] == .string("s1"))
+        #expect(variables?["versionNo"] == .int(2))
+    }
+
+    @Test func theRecoveryRoleBeingNeededIsItsOwnRefusal() async {
+        transport.fail("SecretRevealVersion", .recoveryRoleRequired)
+
+        await #expect(throws: VaultError.recoveryRoleRequired) {
+            try await service.revealVersion(RevealKey(secretID: "s1", fieldKey: "password", versionNo: 1), .fixture)
+        }
+    }
 }

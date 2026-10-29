@@ -185,4 +185,43 @@ struct VaultModelsTests {
         #expect(!access.manage && !access.approve && !access.manageRuleset)
         #expect(!Access.none.read && !Access.none.manage)
     }
+
+    private func version(
+        _ number: Int,
+        changed: [String] = [],
+        label: String? = nil,
+        at created: String = "2026-10-28T12:00:00Z"
+    ) -> SecretVersion {
+        SecretVersion(
+            versionNo: number, createdBy: "u1", createdByName: "Alice", createdAt: created,
+            active: number == 3, fieldKeys: ["username", "password"], changedFieldKeys: changed, changeLabel: label
+        )
+    }
+
+    @Test func aVersionSaysWhichFieldsChangedUsingTheirLabels() {
+        let labels = ["username": "Username", "password": "Password"]
+
+        #expect(version(2, changed: ["password"]).summary(labels: labels) == "Changed: Password")
+        #expect(version(2, changed: ["username", "password"]).summary(labels: labels) == "Changed: Username, Password")
+        #expect(version(2, changed: ["gone"]).summary(labels: labels) == "Changed: gone")
+    }
+
+    @Test func aVersionWithNoChangedValueSaysSo() {
+        #expect(version(2).summary(labels: [:]) == "No value changed")
+    }
+
+    @Test func theFirstVersionIsTheCreation() {
+        #expect(version(1, changed: ["username", "password"]).summary(labels: [:]) == "Created")
+    }
+
+    @Test func aTypeChangeUsesTheServersOwnDescription() {
+        #expect(version(2, changed: ["x"], label: "Type changed: A to B")
+            .summary(labels: [:]) == "Type changed: A to B")
+    }
+
+    @Test func versionsAreListedNewestFirst() {
+        let sorted = [version(1), version(3), version(2)].sortedNewestFirst()
+
+        #expect(sorted.map(\.versionNo) == [3, 2, 1])
+    }
 }

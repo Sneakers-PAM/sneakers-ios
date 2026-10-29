@@ -124,6 +124,47 @@ nonisolated struct FieldDefinition: Decodable, Equatable, Sendable {
     }
 }
 
+/// One saved version of a secret. It names who changed what and when, and never carries a value.
+nonisolated struct SecretVersion: Decodable, Equatable, Identifiable, Sendable {
+    let versionNo: Int
+    let createdBy: String
+    let createdByName: String
+    let createdAt: String
+    let active: Bool
+    let fieldKeys: [String]
+    let changedFieldKeys: [String]
+    let changeLabel: String?
+
+    var id: Int {
+        versionNo
+    }
+
+    var createdAtDate: Date? {
+        GatewayDate.parse(createdAt)
+    }
+
+    /// A line for the history list. The server's own description of a type change wins, then the changed fields by
+    /// their labels.
+    func summary(labels: [String: String]) -> String {
+        if let changeLabel, !changeLabel.isEmpty {
+            return changeLabel
+        }
+        if versionNo == 1 {
+            return "Created"
+        }
+        if changedFieldKeys.isEmpty {
+            return "No value changed"
+        }
+        return "Changed: " + changedFieldKeys.map { labels[$0] ?? $0 }.joined(separator: ", ")
+    }
+}
+
+extension [SecretVersion] {
+    nonisolated func sortedNewestFirst() -> [SecretVersion] {
+        sorted { $0.versionNo > $1.versionNo }
+    }
+}
+
 /// What the signed-in person may do in a folder or on a secret, as the gateway works it out.
 nonisolated struct Access: Decodable, Equatable, Sendable {
     let read: Bool
