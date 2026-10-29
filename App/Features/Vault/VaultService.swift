@@ -14,6 +14,12 @@ nonisolated struct FolderContents: Equatable, Sendable {
     let types: [SecretType]
 }
 
+/// The edits to a secret: a new name, and the fields whose values changed. Anything not listed stays as it is.
+nonisolated struct SecretChange: Equatable, Sendable {
+    var name: String?
+    var fields: [String: String]
+}
+
 /// Reads and acts on the vault through the gateway. The real one calls the network; tests fake it.
 nonisolated protocol VaultServicing: Sendable {
     func dashboard(_ context: ServerContext) async throws -> DashboardData
@@ -23,6 +29,9 @@ nonisolated protocol VaultServicing: Sendable {
     func reveal(secretID: String, fieldKey: String, _ context: ServerContext) async throws -> String
     func checkout(secretID: String, _ context: ServerContext) async throws -> Lease
     func checkin(secretID: String, _ context: ServerContext) async throws
+    func access(forFolder folderID: String, _ context: ServerContext) async throws -> Access
+    func access(forSecret secretID: String, _ context: ServerContext) async throws -> Access
+    func update(secretID: String, _ change: SecretChange, _ context: ServerContext) async throws
 }
 
 nonisolated enum VaultError: Error, Equatable, Sendable {

@@ -44,6 +44,11 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var checkoutResult: Result<Lease, VaultError> = .failure(.unexpected)
     var checkinResult: Result<Void, VaultError> = .success(())
 
+    var folderAccessResult: Result<Access, VaultError> = .success(.fixtureFull)
+    var secretAccessResult: Result<Access, VaultError> = .success(.fixtureFull)
+    var updateResult: Result<Void, VaultError> = .success(())
+
+    private(set) var updates: [(secretID: String, change: SecretChange)] = []
     private(set) var dashboardCalls = 0
     private(set) var folderCalls = 0
     private(set) var contentsCalls: [String] = []
@@ -84,6 +89,29 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func checkin(secretID _: String, _: ServerContext) async throws {
         checkins += 1
         try checkinResult.get()
+    }
+
+    func access(forFolder _: String, _: ServerContext) async throws -> Access {
+        try folderAccessResult.get()
+    }
+
+    func access(forSecret _: String, _: ServerContext) async throws -> Access {
+        try secretAccessResult.get()
+    }
+
+    func update(secretID: String, _ change: SecretChange, _: ServerContext) async throws {
+        updates.append((secretID, change))
+        try updateResult.get()
+    }
+}
+
+extension Access {
+    static var fixtureFull: Access {
+        Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+    }
+
+    static var fixtureReadOnly: Access {
+        Access(read: true, reveal: true, manage: false, approve: false, informed: false, manageRuleset: false)
     }
 }
 

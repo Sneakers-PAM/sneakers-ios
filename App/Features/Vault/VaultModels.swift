@@ -62,16 +62,80 @@ nonisolated struct Lease: Decodable, Equatable, Sendable {
     }
 }
 
+/// What kind of control a field needs. The gateway names more kinds over time, so an unknown one is plain text.
+nonisolated enum FieldKind: Equatable, Sendable {
+    case text, multiline, password, boolean, select, file, sensitive
+
+    init(gateway name: String?) {
+        switch name {
+        case "multiline": self = .multiline
+        case "password": self = .password
+        case "boolean": self = .boolean
+        case "select": self = .select
+        case "file": self = .file
+        case "sensitive": self = .sensitive
+        default: self = .text
+        }
+    }
+}
+
 nonisolated struct FieldDefinition: Decodable, Equatable, Sendable {
     let key: String
     let label: String
     let kind: String?
     let sensitive: Bool?
     let superSensitive: Bool?
+    var options: [String]?
+    var required: Bool?
+    var maxLength: Int?
 
-    var isSensitive: Bool {
-        sensitive == true || superSensitive == true
+    init(
+        key: String,
+        label: String,
+        kind: String?,
+        sensitive: Bool?,
+        superSensitive: Bool?,
+        options: [String]? = nil,
+        required: Bool? = nil,
+        maxLength: Int? = nil
+    ) {
+        self.key = key
+        self.label = label
+        self.kind = kind
+        self.sensitive = sensitive
+        self.superSensitive = superSensitive
+        self.options = options
+        self.required = required
+        self.maxLength = maxLength
     }
+
+    var fieldKind: FieldKind {
+        FieldKind(gateway: kind)
+    }
+
+    var isRequired: Bool {
+        required == true
+    }
+
+    /// A value kept out of sight until the server agrees to reveal it: a password or sensitive field, or one the
+    /// type marks as sensitive.
+    var isSensitive: Bool {
+        fieldKind == .password || fieldKind == .sensitive || sensitive == true || superSensitive == true
+    }
+}
+
+/// What the signed-in person may do in a folder or on a secret, as the gateway works it out.
+nonisolated struct Access: Decodable, Equatable, Sendable {
+    let read: Bool
+    let reveal: Bool
+    let manage: Bool
+    let approve: Bool
+    let informed: Bool
+    let manageRuleset: Bool
+
+    static let none = Access(
+        read: false, reveal: false, manage: false, approve: false, informed: false, manageRuleset: false
+    )
 }
 
 nonisolated struct SecretType: Decodable, Equatable, Identifiable, Sendable {

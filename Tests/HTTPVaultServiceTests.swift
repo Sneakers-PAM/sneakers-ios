@@ -181,4 +181,76 @@ struct HTTPVaultServiceTests {
 
         await #expect(throws: VaultError.leaseHeld) { try await service.checkout(secretID: "s1", .fixture) }
     }
+
+    // MARK: Access and edit
+
+    private let accessJSON = """
+    {"read":true,"reveal":true,"manage":true,"approve":false,"informed":false,"manageRuleset":false}
+    """
+
+    @Test func aFoldersAccessIsAskedForByItsId() async throws {
+        transport.answer("BrowseFolderAccess", #"{"myFolderAccess":\#(accessJSON)}"#)
+
+        let access = try await service.access(forFolder: "f1", .fixture)
+
+        #expect(access.manage && !access.approve)
+        #expect(transport.operation(named: "BrowseFolderAccess")?.variables["folderId"] == .string("f1"))
+    }
+
+    @Test func aSecretsAccessIsAskedForByItsId() async throws {
+        transport.answer("SecretAccess", #"{"mySecretAccess":\#(accessJSON)}"#)
+
+        let access = try await service.access(forSecret: "s1", .fixture)
+
+        #expect(access.read && access.reveal)
+        #expect(transport.operation(named: "SecretAccess")?.variables["secretId"] == .string("s1"))
+    }
+
+    @Test func savingSendsOnlyTheNameAndTheFieldsGiven() async throws {
+        transport.answer("EditorsUpdateSecret", #"{"updateSecret":{"id":"s1"}}"#)
+        let change = SecretChange(name: "New name", fields: ["username": "bob", "notes": "line 1\nline 2"])
+
+        try await service.update(secretID: "s1", change, .fixture)
+
+        let operation = try #require(transport.operation(named: "EditorsUpdateSecret"))
+        #expect(operation.variables["id"] == .string("s1"))
+        guard case let .object(input)? = operation.variables["input"] else {
+            Issue.record("the input is missing")
+            return
+        }
+        #expect(input["name"] == .string("New name"))
+        guard case let .list(fields)? = input["fields"] else {
+            Issue.record("the fields are missing")
+            return
+        }
+        let pairs = fields.compactMap { value -> [String: GraphQLValue]? in
+            if case let .object(pair) = value {
+                pair
+            } else {
+                nil
+            }
+        }
+        #expect(pairs.count == 2)
+        #expect(pairs.contains { $0["key"] == .string("username") && $0["value"] == .string("bob") })
+    }
+
+    @Test func aChangeWithNoNameLeavesItOut() async throws {
+        transport.answer("EditorsUpdateSecret", #"{"updateSecret":{"id":"s1"}}"#)
+
+        try await service.update(secretID: "s1", SecretChange(name: nil, fields: ["a": "b"]), .fixture)
+
+        guard case let .object(input)? = transport.operation(named: "EditorsUpdateSecret")?.variables["input"] else {
+            Issue.record("the input is missing")
+            return
+        }
+        #expect(input["name"] == nil)
+    }
+
+    @Test func aRefusedSaveSaysWhy() async {
+        transport.fail("EditorsUpdateSecret", .noAccess)
+
+        await #expect(throws: VaultError.noAccess) {
+            try await service.update(secretID: "s1", SecretChange(name: "x", fields: [:]), .fixture)
+        }
+    }
 }

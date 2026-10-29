@@ -5,8 +5,10 @@ import Foundation
 
 /// The GraphQL the app sends, the same operations the web app uses against the gateway.
 nonisolated enum Operations {
+    private static let accessFields = "read reveal manage approve informed manageRuleset"
     private static let leaseFields = "id secretId userId issuedAt expiresAt returned"
-    private static let typeFields = "id name checkout fields { key label kind sensitive superSensitive }"
+    private static let fieldFields = "key label kind options required maxLength sensitive superSensitive"
+    private static let typeFields = "id name checkout fields { \(fieldFields) }"
 
     static func dashboard(userID: String, limit: Int) -> GraphQLOperation {
         GraphQLOperation(
@@ -113,6 +115,52 @@ nonisolated enum Operations {
             name: "CheckoutsCheckin",
             query: "mutation CheckoutsCheckin($secretId: String!) { checkinSecret(secretId: $secretId) }",
             variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func folderAccess(folderID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "BrowseFolderAccess",
+            query: """
+            query BrowseFolderAccess($folderId: String!) {
+              myFolderAccess(folderId: $folderId) { \(accessFields) }
+            }
+            """,
+            variables: ["folderId": .string(folderID)]
+        )
+    }
+
+    static func secretAccess(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretAccess",
+            query: """
+            query SecretAccess($secretId: String!) {
+              mySecretAccess(secretId: $secretId) { \(accessFields) }
+            }
+            """,
+            variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func update(secretID: String, _ change: SecretChange) -> GraphQLOperation {
+        var input: [String: GraphQLValue] = [:]
+        if let name = change.name {
+            input["name"] = .string(name)
+        }
+        let pairs = change.fields.sorted { $0.key < $1.key }.map { pair in
+            GraphQLValue.object(["key": .string(pair.key), "value": .string(pair.value)])
+        }
+        if !pairs.isEmpty {
+            input["fields"] = .list(pairs)
+        }
+        return GraphQLOperation(
+            name: "EditorsUpdateSecret",
+            query: """
+            mutation EditorsUpdateSecret($id: ID!, $input: UpdateSecretInput!) {
+              updateSecret(id: $id, input: $input) { id }
+            }
+            """,
+            variables: ["id": .string(secretID), "input": .object(input)]
         )
     }
 }

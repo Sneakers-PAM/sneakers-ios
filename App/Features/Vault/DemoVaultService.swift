@@ -11,6 +11,8 @@
         private struct State {
             var revealAttempts = 0
             var lease: Lease?
+            var editedName: String?
+            var editedFields: [String: String] = [:]
         }
 
         private let state = OSAllocatedUnfairLock(initialState: State())
@@ -61,8 +63,8 @@
         }
 
         func secret(id: String, _: ServerContext) async throws -> SecretDetail {
-            let name = id == "s2" ? "Deploy key" : "DB admin"
-            let held = state.withLock { $0.lease }
+            let (held, edited) = state.withLock { ($0.lease, $0) }
+            let name = edited.editedName ?? (id == "s2" ? "Deploy key" : "DB admin")
             if id == "s8" {
                 return SecretDetail(
                     summary: lockedSummary, type: Self.databaseType, values: [:], lease: nil,
@@ -72,7 +74,8 @@
             return SecretDetail(
                 summary: summary(id, name, views: 3),
                 type: Self.databaseType,
-                values: ["username": "app_admin"],
+                values: ["username": "app_admin"]
+                    .merging(edited.editedFields.filter { $0.key == "username" }) { _, new in new },
                 lease: held,
                 folderPath: "Platform / Databases",
                 expiresAt: nil,
@@ -103,6 +106,26 @@
             )
             state.withLock { $0.lease = taken }
             return taken
+        }
+
+        func access(forFolder _: String, _: ServerContext) async throws -> Access {
+            Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+        }
+
+        func access(forSecret secretID: String, _: ServerContext) async throws -> Access {
+            if secretID == "s8" {
+                return .none
+            }
+            return Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+        }
+
+        func update(secretID _: String, _ change: SecretChange, _: ServerContext) async throws {
+            state.withLock { state in
+                if let name = change.name {
+                    state.editedName = name
+                }
+                state.editedFields.merge(change.fields) { _, new in new }
+            }
         }
 
         func checkin(secretID _: String, _: ServerContext) async throws {

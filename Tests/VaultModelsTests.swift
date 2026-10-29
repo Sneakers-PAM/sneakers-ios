@@ -146,4 +146,43 @@ struct VaultModelsTests {
         #expect(text(1) == "1 secret")
         #expect(text(4) == "4 secrets")
     }
+
+    @Test func eachFieldKindTheGatewayNamesIsKnownAndAnythingElseIsText() {
+        #expect(FieldKind(gateway: "multiline") == .multiline)
+        #expect(FieldKind(gateway: "password") == .password)
+        #expect(FieldKind(gateway: "boolean") == .boolean)
+        #expect(FieldKind(gateway: "select") == .select)
+        #expect(FieldKind(gateway: "file") == .file)
+        #expect(FieldKind(gateway: "sensitive") == .sensitive)
+        #expect(FieldKind(gateway: "text") == .text)
+        #expect(FieldKind(gateway: nil) == .text)
+        #expect(FieldKind(gateway: "something new") == .text)
+    }
+
+    @Test func aFieldKnowsItsKindOptionsAndLimits() throws {
+        let json = #"{"key":"mode","label":"Mode","kind":"select","options":["a","b"],"required":true,"maxLength":12}"#
+        let definition = try JSONDecoder().decode(FieldDefinition.self, from: Data(json.utf8))
+        #expect(definition.fieldKind == .select)
+        #expect(definition.options == ["a", "b"])
+        #expect(definition.isRequired)
+        #expect(definition.maxLength == 12)
+    }
+
+    @Test func passwordAndSensitiveFieldsAreHiddenByDefault() {
+        func hidden(_ kind: String, sensitive: Bool? = nil) -> Bool {
+            FieldDefinition(key: "k", label: "K", kind: kind, sensitive: sensitive, superSensitive: nil).isSensitive
+        }
+        #expect(hidden("password"))
+        #expect(hidden("sensitive"))
+        #expect(hidden("text", sensitive: true))
+        #expect(!hidden("text"))
+    }
+
+    @Test func accessReadsWhatThePersonMayDoAndDefaultsToNothing() throws {
+        let json = #"{"read":true,"reveal":true,"manage":false,"approve":false,"informed":true,"manageRuleset":false}"#
+        let access = try JSONDecoder().decode(Access.self, from: Data(json.utf8))
+        #expect(access.read && access.reveal && access.informed)
+        #expect(!access.manage && !access.approve && !access.manageRuleset)
+        #expect(!Access.none.read && !Access.none.manage)
+    }
 }

@@ -72,6 +72,20 @@ nonisolated struct HTTPVaultService: VaultServicing {
         _ = try await run(Operations.checkin(secretID: secretID), as: CheckinResponse.self, in: context)
     }
 
+    func access(forFolder folderID: String, _ context: ServerContext) async throws -> Access {
+        try await run(Operations.folderAccess(folderID: folderID), as: FolderAccessResponse.self, in: context)
+            .myFolderAccess
+    }
+
+    func access(forSecret secretID: String, _ context: ServerContext) async throws -> Access {
+        try await run(Operations.secretAccess(secretID: secretID), as: SecretAccessResponse.self, in: context)
+            .mySecretAccess
+    }
+
+    func update(secretID: String, _ change: SecretChange, _ context: ServerContext) async throws {
+        _ = try await run(Operations.update(secretID: secretID, change), as: UpdateResponse.self, in: context)
+    }
+
     // MARK: Helpers
 
     private func run<T: Decodable>(
@@ -159,6 +173,22 @@ nonisolated struct HTTPVaultService: VaultServicing {
 
     private struct CheckoutResponse: Decodable {
         let checkoutSecret: Lease
+    }
+
+    private struct FolderAccessResponse: Decodable {
+        let myFolderAccess: Access
+    }
+
+    private struct SecretAccessResponse: Decodable {
+        let mySecretAccess: Access
+    }
+
+    private struct UpdatedSecret: Decodable {
+        let id: String
+    }
+
+    private struct UpdateResponse: Decodable {
+        let updateSecret: UpdatedSecret
     }
 
     private struct CheckinResponse: Decodable {
