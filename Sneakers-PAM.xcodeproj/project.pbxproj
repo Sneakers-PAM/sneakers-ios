@@ -48,6 +48,16 @@
 		BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */; };
 		BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */; };
 		BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */; };
+		BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */; };
+		BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A493092EFD200783AE2 /* VaultModels.swift */; };
+		BB5D2A4C3092EFED00783AE2 /* VaultFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */; };
+		BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */; };
+		BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */; };
+		BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A513092F01D00783AE2 /* VaultService.swift */; };
+		BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */; };
+		BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */; };
+		BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */; };
+		BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A593092F04200783AE2 /* VaultOperations.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
 		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
 		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
@@ -143,6 +153,16 @@
 		BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStoreTests.swift; sourceTree = "<group>"; };
 		BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStore.swift; sourceTree = "<group>"; };
 		BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockContentTests.swift; sourceTree = "<group>"; };
+		BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModelsTests.swift; sourceTree = "<group>"; };
+		BB5D2A493092EFD200783AE2 /* VaultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModels.swift; sourceTree = "<group>"; };
+		BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFakes.swift; sourceTree = "<group>"; };
+		BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransportTests.swift; sourceTree = "<group>"; };
+		BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultServiceTests.swift; sourceTree = "<group>"; };
+		BB5D2A513092F01D00783AE2 /* VaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultService.swift; sourceTree = "<group>"; };
+		BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransport.swift; sourceTree = "<group>"; };
+		BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransport.swift; sourceTree = "<group>"; };
+		BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultService.swift; sourceTree = "<group>"; };
+		BB5D2A593092F04200783AE2 /* VaultOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultOperations.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBBD178C30925217005E64B7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
@@ -265,6 +285,16 @@
 			path = Typography;
 			sourceTree = "<group>";
 		};
+		BB5D2A463092EFB400783AE2 /* Vault */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A493092EFD200783AE2 /* VaultModels.swift */,
+				BB5D2A513092F01D00783AE2 /* VaultService.swift */,
+				BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */,
+			);
+			path = Vault;
+			sourceTree = "<group>";
+		};
 		BBBD17A7309257D8005E64B7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +324,9 @@
 				BB5D2A3A3092E3C300783AE2 /* BrandFontsTests.swift */,
 				BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */,
 				BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */,
+				BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */,
+				BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */,
+				BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -348,6 +381,7 @@
 				BB5D29F03092DB1200783AE2 /* SignIn */,
 				BB5D2A113092E0CA00783AE2 /* Lock */,
 				BB5D2A223092E1D100783AE2 /* Authenticator */,
+				BB5D2A463092EFB400783AE2 /* Vault */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -380,6 +414,9 @@
 				BB5D2A1C3092E0E600783AE2 /* LocalAuthenticator.swift */,
 				BB5D2A353092E2AA00783AE2 /* HTTPAuthService+Answers.swift */,
 				BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */,
+				BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */,
+				BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */,
+				BB5D2A593092F04200783AE2 /* VaultOperations.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -390,6 +427,7 @@
 				BBBD17C63092C7B7005E64B7 /* ServerFakes.swift */,
 				BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */,
 				BB5D2A123092E0CA00783AE2 /* LockFakes.swift */,
+				BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -523,16 +561,20 @@
 				BBBD17DD3092C809005E64B7 /* UserDefaultsServerStore.swift in Sources */,
 				BB5D2A213092E10000783AE2 /* AppLockModel+Launch.swift in Sources */,
 				BB5D29FE3092DBA500783AE2 /* AuthModels.swift in Sources */,
+				BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */,
 				BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */,
 				BB5D2A1B3092E0E300783AE2 /* AppLockModel.swift in Sources */,
 				BB5D2A3D3092E3D100783AE2 /* BrandFonts.swift in Sources */,
 				BB5D2A0E3092DE1900783AE2 /* SignInView.swift in Sources */,
 				BB5D2A193092E0DD00783AE2 /* LockModels.swift in Sources */,
 				BB5D2A083092DBD400783AE2 /* SignInModel.swift in Sources */,
+				BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */,
 				BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
 				BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */,
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
+				BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */,
+				BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */,
 				BB5D2A2E3092E21600783AE2 /* QRCode.swift in Sources */,
 				BBBD17B13092623E005E64B7 /* SectionPlaceholderView.swift in Sources */,
 				BB5D2A103092DE1E00783AE2 /* SessionManager+Launch.swift in Sources */,
@@ -552,8 +594,10 @@
 				BB5D2A0A3092DE0500783AE2 /* ServersSection.swift in Sources */,
 				BBBD17E33092C846005E64B7 /* AddServerView.swift in Sources */,
 				BBBD17D33092C7F6005E64B7 /* ServerEntry.swift in Sources */,
+				BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */,
 				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
 				BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */,
+				BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */,
 				BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */,
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
 				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
@@ -568,17 +612,20 @@
 				BB5D2A283092E1F400783AE2 /* QRCodeTests.swift in Sources */,
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
 				BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */,
+				BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */,
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
 				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
 				BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */,
 				BBBD17B93092A85A005E64B7 /* SplashContentTests.swift in Sources */,
+				BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */,
 				BB5D2A153092E0CD00783AE2 /* LockPolicyTests.swift in Sources */,
 				BBBD17CD3092C7CD005E64B7 /* HTTPServerProbeTests.swift in Sources */,
 				BBBD17B33092A4EE005E64B7 /* SneakerLoaderProgressTests.swift in Sources */,
 				BB5D29FA3092DB5900783AE2 /* SessionManagerTests.swift in Sources */,
 				BB5D29F23092DB2E00783AE2 /* AuthFakes.swift in Sources */,
 				BB5D2A323092E24C00783AE2 /* SecretFormatTests.swift in Sources */,
+				BB5D2A4C3092EFED00783AE2 /* VaultFakes.swift in Sources */,
 				BBBD17C73092C7B7005E64B7 /* ServerFakes.swift in Sources */,
 				BBBD17DF3092C835005E64B7 /* AddServerOutcomeMessageTests.swift in Sources */,
 				BB5D29F43092DB3200783AE2 /* AuthErrorMessageTests.swift in Sources */,
@@ -590,6 +637,7 @@
 				BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */,
 				BB5D29F83092DB5200783AE2 /* KeychainSessionStoreTests.swift in Sources */,
 				BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */,
+				BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */,
 			);
 		};
 		BBBD179C30925620005E64B7 /* Sources */ = {
@@ -760,6 +808,7 @@
 				INFOPLIST_FILE = App/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Sneakers-PAM uses Face ID to unlock the app and keep your secrets private.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -803,6 +852,7 @@
 				INFOPLIST_FILE = App/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Sneakers-PAM uses Face ID to unlock the app and keep your secrets private.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
