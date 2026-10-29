@@ -54,6 +54,19 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
 
     var lifecycleResult: Result<Void, VaultError> = .success(())
 
+    var folderResult: Result<Folder, VaultError> = .success(
+        Folder(id: "new", name: "New", parentId: nil, subtreeSecretCount: 0)
+    )
+    var folderActionResult: Result<Void, VaultError> = .success(())
+    var typesResult: Result<[SecretType], VaultError> = .success([])
+    var createdSecretID = "s-new"
+
+    private(set) var createdFolders: [(parentID: String?, name: String)] = []
+    private(set) var renamedFolders: [(id: String, name: String)] = []
+    private(set) var movedFolders: [(id: String, parentID: String?)] = []
+    private(set) var movedSecrets: [(id: String, folderID: String)] = []
+    private(set) var moveRequests: [MoveRequest] = []
+    private(set) var createdSecrets: [NewSecret] = []
     private(set) var rotations: [String] = []
     private(set) var retirements: [String] = []
     private(set) var reinstatements: [String] = []
@@ -134,6 +147,41 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func setAutomation(secretID: String, _ setting: AutomationSetting, _: ServerContext) async throws {
         automations.append(AutomationRequest(secretID: secretID, setting: setting))
         try lifecycleResult.get()
+    }
+
+    func createFolder(parentID: String?, name: String, _: ServerContext) async throws -> Folder {
+        createdFolders.append((parentID, name))
+        return try folderResult.get()
+    }
+
+    func renameFolder(id: String, name: String, _: ServerContext) async throws {
+        renamedFolders.append((id, name))
+        try folderActionResult.get()
+    }
+
+    func moveFolder(id: String, to parentID: String?, _: ServerContext) async throws {
+        movedFolders.append((id, parentID))
+        try folderActionResult.get()
+    }
+
+    func moveSecret(id: String, to folderID: String, _: ServerContext) async throws {
+        movedSecrets.append((id, folderID))
+        try folderActionResult.get()
+    }
+
+    func requestMove(_ request: MoveRequest, _: ServerContext) async throws {
+        moveRequests.append(request)
+        try folderActionResult.get()
+    }
+
+    func secretTypes(_: ServerContext) async throws -> [SecretType] {
+        try typesResult.get()
+    }
+
+    func createSecret(_ secret: NewSecret, _: ServerContext) async throws -> String {
+        createdSecrets.append(secret)
+        try folderActionResult.get()
+        return createdSecretID
     }
 
     func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {

@@ -122,7 +122,7 @@ nonisolated struct HTTPVaultService: VaultServicing {
 
     // MARK: Helpers
 
-    private func run<T: Decodable>(
+    func run<T: Decodable>(
         _ operation: GraphQLOperation,
         as type: T.Type,
         in context: ServerContext
@@ -232,11 +232,11 @@ nonisolated struct HTTPVaultService: VaultServicing {
         let mySecretAccess: Access
     }
 
-    private struct UpdatedSecret: Decodable {
+    struct UpdatedSecret: Decodable {
         let id: String
     }
 
-    private struct UpdateResponse: Decodable {
+    struct UpdateResponse: Decodable {
         let updateSecret: UpdatedSecret
     }
 

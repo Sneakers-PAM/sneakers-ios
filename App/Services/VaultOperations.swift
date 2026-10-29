@@ -5,10 +5,11 @@ import Foundation
 
 /// The GraphQL the app sends, the same operations the web app uses against the gateway.
 nonisolated enum Operations {
+    static let folderFields = "id name parentId scope ownerUserId canManage subtreeSecretCount"
     private static let accessFields = "read reveal manage approve informed manageRuleset"
     private static let leaseFields = "id secretId userId issuedAt expiresAt returned"
     private static let fieldFields = "key label kind options required maxLength sensitive superSensitive"
-    private static let typeFields = "id name checkout fields { \(fieldFields) } heartbeat rotation"
+    static let typeFields = "id name checkout fields { \(fieldFields) } heartbeat rotation"
 
     static func dashboard(userID: String, limit: Int) -> GraphQLOperation {
         GraphQLOperation(
@@ -42,7 +43,7 @@ nonisolated enum Operations {
 
     static let folders = GraphQLOperation(
         name: "BrowseFolders",
-        query: "query BrowseFolders { folders { id name parentId subtreeSecretCount } }"
+        query: "query BrowseFolders { folders { \(folderFields) } }"
     )
 
     static func contents(folderID: String) -> GraphQLOperation {

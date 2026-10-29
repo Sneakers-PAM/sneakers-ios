@@ -20,6 +20,27 @@ nonisolated struct SecretChange: Equatable, Sendable {
     var fields: [String: String]
 }
 
+/// A secret to create: its name, where it goes, its type and the values of its fields.
+nonisolated struct NewSecret: Equatable, Sendable {
+    var name: String
+    var folderID: String
+    var typeID: String
+    var fields: [String: String]
+}
+
+/// A move that needs a site admin's approval, with why.
+nonisolated struct MoveRequest: Equatable, Sendable {
+    enum Subject: Equatable, Sendable {
+        case secret(id: String, name: String)
+        case folder(id: String, name: String)
+    }
+
+    var subject: Subject
+    var destinationID: String
+    var destinationName: String
+    var reason: String
+}
+
 /// Reads and acts on the vault through the gateway. The real one calls the network; tests fake it.
 nonisolated protocol VaultServicing: Sendable {
     func dashboard(_ context: ServerContext) async throws -> DashboardData
@@ -36,6 +57,13 @@ nonisolated protocol VaultServicing: Sendable {
     func retire(secretID: String, _ context: ServerContext) async throws
     func reinstate(secretID: String, _ context: ServerContext) async throws
     func setAutomation(secretID: String, _ setting: AutomationSetting, _ context: ServerContext) async throws
+    func createFolder(parentID: String?, name: String, _ context: ServerContext) async throws -> Folder
+    func renameFolder(id: String, name: String, _ context: ServerContext) async throws
+    func moveFolder(id: String, to parentID: String?, _ context: ServerContext) async throws
+    func moveSecret(id: String, to folderID: String, _ context: ServerContext) async throws
+    func requestMove(_ request: MoveRequest, _ context: ServerContext) async throws
+    func secretTypes(_ context: ServerContext) async throws -> [SecretType]
+    func createSecret(_ secret: NewSecret, _ context: ServerContext) async throws -> String
     func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion]
     /// An earlier version's value: the key names the secret, the field and the version.
     func revealVersion(_ key: RevealKey, _ context: ServerContext) async throws -> String

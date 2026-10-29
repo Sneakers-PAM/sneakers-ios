@@ -15,6 +15,9 @@
             var rotatedAt: Date?
             var rotationOptOut = false
             var heartbeatOptOut = false
+            var addedFolders: [Folder] = []
+            var renamedFolders: [String: String] = [:]
+            var addedSecretNames: [String] = []
             var editedName: String?
             var editedFields: [String: String] = [:]
         }
@@ -147,6 +150,36 @@
                 $0.rotationOptOut = setting.disableRotation
                 $0.heartbeatOptOut = setting.disableHeartbeat
             }
+        }
+
+        func createFolder(parentID: String?, name: String, _: ServerContext) async throws -> Folder {
+            let id = "new-\(name)"
+            state.withLock { $0.addedFolders.append(Folder(
+                id: id,
+                name: name,
+                parentId: parentID,
+                subtreeSecretCount: 0
+            )) }
+            return Folder(id: id, name: name, parentId: parentID, subtreeSecretCount: 0)
+        }
+
+        func renameFolder(id: String, name: String, _: ServerContext) async throws {
+            state.withLock { $0.renamedFolders[id] = name }
+        }
+
+        func moveFolder(id _: String, to _: String?, _: ServerContext) async throws {}
+
+        func moveSecret(id _: String, to _: String, _: ServerContext) async throws {}
+
+        func requestMove(_: MoveRequest, _: ServerContext) async throws {}
+
+        func secretTypes(_: ServerContext) async throws -> [SecretType] {
+            [Self.databaseType]
+        }
+
+        func createSecret(_ secret: NewSecret, _: ServerContext) async throws -> String {
+            state.withLock { $0.addedSecretNames.append(secret.name) }
+            return "s-new"
         }
 
         func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
