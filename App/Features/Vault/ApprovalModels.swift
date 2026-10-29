@@ -145,3 +145,17 @@ nonisolated struct RequestBoard: Equatable, Sendable {
         history = involved.filter { $0.request.status != .pending }
     }
 }
+
+/// A reveal or use of a secret waiting for someone's decision.
+nonisolated struct SecretUse: Equatable, Identifiable, Sendable {
+    let id: String
+    let secretName: String
+    let fieldKey: String
+    let state: String
+    let expiresAt: Date
+    let purpose: String
+    let requester: String
+    let requestedBy: String
+    let confirm: Bool
+    let runID: String?
+}

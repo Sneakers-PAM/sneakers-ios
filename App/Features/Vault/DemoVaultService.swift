@@ -15,6 +15,8 @@
             var rotatedAt: Date?
             var rotationOptOut = false
             var heartbeatOptOut = false
+            var decided: [String: ApprovalStatus] = [:]
+            var decidedUses: Set<String> = []
             var redeemPolls = 0
             var savedRules: [AccessRule]?
             var addedFolders: [Folder] = []
@@ -198,8 +200,6 @@
             state.withLock { $0.addedSecrets.append((secret.name, secret.folderID)) }
             return "s-new"
         }
-
-        func requestAccess(secretID _: String, reason _: String, _: ServerContext) async throws {}
 
         func prepareReveal(_ key: RevealKey, runID: String, _: ServerContext) async throws -> HeldReveal {
             HeldReveal(
