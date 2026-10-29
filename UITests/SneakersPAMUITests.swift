@@ -11,10 +11,30 @@ final class SneakersPAMUITests: XCTestCase {
     }
 
     @MainActor
-    func testLaunchShowsHome() {
+    func testFirstLaunchAsksForAServer() {
         let app = XCUIApplication(bundleIdentifier: Self.appBundleIdentifier)
+        app.launchArguments = ["-uiTestingEmptyServers"]
         app.launch()
 
-        XCTAssertTrue(app.navigationBars["Home"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Add your server"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.textFields["serverAddress"].exists)
+        XCTAssertFalse(app.buttons["checkAndAdd"].isEnabled)
+    }
+
+    @MainActor
+    func testAnAddressThatIsNotHTTPSIsRefusedBeforeAnyNetworkCall() {
+        let app = XCUIApplication(bundleIdentifier: Self.appBundleIdentifier)
+        app.launchArguments = ["-uiTestingEmptyServers"]
+        app.launch()
+
+        let field = app.textFields["serverAddress"]
+        XCTAssertTrue(field.waitForExistence(timeout: 8))
+        field.tap()
+        field.typeText("http://sneakers.example.org")
+        app.buttons["checkAndAdd"].tap()
+
+        let message = app.staticTexts["serverMessage"]
+        XCTAssertTrue(message.waitForExistence(timeout: 5))
+        XCTAssertEqual(message.label, "The address must use https. The app never connects without TLS.")
     }
 }
