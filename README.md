@@ -16,10 +16,12 @@
 - 🕘 **History:** every saved version with who changed it and when, reading an old value through the same audited reveal, and restoring a version.
 - 💓 **Heartbeat and rotation:** whether a secret's target still accepts the stored value, when it was last checked, rotate now, automatic checking and rotation switches, and retire or restore a secret.
 - 📂 **Create and move:** make folders and secrets, rename a folder, and move a secret or folder, with a request when the vault needs a site admin's approval.
+- 📨 **Requests and approvals:** ask for access to a secret you can see but not read, follow what you asked for, and approve or deny what waits on you, each confirmed with Face ID, Touch ID or the device passcode first. A badge on Approvals shows how many are waiting, and both screens refresh while they are open.
+- ⏳ **Reveals that need approval:** a reveal the vault holds shows a waiting state with a countdown, can be cancelled, and the value is read once it is approved. It is never read before then.
 - 👥 **Who has access:** the rules for a secret or folder, including the ones from folders above, and for people who may change them, setting each cell to allow, deny or blank and adding a person.
 - 🎨 **Laces design:** the brand icon, the opening screen and the brand fonts.
 
-Passkey and single sign-on sign-in, access requests and approvals are still to come.
+Passkey and single sign-on sign-in are still to come.
 
 ## ▶️ Run it
 

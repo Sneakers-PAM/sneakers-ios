@@ -67,14 +67,12 @@ struct RequestsView: View {
                     ForEach(model.board.open) { RequestCard(row: $0) }
                     ForEach(model.myUses) { UseCard(use: $0) { EmptyView() } }
                 }
-                .accessibilityIdentifier("requestsOpen")
             }
             let decided = model.board.history.filter(\.mine)
             if !decided.isEmpty {
                 Section("Decided") {
                     ForEach(decided) { RequestCard(row: $0) }
                 }
-                .accessibilityIdentifier("requestsDecided")
             }
         }
     }
