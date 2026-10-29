@@ -3,26 +3,52 @@
 
 import SwiftUI
 
-/// Folders: the folder tree, the secrets in a folder and one secret. Three columns on an iPad, a stack on an iPhone.
+/// Where a folder screen is pushed to.
+struct FolderRoute: Hashable {
+    let id: String
+}
+
+/// Folders: walk down through folders, which hold subfolders, secrets or both. On an iPad a secret opens beside the
+/// list, and on an iPhone it opens on top of it.
 struct FoldersView: View {
     @Environment(VaultAccess.self) private var access
     @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var model = FoldersModel()
-    @State private var folderID: String?
     @State private var secretID: String?
     @State private var visibility = NavigationSplitViewVisibility.all
 
     var body: some View {
-        NavigationSplitView(columnVisibility: $visibility) {
-            sidebar
-                .navigationTitle("Folders")
-                .toolbar { AccountToolbarButton() }
-        } content: {
-            if let folderID {
-                SecretListView(folderID: folderID, selection: $secretID)
-                    .id(folderID)
+        Group {
+            if sizeClass == .regular {
+                split
             } else {
-                ContentUnavailableView("Pick a folder", systemImage: "folder")
+                stack
+            }
+        }
+        .task { await model.load(access) }
+    }
+
+    private var stack: some View {
+        NavigationStack {
+            FolderContentView(folderID: nil, folders: model, selection: $secretID, pushesSecrets: true)
+                .navigationDestination(for: FolderRoute.self) { route in
+                    FolderContentView(folderID: route.id, folders: model, selection: $secretID, pushesSecrets: true)
+                }
+                .navigationDestination(for: SecretRoute.self) { route in
+                    SecretDetailView(secretID: route.id, title: route.name)
+                }
+        }
+    }
+
+    private var split: some View {
+        NavigationSplitView(columnVisibility: $visibility) {
+            NavigationStack {
+                FolderContentView(folderID: nil, folders: model, selection: $secretID, pushesSecrets: false)
+                    .navigationDestination(for: FolderRoute.self) { route in
+                        FolderContentView(
+                            folderID: route.id, folders: model, selection: $secretID, pushesSecrets: false
+                        )
+                    }
             }
         } detail: {
             if let secretID {
@@ -34,45 +60,10 @@ struct FoldersView: View {
                 ContentUnavailableView("Pick a secret", systemImage: "key")
             }
         }
-        .task { await model.load(access) }
-        .onChange(of: folderID) {
-            secretID = nil
-            if sizeClass == .regular {
-                visibility = .doubleColumn
+        .onChange(of: secretID) {
+            if secretID != nil {
+                visibility = .detailOnly
             }
-        }
-    }
-
-    @ViewBuilder
-    private var sidebar: some View {
-        if !model.hasLoaded {
-            if let message = model.message {
-                ContentUnavailableView {
-                    Label("Couldn't load folders", systemImage: "exclamationmark.triangle")
-                } description: {
-                    Text(message)
-                } actions: {
-                    Button("Try again") { Task { await model.load(access) } }
-                        .accessibilityIdentifier("foldersRetry")
-                }
-            } else {
-                SneakerLoaderView(size: 96)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .accessibilityIdentifier("foldersLoading")
-            }
-        } else if model.tree.nodes().isEmpty {
-            ContentUnavailableView(
-                "No folders",
-                systemImage: "folder",
-                description: Text("Nothing has been shared with you yet.")
-            )
-        } else {
-            List(model.tree.nodes(), children: \.children, selection: $folderID) { node in
-                Label(node.name, systemImage: "folder")
-                    .tag(node.id)
-                    .accessibilityIdentifier("folder.\(node.name)")
-            }
-            .refreshable { await model.load(access) }
         }
     }
 }

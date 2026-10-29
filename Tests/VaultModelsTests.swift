@@ -136,4 +136,14 @@ struct VaultModelsTests {
 
         #expect(type.primarySensitiveFieldKey == nil)
     }
+
+    @Test func aFolderSaysHowManySecretsItHoldsIncludingItsSubfolders() {
+        func text(_ count: Int?) -> String {
+            Folder(id: "1", name: "F", parentId: nil, subtreeSecretCount: count).secretCountText
+        }
+        #expect(text(nil) == "")
+        #expect(text(0) == "Empty")
+        #expect(text(1) == "1 secret")
+        #expect(text(4) == "4 secrets")
+    }
 }

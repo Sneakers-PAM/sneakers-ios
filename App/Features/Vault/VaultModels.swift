@@ -8,6 +8,16 @@ nonisolated struct Folder: Decodable, Equatable, Identifiable, Sendable {
     let name: String
     let parentId: String?
     let subtreeSecretCount: Int?
+
+    /// How many secrets the folder holds, counting its subfolders. Empty when the server did not say.
+    var secretCountText: String {
+        switch subtreeSecretCount {
+        case nil: ""
+        case 0: "Empty"
+        case 1: "1 secret"
+        case let count?: "\(count) secrets"
+        }
+    }
 }
 
 nonisolated struct SecretStats: Decodable, Equatable, Sendable {

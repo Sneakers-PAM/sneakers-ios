@@ -32,24 +32,32 @@ final class VaultUITests: XCTestCase {
         tab.tap()
     }
 
-    /// Taps a top-level folder. A portrait iPad keeps the folder column folded away until it is asked for.
+    /// Taps once the row has stopped moving: a tap during a push or a column change is dropped.
+    private func tapWhenSettled(_ row: XCUIElement) {
+        let settled = XCTNSPredicateExpectation(predicate: NSPredicate(format: "isHittable == true"), object: row)
+        _ = XCTWaiter().wait(for: [settled], timeout: 8)
+        Thread.sleep(forTimeInterval: 0.6)
+        row.tap()
+    }
+
+    /// Taps a folder row. A portrait iPad keeps the folder column folded away until it is asked for.
     private func openFolder(_ app: XCUIApplication, _ name: String) {
-        let folder = element(app, "folder.\(name)")
-        if !folder.waitForExistence(timeout: 4) {
+        let row = app.cells.containing(.any, identifier: "folder.\(name)").firstMatch
+        if !row.waitForExistence(timeout: 4) {
             let sidebar = app.buttons["Show Sidebar"].firstMatch
             if sidebar.exists {
                 sidebar.tap()
             }
         }
-        XCTAssertTrue(folder.waitForExistence(timeout: 8), "the folder list is missing")
-        folder.tap()
+        XCTAssertTrue(row.waitForExistence(timeout: 8), "the folder \(name) is missing")
+        tapWhenSettled(row)
     }
 
     /// Taps the list row, not the text inside it: an iPad ignores a tap on the combined text element.
     private func tapSecret(_ app: XCUIApplication, _ name: String) {
-        let row = app.cells.containing(.staticText, identifier: "secret.\(name)").firstMatch
+        let row = app.cells.containing(.any, identifier: "secret.\(name)").firstMatch
         XCTAssertTrue(row.waitForExistence(timeout: 8), "the secret list is missing")
-        row.tap()
+        tapWhenSettled(row)
     }
 
     /// Goes from Home to the demo secret's detail screen.
@@ -68,6 +76,18 @@ final class VaultUITests: XCTestCase {
         XCTAssertTrue(element(app, "homeTile.expired").exists)
         XCTAssertTrue(element(app, "homeTile.drift").exists)
         XCTAssertTrue(app.staticTexts["Acme VPN"].exists, "the checked-out secret is missing")
+    }
+
+    @MainActor
+    func testAFolderThatHoldsOnlyFoldersLetsYouWalkDownToItsSecrets() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Platform")
+        XCTAssertFalse(element(app, "secret.Deploy key").exists, "the secret lives one level down")
+        openFolder(app, "Databases")
+        tapSecret(app, "Deploy key")
+
+        XCTAssertTrue(element(app, "field.password").waitForExistence(timeout: 8), "the secret did not open")
     }
 
     @MainActor
