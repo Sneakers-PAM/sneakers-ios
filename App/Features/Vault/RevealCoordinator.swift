@@ -33,22 +33,31 @@ final class RevealCoordinator {
     private static let logger = Logger(subsystem: "com.therabbithole.app.apple.sneakers-pam", category: "reveal")
 
     private(set) var revealed: [RevealKey: String] = [:]
-    private(set) var notice: String?
+    var notice: String?
     private(set) var stepUp: StepUpPrompt?
     /// Goes up each time a version is restored, so a screen showing the secret knows to reload.
     private(set) var restoredCount = 0
+    /// Reveals the vault is holding until someone approves them, by what was asked for.
+    var held: [RevealKey: HeldReveal] = [:]
 
-    private let access: VaultAccess
+    let access: VaultAccess
     private let auth: AuthServicing
-    private let clipboard: Clipboard
+    let clipboard: Clipboard
+    let pollEvery: Duration
     private let hideAfter: Duration
     @ObservationIgnored private var hideTasks: [RevealKey: Task<Void, Never>] = [:]
+    @ObservationIgnored var heldTasks: [RevealKey: Task<Void, Never>] = [:]
+    @ObservationIgnored var runIDs: [String: String] = [:]
 
-    init(access: VaultAccess, auth: AuthServicing, clipboard: Clipboard, hideAfter: Duration = .seconds(20)) {
+    init(
+        access: VaultAccess, auth: AuthServicing, clipboard: Clipboard,
+        hideAfter: Duration = .seconds(20), pollEvery: Duration = .seconds(3)
+    ) {
         self.access = access
         self.auth = auth
         self.clipboard = clipboard
         self.hideAfter = hideAfter
+        self.pollEvery = pollEvery
     }
 
     func show(_ key: RevealKey) async {
@@ -78,6 +87,9 @@ final class RevealCoordinator {
     func hideAll() {
         hideTasks.values.forEach { $0.cancel() }
         hideTasks = [:]
+        heldTasks.values.forEach { $0.cancel() }
+        heldTasks = [:]
+        held = [:]
         revealed = [:]
         notice = nil
         stepUp = nil
@@ -131,11 +143,9 @@ final class RevealCoordinator {
         do {
             switch action {
             case let .show(key):
-                revealed[key] = try await fetch(key)
-                scheduleHide(key)
+                try await finish(action, value: fetch(key))
             case let .copy(key):
-                try await clipboard.copy(fetch(key), clearAfter: ClipboardPolicy.clearAfter)
-                notice = ClipboardPolicy.copiedNotice
+                try await finish(.copy(key), value: fetch(key))
             case let .restore(secretID, versionNo):
                 try await access.perform { context in
                     try await self.access.service.restore(secretID: secretID, versionNo: versionNo, context)
@@ -146,10 +156,26 @@ final class RevealCoordinator {
         } catch VaultError.stepUpRequired {
             Self.logger.info("a fresh second factor is needed")
             stepUp = StepUpPrompt(action: action)
+        } catch VaultError.approvalRequired {
+            await hold(action)
         } catch let error as VaultError {
             notice = error.message
         } catch {
             notice = VaultError.unexpected.message
+        }
+    }
+
+    /// Shows or copies a value that has been read. A restore has no value.
+    func finish(_ action: PendingReveal, value: String) {
+        switch action {
+        case let .show(key):
+            revealed[key] = value
+            scheduleHide(key)
+        case .copy:
+            clipboard.copy(value, clearAfter: ClipboardPolicy.clearAfter)
+            notice = ClipboardPolicy.copiedNotice
+        case .restore:
+            break
         }
     }
 
@@ -163,7 +189,7 @@ final class RevealCoordinator {
         }
     }
 
-    private func scheduleHide(_ key: RevealKey) {
+    func scheduleHide(_ key: RevealKey) {
         hideTasks[key]?.cancel()
         hideTasks[key] = Task { [hideAfter] in
             try? await Task.sleep(for: hideAfter)

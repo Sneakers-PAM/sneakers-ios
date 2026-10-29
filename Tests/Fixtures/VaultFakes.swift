@@ -73,6 +73,24 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
 
     private(set) var savedSecretRules: [(secretID: String, rules: [AccessRule])] = []
     private(set) var savedFolderRules: [(folderID: String, update: RulesUpdate)] = []
+    var prepareResults: [Result<HeldReveal, VaultError>] = []
+    var redeemResults: [Result<String, VaultError>] = []
+
+    var overviewResult: Result<RequestsOverview, VaultError> = .success(
+        RequestsOverview(requests: [], secretNames: [:], secretsIMayApprove: [], people: [:])
+    )
+    var usesToDecideResult: Result<[SecretUse], VaultError> = .success([])
+    var myUsesResult: Result<[SecretUse], VaultError> = .success([])
+    var decisionResult: Result<Void, VaultError> = .success(())
+
+    private(set) var resolutions: [Resolution] = []
+    private(set) var comments: [(requestID: String, body: String)] = []
+    private(set) var useDecisions: [(id: String, approve: Bool)] = []
+    var requestAccessResult: Result<Void, VaultError> = .success(())
+
+    private(set) var accessRequests: [(secretID: String, reason: String)] = []
+    private(set) var prepared: [PreparedReveal] = []
+    private(set) var redeemed: [String] = []
     private(set) var rotations: [String] = []
     private(set) var retirements: [String] = []
     private(set) var reinstatements: [String] = []
@@ -212,6 +230,50 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         return createdSecretID
     }
 
+    func requestsOverview(_: ServerContext) async throws -> RequestsOverview {
+        try overviewResult.get()
+    }
+
+    func resolve(requestID: String, approve: Bool, grantHours: Int?, _: ServerContext) async throws {
+        resolutions.append(Resolution(requestID: requestID, approve: approve, grantHours: grantHours))
+        try decisionResult.get()
+    }
+
+    func comment(requestID: String, body: String, _: ServerContext) async throws {
+        comments.append((requestID, body))
+        try decisionResult.get()
+    }
+
+    func usesToDecide(_: ServerContext) async throws -> [SecretUse] {
+        try usesToDecideResult.get()
+    }
+
+    func myPendingUses(_: ServerContext) async throws -> [SecretUse] {
+        try myUsesResult.get()
+    }
+
+    func decideUse(id: String, approve: Bool, _: ServerContext) async throws {
+        useDecisions.append((id, approve))
+        try decisionResult.get()
+    }
+
+    func requestAccess(secretID: String, reason: String, _: ServerContext) async throws {
+        accessRequests.append((secretID, reason))
+        try requestAccessResult.get()
+    }
+
+    func prepareReveal(_ key: RevealKey, runID: String, _: ServerContext) async throws -> HeldReveal {
+        prepared.append(PreparedReveal(secretID: key.secretID, fieldKey: key.fieldKey, runID: runID))
+        guard !prepareResults.isEmpty else { throw VaultError.unexpected }
+        return try prepareResults.removeFirst().get()
+    }
+
+    func redeemReveal(useID: String, _: ServerContext) async throws -> String {
+        redeemed.append(useID)
+        guard !redeemResults.isEmpty else { throw VaultError.approvalPending }
+        return try redeemResults.removeFirst().get()
+    }
+
     func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
         try versionsResult.get()
     }
@@ -227,6 +289,18 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         guard !restoreResults.isEmpty else { return }
         try restoreResults.removeFirst().get()
     }
+}
+
+struct Resolution: Equatable {
+    let requestID: String
+    let approve: Bool
+    let grantHours: Int?
+}
+
+struct PreparedReveal: Equatable {
+    let secretID: String
+    let fieldKey: String
+    let runID: String
 }
 
 struct AutomationRequest: Equatable {

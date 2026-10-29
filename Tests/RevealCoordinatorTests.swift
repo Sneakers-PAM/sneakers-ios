@@ -101,13 +101,21 @@ struct RevealCoordinatorTests {
         #expect(coordinator.stepUp == nil)
     }
 
-    @Test func aSecretThatNeedsApprovalSaysSoAndAsksForNoCode() async {
+    @Test func aSecretThatNeedsApprovalIsHeldForItAndAsksForNoCode() async {
         vault.revealResults = [.failure(.approvalRequired)]
+        let pending = HeldReveal(
+            id: "u1",
+            state: "PENDING",
+            confirm: false,
+            expiresAt: .distantFuture,
+            runID: "ios_run"
+        )
+        vault.prepareResults = [.success(pending)]
         let coordinator = makeCoordinator()
 
         await coordinator.copy(key)
 
-        #expect(coordinator.notice == VaultError.approvalRequired.message)
+        #expect(coordinator.held[key]?.id == "u1")
         #expect(coordinator.stepUp == nil)
         #expect(clipboard.copies.isEmpty)
     }

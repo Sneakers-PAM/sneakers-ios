@@ -13,6 +13,7 @@ struct SecretDetailView: View {
     @State private var model: SecretDetailModel
     @State private var editing: EditSecretModel?
     @State private var moving: MoveModel?
+    @State private var requesting: AccessRequestModel?
 
     init(secretID: String, title: String) {
         self.secretID = secretID
@@ -64,6 +65,9 @@ struct SecretDetailView: View {
                     }
                 }
             }
+            .sheet(item: $requesting) { request in
+                AccessRequestView(model: request)
+            }
             .sheet(item: $moving) { move in
                 MoveView(model: move) { Task { await model.load(access) } }
             }
@@ -103,6 +107,10 @@ struct SecretDetailView: View {
                 Section {
                     Label("You can see this secret exists but can't read it.", systemImage: "lock.fill")
                         .accessibilityIdentifier("noAccess")
+                    Button("Request access", systemImage: "hand.raised") {
+                        requesting = AccessRequestModel(secretID: secretID)
+                    }
+                    .accessibilityIdentifier("requestAccess")
                 }
             } else {
                 HeartbeatCard(model: model)
@@ -189,6 +197,8 @@ private struct FieldRowView: View {
     private var value: some View {
         if let plain = row.plainValue {
             FieldValueText(kind: row.kind, value: plain)
+        } else if let use = reveal.held[key] {
+            HeldRevealView(use: use) { reveal.cancelHeld(key) }
         } else if let shown = reveal.revealed[key] {
             FieldValueText(kind: row.kind == .multiline ? .multiline : .text, value: shown)
                 .textSelection(.disabled)
@@ -206,7 +216,7 @@ private struct FieldRowView: View {
                 .labelStyle(.iconOnly)
                 .buttonStyle(.borderless)
                 .accessibilityIdentifier("copy.\(row.key)")
-        } else if row.isSensitive {
+        } else if row.isSensitive, reveal.held[key] == nil {
             if reveal.revealed[key] != nil {
                 Button("Hide", systemImage: "eye.slash") { reveal.hide(key) }
                     .labelStyle(.iconOnly)

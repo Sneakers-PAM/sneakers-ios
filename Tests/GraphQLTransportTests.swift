@@ -111,4 +111,20 @@ struct GraphQLTransportTests {
         #expect(VaultError.stepUpRequired.message == "Confirm it's you with a code to continue.")
         #expect(VaultError.unreachable.message == "Couldn't reach the server. Check your connection and try again.")
     }
+
+    @Test func aRedeemOfAUseStillWaitingIsPendingNotAFailure() throws {
+        let body = #"{"data":null,"errors":[{"message":"use is PENDING","extensions":{"code":"FAILED_PRECONDITION"}}]}"#
+
+        #expect(throws: VaultError.approvalPending) {
+            try GraphQLResponse.parse(status: 200, body: Data(body.utf8))
+        }
+    }
+
+    @Test func anyOtherFailedPreconditionIsStillUnexpected() throws {
+        let body = #"{"data":null,"errors":[{"message":"nope","extensions":{"code":"FAILED_PRECONDITION"}}]}"#
+
+        #expect(throws: VaultError.unexpected) {
+            try GraphQLResponse.parse(status: 200, body: Data(body.utf8))
+        }
+    }
 }

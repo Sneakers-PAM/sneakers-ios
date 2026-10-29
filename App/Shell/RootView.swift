@@ -16,6 +16,8 @@ struct RootView: View {
     @Environment(SessionManager.self) private var sessions
     @Environment(AppLockModel.self) private var lock
     @Environment(RevealCoordinator.self) private var reveal
+    @Environment(RequestsModel.self) private var requests
+    @Environment(VaultAccess.self) private var vaultAccess
     @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var selection = AppSection.initial
     @State private var showsLoader = true
@@ -55,6 +57,7 @@ struct RootView: View {
         }
         .onChange(of: registry.active.map { sessions.isSignedIn($0.id) }) {
             reveal.hideAll()
+            requests.reset()
         }
         .onChange(of: sessions.interactiveSignIns) {
             lock.signedInJustNow()
@@ -107,6 +110,7 @@ struct RootView: View {
                 Tab(section.title, systemImage: section.systemImage, value: section) {
                     sectionView(section)
                 }
+                .badge(section == .approvals ? requests.awaitingCount : 0)
                 .hidden(section == .account && sizeClass == .regular)
             }
         }
@@ -114,6 +118,7 @@ struct RootView: View {
         .sheet(isPresented: stepUpBinding) {
             StepUpView()
         }
+        .task { await requests.load(vaultAccess) }
         .onChange(of: selection) { _, newSection in
             Self.logger.debug("section selected: \(newSection.rawValue, privacy: .public)")
         }
@@ -127,7 +132,8 @@ private extension RootView {
         case .home: HomeView()
         case .folders: FoldersView()
         case .account: AccountView()
-        case .requests, .approvals: SectionPlaceholderView(section: section)
+        case .requests: RequestsView()
+        case .approvals: ApprovalsView()
         }
     }
 

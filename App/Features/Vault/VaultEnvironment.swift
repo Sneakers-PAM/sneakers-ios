@@ -29,6 +29,16 @@ enum VaultEnvironment {
         return (access, reveal)
     }
 
+    /// The check before an approval. Debug builds in the UI tests have nobody to look at the phone, so it passes.
+    static func authenticator(arguments: [String] = CommandLine.arguments) -> Authenticating {
+        #if DEBUG
+            if arguments.contains(SessionManager.signedInArgument) {
+                return AlwaysSucceeds()
+            }
+        #endif
+        return LocalAuthenticator()
+    }
+
     private static func service(for arguments: [String]) -> VaultServicing {
         #if DEBUG
             if arguments.contains(SessionManager.signedInArgument) {
@@ -47,3 +57,11 @@ enum VaultEnvironment {
         return HTTPAuthService()
     }
 }
+
+#if DEBUG
+    private struct AlwaysSucceeds: Authenticating {
+        func authenticate(reason _: String) async -> LockResult {
+            .success
+        }
+    }
+#endif

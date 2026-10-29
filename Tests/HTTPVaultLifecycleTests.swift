@@ -68,4 +68,43 @@ struct HTTPVaultLifecycleTests {
         #expect(variables?["disableRotation"] == .bool(true))
         #expect(variables?["disableHeartbeat"] == .bool(false))
     }
+
+    // MARK: Held reveals
+
+    @Test func aRevealThatIsHeldForApprovalIsPreparedWithItsRun() async throws {
+        transport.answer("SecretPrepareReveal", """
+        {"prepareSecretReveal":{"id":"u1","state":"PENDING","confirm":true,"expiresAtUnix":1793300000,
+          "runId":"ios_run"}}
+        """)
+
+        let held = try await service.prepareReveal(
+            RevealKey(secretID: "s1", fieldKey: "password"), runID: "ios_run", .fixture
+        )
+
+        #expect(held.id == "u1")
+        #expect(held.state == "PENDING")
+        #expect(held.confirm)
+        #expect(held.expiresAt == Date(timeIntervalSince1970: 1_793_300_000))
+        let variables = transport.operation(named: "SecretPrepareReveal")?.variables
+        #expect(variables?["secretId"] == .string("s1"))
+        #expect(variables?["fieldKey"] == .string("password"))
+        #expect(variables?["runId"] == .string("ios_run"))
+    }
+
+    @Test func anApprovedRevealIsRedeemedForItsValue() async throws {
+        transport.answer("SecretRedeemReveal", #"{"redeemSecretReveal":"the-value"}"#)
+
+        let value = try await service.redeemReveal(useID: "u1", .fixture)
+
+        #expect(value == "the-value")
+        #expect(transport.operation(named: "SecretRedeemReveal")?.variables["id"] == .string("u1"))
+    }
+
+    @Test func aRevealStillWaitingForApprovalIsPending() async {
+        transport.fail("SecretRedeemReveal", .approvalPending)
+
+        await #expect(throws: VaultError.approvalPending) {
+            try await service.redeemReveal(useID: "u1", .fixture)
+        }
+    }
 }
