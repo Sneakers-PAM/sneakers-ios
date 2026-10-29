@@ -9,6 +9,9 @@ struct AddServerView: View {
     @Environment(ServerRegistry.self) private var registry
 
     var onAdded: () -> Void = {}
+    /// Set when the view is a sheet the person can leave. The first-launch screen has none, because the app
+    /// needs a server before it can do anything.
+    var onCancel: (() -> Void)?
 
     @State private var address = ""
     @State private var isChecking = false
@@ -68,6 +71,14 @@ struct AddServerView: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .background(Color("LaunchBackground").ignoresSafeArea())
+        .toolbar {
+            if let onCancel {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", action: onCancel)
+                        .accessibilityIdentifier("cancelAddServer")
+                }
+            }
+        }
     }
 
     private func check() {

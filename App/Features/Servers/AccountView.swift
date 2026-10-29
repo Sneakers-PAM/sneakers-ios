@@ -49,8 +49,11 @@ struct AccountView: View {
             }
             .navigationTitle("Account")
             .sheet(isPresented: $showsAddSheet) {
-                AddServerView { showsAddSheet = false }
-                    .presentationDetents([.large])
+                NavigationStack {
+                    AddServerView(onAdded: { showsAddSheet = false }, onCancel: { showsAddSheet = false })
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+                .presentationDetents([.large])
             }
         }
     }
