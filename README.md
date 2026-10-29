@@ -2,6 +2,36 @@
 
 > 🧭 Sneakers iOS app (Swift)
 
+## ✨ What it does today
+
+- 🔐 **Sign in:** a username and password, then an authenticator or emailed code, against your own Sneakers server. Nothing in the app shows until you are signed in.
+- 🗝 **Device-only sessions:** each server's session lives in the Keychain on this device, locked while the device is, and never synced to iCloud.
+- 🌐 **Several servers:** add more than one, check each one's release, and switch between them.
+- 🔒 **App lock:** Face ID, Touch ID or the passcode on launch and after a short time out of sight, with a cover over the app switcher.
+- 🛡 **Second factor setup:** scan a QR code or type a key, and the app asks for it when the server requires one.
+- 🎨 **Laces design:** the brand icon, the opening screen and the brand fonts.
+
+Passkey and single sign-on sign-in, and the vault screens themselves, are still to come.
+
+## ▶️ Run it
+
+### Before you start
+
+- Xcode 27 with the iOS 27 simulators, and SwiftLint and SwiftFormat for the checks (`brew install swiftlint swiftformat`).
+- A Sneakers server you can reach over https. The app never connects without TLS.
+- The app runs on the simulators only for now. Device builds need an Apple developer team.
+
+### Steps
+
+1. Open `Sneakers-PAM.xcodeproj` in Xcode and pick the `Sneakers-PAM` scheme with an iPhone or iPad simulator.
+2. Run it. On a new install it asks for your server's address, then signs you in.
+3. Run the tests from a terminal:
+
+```bash
+xcodebuild test -project Sneakers-PAM.xcodeproj -scheme Sneakers-PAM \
+  -destination 'platform=iOS Simulator,name=iPhone 17'
+```
+
 ## 🛠 Develop
 
 ```bash

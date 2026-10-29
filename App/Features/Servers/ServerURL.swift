@@ -15,6 +15,8 @@ nonisolated struct ServerURL: Hashable, Codable, Sendable {
 
     let host: String
     let port: Int?
+    /// The address as a URL, for building requests.
+    let origin: URL
 
     var absoluteString: String {
         "https://\(host)" + (port.map { ":\($0)" } ?? "")
@@ -30,8 +32,17 @@ nonisolated struct ServerURL: Hashable, Codable, Sendable {
         guard components.user == nil, components.password == nil else { throw Failure.hasCredentials }
         guard let rawHost = components.host, Self.isValid(host: rawHost) else { throw Failure.malformed }
 
-        host = rawHost.lowercased()
-        port = components.port == 443 ? nil : components.port
+        let normalisedHost = rawHost.lowercased()
+        let normalisedPort = components.port == 443 ? nil : components.port
+        var parts = URLComponents()
+        parts.scheme = "https"
+        parts.host = normalisedHost
+        parts.port = normalisedPort
+        guard let origin = parts.url else { throw Failure.malformed }
+
+        host = normalisedHost
+        port = normalisedPort
+        self.origin = origin
     }
 
     init(from decoder: any Decoder) throws {

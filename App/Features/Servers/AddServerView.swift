@@ -23,10 +23,11 @@ struct AddServerView: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Add your server")
-                        .font(.system(size: 32, weight: .heavy))
+                        .lacesFont(.title)
                         .tracking(-0.6)
                         .accessibilityAddTraits(.isHeader)
                     Text("Enter the address of your Sneakers server. You can add more than one later.")
+                        .lacesFont(.bodyLarge)
                         .foregroundStyle(.secondary)
                 }
 

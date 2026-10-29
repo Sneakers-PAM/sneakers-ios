@@ -28,7 +28,7 @@ struct SplashView: View {
     private var wordmark: some View {
         let dot = Text(SplashContent.wordmark.dot).foregroundColor(Color("LacesSole"))
         return Text("\(SplashContent.wordmark.start)\(dot)\(SplashContent.wordmark.end)")
-            .font(.system(size: 30, weight: .heavy))
+            .lacesFont(.wordmark)
             .tracking(-0.6)
             .foregroundStyle(Color("LacesInk"))
     }
@@ -36,7 +36,7 @@ struct SplashView: View {
     private var slogan: some View {
         let mark = Text(SplashContent.trademark).font(.system(size: 12, weight: .bold)).baselineOffset(10)
         return Text("\(SplashContent.sloganLines.joined(separator: "\n"))\(mark)")
-            .font(.system(size: 22, weight: .heavy))
+            .lacesFont(.slogan)
             .multilineTextAlignment(.center)
             .foregroundStyle(Color("LacesInk"))
     }
@@ -47,7 +47,7 @@ struct SplashView: View {
                 Text(line)
             }
         }
-        .font(.system(size: 12, design: .monospaced))
+        .lacesFont(.mono)
         .foregroundStyle(.secondary)
     }
 }
