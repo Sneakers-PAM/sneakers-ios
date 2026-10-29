@@ -79,6 +79,20 @@ final class VaultUITests: XCTestCase {
     }
 
     @MainActor
+    func testTheFourCountsAreTheSameSizeAndFillTheRow() {
+        let app = launchSignedIn()
+        let tiles = ["accessible", "expiring", "expired", "drift"].map { element(app, "homeTile.\($0)") }
+        XCTAssertTrue(tiles[0].waitForExistence(timeout: 8), "the counts are missing")
+
+        let sizes = tiles.map(\.frame.size)
+        XCTAssertTrue(sizes.allSatisfy { abs($0.width - sizes[0].width) < 1 }, "the widths differ: \(sizes)")
+        XCTAssertTrue(sizes.allSatisfy { abs($0.height - sizes[0].height) < 1 }, "the heights differ: \(sizes)")
+        if isPad {
+            XCTAssertTrue(tiles.allSatisfy { abs($0.frame.minY - tiles[0].frame.minY) < 1 }, "not in one row")
+        }
+    }
+
+    @MainActor
     func testAFolderThatHoldsOnlyFoldersLetsYouWalkDownToItsSecrets() {
         let app = launchSignedIn()
         openFolders(app)

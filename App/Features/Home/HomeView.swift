@@ -109,10 +109,18 @@ private struct LeaseRow: View {
 }
 
 private struct StatTiles: View {
+    /// Tiles are all one size: four across a wide screen, two by two on a phone.
+    private static let tileHeight: CGFloat = 96
+
     let stats: SecretStats
+    @Environment(\.horizontalSizeClass) private var sizeClass
+
+    private var columns: [GridItem] {
+        Array(repeating: GridItem(.flexible(), spacing: 12), count: sizeClass == .regular ? 4 : 2)
+    }
 
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 12)], spacing: 12) {
+        LazyVGrid(columns: columns, spacing: 12) {
             tile("accessible", "Secrets", stats.total, "key")
             tile("expiring", "Expiring soon", stats.expiringSoon, "clock")
             tile("expired", "Expired", stats.expired, "exclamationmark.circle")
@@ -126,11 +134,13 @@ private struct StatTiles: View {
             Label(title, systemImage: symbol)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             Text("\(value)")
                 .font(.title.bold())
                 .monospacedDigit()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: Self.tileHeight, alignment: .topLeading)
         .padding(14)
         .background(.quaternary, in: RoundedRectangle(cornerRadius: 14))
         .accessibilityElement(children: .combine)
