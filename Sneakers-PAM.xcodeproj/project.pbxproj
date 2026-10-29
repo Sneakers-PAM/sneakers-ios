@@ -7,6 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB5D29F23092DB2E00783AE2 /* AuthFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */; };
+		BB5D29F43092DB3200783AE2 /* AuthErrorMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F33092DB3200783AE2 /* AuthErrorMessageTests.swift */; };
+		BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F53092DB4800783AE2 /* HTTPAuthServiceTests.swift */; };
+		BB5D29F83092DB5200783AE2 /* KeychainSessionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F73092DB5200783AE2 /* KeychainSessionStoreTests.swift */; };
+		BB5D29FA3092DB5900783AE2 /* SessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F93092DB5900783AE2 /* SessionManagerTests.swift */; };
+		BB5D29FC3092DB6A00783AE2 /* SignInModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29FB3092DB6A00783AE2 /* SignInModelTests.swift */; };
+		BB5D29FE3092DBA500783AE2 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29FD3092DBA500783AE2 /* AuthModels.swift */; };
+		BB5D2A003092DBA800783AE2 /* AuthServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29FF3092DBA800783AE2 /* AuthServicing.swift */; };
+		BB5D2A023092DBBE00783AE2 /* HTTPAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A013092DBBE00783AE2 /* HTTPAuthService.swift */; };
+		BB5D2A043092DBC300783AE2 /* KeychainSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A033092DBC300783AE2 /* KeychainSessionStore.swift */; };
+		BB5D2A063092DBCC00783AE2 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A053092DBCC00783AE2 /* SessionManager.swift */; };
+		BB5D2A083092DBD400783AE2 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A073092DBD400783AE2 /* SignInModel.swift */; };
+		BB5D2A0A3092DE0500783AE2 /* ServersSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A093092DE0500783AE2 /* ServersSection.swift */; };
+		BB5D2A0C3092DE0A00783AE2 /* CodeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A0B3092DE0A00783AE2 /* CodeEntryView.swift */; };
+		BB5D2A0E3092DE1900783AE2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A0D3092DE1900783AE2 /* SignInView.swift */; };
+		BB5D2A103092DE1E00783AE2 /* SessionManager+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A0F3092DE1E00783AE2 /* SessionManager+Launch.swift */; };
+		BB5D2A133092E0CA00783AE2 /* LockFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A123092E0CA00783AE2 /* LockFakes.swift */; };
+		BB5D2A153092E0CD00783AE2 /* LockPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A143092E0CD00783AE2 /* LockPolicyTests.swift */; };
+		BB5D2A173092E0D500783AE2 /* AppLockModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A163092E0D500783AE2 /* AppLockModelTests.swift */; };
+		BB5D2A193092E0DD00783AE2 /* LockModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A183092E0DD00783AE2 /* LockModels.swift */; };
+		BB5D2A1B3092E0E300783AE2 /* AppLockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A1A3092E0E300783AE2 /* AppLockModel.swift */; };
+		BB5D2A1D3092E0E600783AE2 /* LocalAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A1C3092E0E600783AE2 /* LocalAuthenticator.swift */; };
+		BB5D2A1F3092E0FC00783AE2 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A1E3092E0FC00783AE2 /* LockView.swift */; };
+		BB5D2A213092E10000783AE2 /* AppLockModel+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A203092E10000783AE2 /* AppLockModel+Launch.swift */; };
+		BB5D2A243092E1EA00783AE2 /* AuthenticatorSetupModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A233092E1EA00783AE2 /* AuthenticatorSetupModelTests.swift */; };
+		BB5D2A263092E1F100783AE2 /* ReminderPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A253092E1F100783AE2 /* ReminderPolicyTests.swift */; };
+		BB5D2A283092E1F400783AE2 /* QRCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A273092E1F400783AE2 /* QRCodeTests.swift */; };
+		BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A293092E21200783AE2 /* AuthenticatorSetupModel.swift */; };
+		BB5D2A2C3092E21300783AE2 /* ReminderPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A2B3092E21300783AE2 /* ReminderPolicy.swift */; };
+		BB5D2A2E3092E21600783AE2 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A2D3092E21600783AE2 /* QRCode.swift */; };
+		BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A2F3092E24200783AE2 /* AuthenticatorSetupView.swift */; };
+		BB5D2A323092E24C00783AE2 /* SecretFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A313092E24C00783AE2 /* SecretFormatTests.swift */; };
+		BB5D2A343092E24D00783AE2 /* SecretFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A333092E24D00783AE2 /* SecretFormat.swift */; };
+		BB5D2A363092E2AA00783AE2 /* HTTPAuthService+Answers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A353092E2AA00783AE2 /* HTTPAuthService+Answers.swift */; };
+		BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A373092E2D200783AE2 /* HTTPAuthAnswerTests.swift */; };
+		BB5D2A3B3092E3C300783AE2 /* BrandFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A3A3092E3C300783AE2 /* BrandFontsTests.swift */; };
+		BB5D2A3D3092E3D100783AE2 /* BrandFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A3C3092E3D100783AE2 /* BrandFonts.swift */; };
+		BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A3E3092E3D500783AE2 /* LacesTextStyle.swift */; };
+		BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */; };
+		BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */; };
+		BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
 		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
 		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
@@ -61,6 +102,47 @@
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* Sneakers-PAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sneakers-PAM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFakes.swift; sourceTree = "<group>"; };
+		BB5D29F33092DB3200783AE2 /* AuthErrorMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorMessageTests.swift; sourceTree = "<group>"; };
+		BB5D29F53092DB4800783AE2 /* HTTPAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuthServiceTests.swift; sourceTree = "<group>"; };
+		BB5D29F73092DB5200783AE2 /* KeychainSessionStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSessionStoreTests.swift; sourceTree = "<group>"; };
+		BB5D29F93092DB5900783AE2 /* SessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerTests.swift; sourceTree = "<group>"; };
+		BB5D29FB3092DB6A00783AE2 /* SignInModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModelTests.swift; sourceTree = "<group>"; };
+		BB5D29FD3092DBA500783AE2 /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
+		BB5D29FF3092DBA800783AE2 /* AuthServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServicing.swift; sourceTree = "<group>"; };
+		BB5D2A013092DBBE00783AE2 /* HTTPAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuthService.swift; sourceTree = "<group>"; };
+		BB5D2A033092DBC300783AE2 /* KeychainSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSessionStore.swift; sourceTree = "<group>"; };
+		BB5D2A053092DBCC00783AE2 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		BB5D2A073092DBD400783AE2 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		BB5D2A093092DE0500783AE2 /* ServersSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersSection.swift; sourceTree = "<group>"; };
+		BB5D2A0B3092DE0A00783AE2 /* CodeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEntryView.swift; sourceTree = "<group>"; };
+		BB5D2A0D3092DE1900783AE2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		BB5D2A0F3092DE1E00783AE2 /* SessionManager+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionManager+Launch.swift"; sourceTree = "<group>"; };
+		BB5D2A123092E0CA00783AE2 /* LockFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockFakes.swift; sourceTree = "<group>"; };
+		BB5D2A143092E0CD00783AE2 /* LockPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockPolicyTests.swift; sourceTree = "<group>"; };
+		BB5D2A163092E0D500783AE2 /* AppLockModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockModelTests.swift; sourceTree = "<group>"; };
+		BB5D2A183092E0DD00783AE2 /* LockModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockModels.swift; sourceTree = "<group>"; };
+		BB5D2A1A3092E0E300783AE2 /* AppLockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockModel.swift; sourceTree = "<group>"; };
+		BB5D2A1C3092E0E600783AE2 /* LocalAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticator.swift; sourceTree = "<group>"; };
+		BB5D2A1E3092E0FC00783AE2 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
+		BB5D2A203092E10000783AE2 /* AppLockModel+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppLockModel+Launch.swift"; sourceTree = "<group>"; };
+		BB5D2A233092E1EA00783AE2 /* AuthenticatorSetupModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorSetupModelTests.swift; sourceTree = "<group>"; };
+		BB5D2A253092E1F100783AE2 /* ReminderPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPolicyTests.swift; sourceTree = "<group>"; };
+		BB5D2A273092E1F400783AE2 /* QRCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeTests.swift; sourceTree = "<group>"; };
+		BB5D2A293092E21200783AE2 /* AuthenticatorSetupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorSetupModel.swift; sourceTree = "<group>"; };
+		BB5D2A2B3092E21300783AE2 /* ReminderPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPolicy.swift; sourceTree = "<group>"; };
+		BB5D2A2D3092E21600783AE2 /* QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		BB5D2A2F3092E24200783AE2 /* AuthenticatorSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatorSetupView.swift; sourceTree = "<group>"; };
+		BB5D2A313092E24C00783AE2 /* SecretFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretFormatTests.swift; sourceTree = "<group>"; };
+		BB5D2A333092E24D00783AE2 /* SecretFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretFormat.swift; sourceTree = "<group>"; };
+		BB5D2A353092E2AA00783AE2 /* HTTPAuthService+Answers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPAuthService+Answers.swift"; sourceTree = "<group>"; };
+		BB5D2A373092E2D200783AE2 /* HTTPAuthAnswerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuthAnswerTests.swift; sourceTree = "<group>"; };
+		BB5D2A3A3092E3C300783AE2 /* BrandFontsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandFontsTests.swift; sourceTree = "<group>"; };
+		BB5D2A3C3092E3D100783AE2 /* BrandFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandFonts.swift; sourceTree = "<group>"; };
+		BB5D2A3E3092E3D500783AE2 /* LacesTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LacesTextStyle.swift; sourceTree = "<group>"; };
+		BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStoreTests.swift; sourceTree = "<group>"; };
+		BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStore.swift; sourceTree = "<group>"; };
+		BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockContentTests.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBBD178C30925217005E64B7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
@@ -137,6 +219,52 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BB5D29F03092DB1200783AE2 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D29FD3092DBA500783AE2 /* AuthModels.swift */,
+				BB5D29FF3092DBA800783AE2 /* AuthServicing.swift */,
+				BB5D2A053092DBCC00783AE2 /* SessionManager.swift */,
+				BB5D2A073092DBD400783AE2 /* SignInModel.swift */,
+				BB5D2A0B3092DE0A00783AE2 /* CodeEntryView.swift */,
+				BB5D2A0D3092DE1900783AE2 /* SignInView.swift */,
+				BB5D2A0F3092DE1E00783AE2 /* SessionManager+Launch.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		BB5D2A113092E0CA00783AE2 /* Lock */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A183092E0DD00783AE2 /* LockModels.swift */,
+				BB5D2A1A3092E0E300783AE2 /* AppLockModel.swift */,
+				BB5D2A1E3092E0FC00783AE2 /* LockView.swift */,
+				BB5D2A203092E10000783AE2 /* AppLockModel+Launch.swift */,
+			);
+			path = Lock;
+			sourceTree = "<group>";
+		};
+		BB5D2A223092E1D100783AE2 /* Authenticator */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A293092E21200783AE2 /* AuthenticatorSetupModel.swift */,
+				BB5D2A2B3092E21300783AE2 /* ReminderPolicy.swift */,
+				BB5D2A2D3092E21600783AE2 /* QRCode.swift */,
+				BB5D2A2F3092E24200783AE2 /* AuthenticatorSetupView.swift */,
+				BB5D2A333092E24D00783AE2 /* SecretFormat.swift */,
+			);
+			path = Authenticator;
+			sourceTree = "<group>";
+		};
+		BB5D2A393092E3BF00783AE2 /* Typography */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A3C3092E3D100783AE2 /* BrandFonts.swift */,
+				BB5D2A3E3092E3D500783AE2 /* LacesTextStyle.swift */,
+			);
+			path = Typography;
+			sourceTree = "<group>";
+		};
 		BBBD17A7309257D8005E64B7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +279,21 @@
 				BBBD17CA3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift */,
 				BBBD17CC3092C7CD005E64B7 /* HTTPServerProbeTests.swift */,
 				BBBD17DE3092C835005E64B7 /* AddServerOutcomeMessageTests.swift */,
+				BB5D29F33092DB3200783AE2 /* AuthErrorMessageTests.swift */,
+				BB5D29F53092DB4800783AE2 /* HTTPAuthServiceTests.swift */,
+				BB5D29F73092DB5200783AE2 /* KeychainSessionStoreTests.swift */,
+				BB5D29F93092DB5900783AE2 /* SessionManagerTests.swift */,
+				BB5D29FB3092DB6A00783AE2 /* SignInModelTests.swift */,
+				BB5D2A143092E0CD00783AE2 /* LockPolicyTests.swift */,
+				BB5D2A163092E0D500783AE2 /* AppLockModelTests.swift */,
+				BB5D2A233092E1EA00783AE2 /* AuthenticatorSetupModelTests.swift */,
+				BB5D2A253092E1F100783AE2 /* ReminderPolicyTests.swift */,
+				BB5D2A273092E1F400783AE2 /* QRCodeTests.swift */,
+				BB5D2A313092E24C00783AE2 /* SecretFormatTests.swift */,
+				BB5D2A373092E2D200783AE2 /* HTTPAuthAnswerTests.swift */,
+				BB5D2A3A3092E3C300783AE2 /* BrandFontsTests.swift */,
+				BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */,
+				BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -185,6 +328,7 @@
 				BBBD17B63092A51D005E64B7 /* SneakerLoaderView.swift */,
 				BBBD17BA3092A866005E64B7 /* SplashContent.swift */,
 				BBBD17BC3092A86A005E64B7 /* SplashView.swift */,
+				BB5D2A393092E3BF00783AE2 /* Typography */,
 			);
 			path = Shell;
 			sourceTree = "<group>";
@@ -201,6 +345,9 @@
 			isa = PBXGroup;
 			children = (
 				BBBD17BF3092C79A005E64B7 /* Servers */,
+				BB5D29F03092DB1200783AE2 /* SignIn */,
+				BB5D2A113092E0CA00783AE2 /* Lock */,
+				BB5D2A223092E1D100783AE2 /* Authenticator */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -218,6 +365,7 @@
 				BBBD17E23092C846005E64B7 /* AddServerView.swift */,
 				BBBD17E43092C849005E64B7 /* AccountView.swift */,
 				BBBD17E63092C853005E64B7 /* ServerRegistry+Launch.swift */,
+				BB5D2A093092DE0500783AE2 /* ServersSection.swift */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -227,6 +375,11 @@
 			children = (
 				BBBD17DA3092C807005E64B7 /* HTTPServerProbe.swift */,
 				BBBD17DC3092C809005E64B7 /* UserDefaultsServerStore.swift */,
+				BB5D2A013092DBBE00783AE2 /* HTTPAuthService.swift */,
+				BB5D2A033092DBC300783AE2 /* KeychainSessionStore.swift */,
+				BB5D2A1C3092E0E600783AE2 /* LocalAuthenticator.swift */,
+				BB5D2A353092E2AA00783AE2 /* HTTPAuthService+Answers.swift */,
+				BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -235,6 +388,8 @@
 			isa = PBXGroup;
 			children = (
 				BBBD17C63092C7B7005E64B7 /* ServerFakes.swift */,
+				BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */,
+				BB5D2A123092E0CA00783AE2 /* LockFakes.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -360,40 +515,81 @@
 			files = (
 				BBBD17CF3092C7EF005E64B7 /* ServerURL.swift in Sources */,
 				BBBD17BB3092A866005E64B7 /* SplashContent.swift in Sources */,
+				BB5D2A0C3092DE0A00783AE2 /* CodeEntryView.swift in Sources */,
 				BBBD17D53092C7F8005E64B7 /* ServerProbing.swift in Sources */,
+				BB5D2A063092DBCC00783AE2 /* SessionManager.swift in Sources */,
+				BB5D2A1F3092E0FC00783AE2 /* LockView.swift in Sources */,
+				BB5D2A1D3092E0E600783AE2 /* LocalAuthenticator.swift in Sources */,
 				BBBD17DD3092C809005E64B7 /* UserDefaultsServerStore.swift in Sources */,
+				BB5D2A213092E10000783AE2 /* AppLockModel+Launch.swift in Sources */,
+				BB5D29FE3092DBA500783AE2 /* AuthModels.swift in Sources */,
 				BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */,
+				BB5D2A1B3092E0E300783AE2 /* AppLockModel.swift in Sources */,
+				BB5D2A3D3092E3D100783AE2 /* BrandFonts.swift in Sources */,
+				BB5D2A0E3092DE1900783AE2 /* SignInView.swift in Sources */,
+				BB5D2A193092E0DD00783AE2 /* LockModels.swift in Sources */,
+				BB5D2A083092DBD400783AE2 /* SignInModel.swift in Sources */,
+				BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
+				BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */,
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
+				BB5D2A2E3092E21600783AE2 /* QRCode.swift in Sources */,
 				BBBD17B13092623E005E64B7 /* SectionPlaceholderView.swift in Sources */,
+				BB5D2A103092DE1E00783AE2 /* SessionManager+Launch.swift in Sources */,
+				BB5D2A023092DBBE00783AE2 /* HTTPAuthService.swift in Sources */,
+				BB5D2A043092DBC300783AE2 /* KeychainSessionStore.swift in Sources */,
 				BBBD17E73092C853005E64B7 /* ServerRegistry+Launch.swift in Sources */,
 				BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */,
 				BBBD17B53092A4FB005E64B7 /* SneakerLoaderProgress.swift in Sources */,
+				BB5D2A003092DBA800783AE2 /* AuthServicing.swift in Sources */,
 				BBBD17DB3092C807005E64B7 /* HTTPServerProbe.swift in Sources */,
+				BB5D2A343092E24D00783AE2 /* SecretFormat.swift in Sources */,
+				BB5D2A2C3092E21300783AE2 /* ReminderPolicy.swift in Sources */,
 				BBBD17D93092C803005E64B7 /* ServerRegistry.swift in Sources */,
 				BBBD17E13092C840005E64B7 /* AddServerOutcome+Message.swift in Sources */,
+				BB5D2A363092E2AA00783AE2 /* HTTPAuthService+Answers.swift in Sources */,
 				BBBD17E53092C849005E64B7 /* AccountView.swift in Sources */,
+				BB5D2A0A3092DE0500783AE2 /* ServersSection.swift in Sources */,
 				BBBD17E33092C846005E64B7 /* AddServerView.swift in Sources */,
 				BBBD17D33092C7F6005E64B7 /* ServerEntry.swift in Sources */,
 				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
+				BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */,
 				BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */,
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
+				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
 			);
 		};
 		BBBD179130925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BB5D2A173092E0D500783AE2 /* AppLockModelTests.swift in Sources */,
+				BB5D2A263092E1F100783AE2 /* ReminderPolicyTests.swift in Sources */,
+				BB5D2A3B3092E3C300783AE2 /* BrandFontsTests.swift in Sources */,
+				BB5D2A283092E1F400783AE2 /* QRCodeTests.swift in Sources */,
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
 				BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */,
+				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
+				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
+				BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */,
 				BBBD17B93092A85A005E64B7 /* SplashContentTests.swift in Sources */,
+				BB5D2A153092E0CD00783AE2 /* LockPolicyTests.swift in Sources */,
 				BBBD17CD3092C7CD005E64B7 /* HTTPServerProbeTests.swift in Sources */,
 				BBBD17B33092A4EE005E64B7 /* SneakerLoaderProgressTests.swift in Sources */,
+				BB5D29FA3092DB5900783AE2 /* SessionManagerTests.swift in Sources */,
+				BB5D29F23092DB2E00783AE2 /* AuthFakes.swift in Sources */,
+				BB5D2A323092E24C00783AE2 /* SecretFormatTests.swift in Sources */,
 				BBBD17C73092C7B7005E64B7 /* ServerFakes.swift in Sources */,
 				BBBD17DF3092C835005E64B7 /* AddServerOutcomeMessageTests.swift in Sources */,
+				BB5D29F43092DB3200783AE2 /* AuthErrorMessageTests.swift in Sources */,
 				BBBD179830925620005E64B7 /* SneakersPAMTests.swift in Sources */,
+				BB5D2A243092E1EA00783AE2 /* AuthenticatorSetupModelTests.swift in Sources */,
 				BBBD17AD30926228005E64B7 /* AppSectionTests.swift in Sources */,
+				BB5D2A133092E0CA00783AE2 /* LockFakes.swift in Sources */,
+				BB5D29FC3092DB6A00783AE2 /* SignInModelTests.swift in Sources */,
 				BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */,
+				BB5D29F83092DB5200783AE2 /* KeychainSessionStoreTests.swift in Sources */,
+				BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */,
 			);
 		};
 		BBBD179C30925620005E64B7 /* Sources */ = {
