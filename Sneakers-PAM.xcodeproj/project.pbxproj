@@ -49,6 +49,7 @@
 		BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */; };
 		BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */; };
 		BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */; };
+		BB45A51E787EEC320E53197C /* RequestBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C561858732CB4EB7637D4 /* RequestBoardTests.swift */; };
 		BBC0D63F505F50D29BA41139 /* RevealApprovalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF7806BDD1B25222E7DE64 /* RevealApprovalTests.swift */; };
 		BB7914A6884EAF451BB80DB5 /* SharingModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2BCBFA253D5A2545A84B32 /* SharingModelsTests.swift */; };
 		BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A493092EFD200783AE2 /* VaultModels.swift */; };
@@ -217,6 +218,7 @@
 		BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStore.swift; sourceTree = "<group>"; };
 		BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockContentTests.swift; sourceTree = "<group>"; };
 		BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModelsTests.swift; sourceTree = "<group>"; };
+		BB4C561858732CB4EB7637D4 /* RequestBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestBoardTests.swift"; sourceTree = "<group>"; };
 		BBCF7806BDD1B25222E7DE64 /* RevealApprovalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevealApprovalTests.swift"; sourceTree = "<group>"; };
 		BB2BCBFA253D5A2545A84B32 /* SharingModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharingModelsTests.swift"; sourceTree = "<group>"; };
 		BB5D2A493092EFD200783AE2 /* VaultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModels.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */,
 				BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */,
 				BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */,
+				BB4C561858732CB4EB7637D4 /* RequestBoardTests.swift */,
 				BBCF7806BDD1B25222E7DE64 /* RevealApprovalTests.swift */,
 				BB2BCBFA253D5A2545A84B32 /* SharingModelsTests.swift */,
 				BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */,
@@ -901,6 +904,7 @@
 				BB5D2A603092F10800783AE2 /* ClipboardTests.swift in Sources */,
 				BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */,
 				BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */,
+				BB45A51E787EEC320E53197C /* RequestBoardTests.swift in Sources */,
 				BBC0D63F505F50D29BA41139 /* RevealApprovalTests.swift in Sources */,
 				BB7914A6884EAF451BB80DB5 /* SharingModelsTests.swift in Sources */,
 			);
