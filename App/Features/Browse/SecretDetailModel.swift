@@ -49,6 +49,7 @@ final class SecretDetailModel {
     private(set) var phase = Phase.loading
     private(set) var message: String?
     private(set) var isWorking = false
+    private(set) var access = Access.none
 
     init(secretID: String) {
         self.secretID = secretID
@@ -84,6 +85,11 @@ final class SecretDetailModel {
         return lease.userId == userID ? .heldByMe(expires: lease.expiry) : .heldByOther(expires: lease.expiry)
     }
 
+    var canEdit: Bool {
+        guard let detail else { return false }
+        return access.manage && detail.summary.isReadable
+    }
+
     var canCheckOut: Bool {
         guard let detail else { return false }
         return detail.summary.isReadable && detail.type?.supportsCheckout == true && detail.lease == nil
@@ -96,12 +102,23 @@ final class SecretDetailModel {
     func load(_ access: VaultAccess) async {
         do {
             let loaded = try await access.perform { try await access.service.secret(id: self.secretID, $0) }
+            self.access = await mine(access)
             phase = .loaded(loaded)
             Self.logger.debug("secret loaded")
         } catch {
             let failure = error as? VaultError ?? .unexpected
             Self.logger.info("secret failed: \(String(describing: failure), privacy: .public)")
             phase = .failed(failure.message)
+        }
+    }
+
+    /// What I may do here. When the gateway cannot say, I may do nothing, and the screen still opens.
+    private func mine(_ access: VaultAccess) async -> Access {
+        do {
+            return try await access.perform { try await access.service.access(forSecret: self.secretID, $0) }
+        } catch {
+            Self.logger.info("secret access could not be read")
+            return .none
         }
     }
 
