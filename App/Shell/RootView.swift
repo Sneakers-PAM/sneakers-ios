@@ -5,11 +5,12 @@ import os
 import SwiftUI
 
 /// The app's navigation shell: a tab bar on iPhone that becomes a sidebar on iPad.
-/// It opens on the sneaker loader, which takes over from the plain launch screen.
+/// It opens on the sneaker loader, then asks for a server if there is none yet.
 struct RootView: View {
     private static let logger = Logger(subsystem: "com.therabbithole.app.apple.sneakers-pam", category: "shell")
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(ServerRegistry.self) private var registry
     @State private var selection = AppSection.initial
     @State private var showsLoader = true
 
@@ -17,6 +18,9 @@ struct RootView: View {
         ZStack {
             if showsLoader {
                 SplashView()
+                    .transition(.opacity)
+            } else if registry.entries.isEmpty {
+                AddServerView()
                     .transition(.opacity)
             } else {
                 shell
@@ -38,7 +42,11 @@ struct RootView: View {
         TabView(selection: $selection) {
             ForEach(AppSection.allCases) { section in
                 Tab(section.title, systemImage: section.systemImage, value: section) {
-                    SectionPlaceholderView(section: section)
+                    if section == .account {
+                        AccountView()
+                    } else {
+                        SectionPlaceholderView(section: section)
+                    }
                 }
             }
         }
@@ -51,4 +59,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
+        .environment(ServerRegistry(store: UserDefaultsServerStore(), probe: HTTPServerProbe(), policy: .current))
 }

@@ -5,9 +5,12 @@ import SwiftUI
 
 @main
 struct SneakersPAMApp: App {
+    @State private var registry = ServerRegistry.live()
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(registry)
         }
     }
 }
