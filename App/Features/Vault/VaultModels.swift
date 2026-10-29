@@ -8,6 +8,13 @@ nonisolated struct Folder: Decodable, Equatable, Identifiable, Sendable {
     let name: String
     let parentId: String?
     let subtreeSecretCount: Int?
+    var scope: String?
+    var ownerUserId: String?
+    var canManage: Bool?
+
+    var isPersonal: Bool {
+        scope == "personal"
+    }
 
     /// How many secrets the folder holds, counting its subfolders. Empty when the server did not say.
     var secretCountText: String {
@@ -40,6 +47,15 @@ nonisolated struct SecretSummary: Decodable, Equatable, Identifiable, Sendable {
     let viewCount: Int?
     let lastAccessedAt: String?
 
+    /// The one thing worth saying about a failed check beyond its status: a host key problem.
+    var heartbeatNote: String? {
+        switch lastHeartbeatResult {
+        case "hostKeyNotPinned": "The target has no pinned host key, so it is not being checked."
+        case "hostKeyMismatch": "The host offered a different key than the one that is pinned."
+        default: nil
+        }
+    }
+
     var health: HealthStatus {
         HealthStatus(heartbeatResult: lastHeartbeatResult, hasTarget: targetId?.isEmpty == false)
     }
@@ -62,15 +78,65 @@ nonisolated struct Lease: Decodable, Equatable, Sendable {
     }
 }
 
+/// What kind of control a field needs. The gateway names more kinds over time, so an unknown one is plain text.
+nonisolated enum FieldKind: Equatable, Sendable {
+    case text, multiline, password, boolean, select, file, sensitive
+
+    init(gateway name: String?) {
+        switch name {
+        case "multiline": self = .multiline
+        case "password": self = .password
+        case "boolean": self = .boolean
+        case "select": self = .select
+        case "file": self = .file
+        case "sensitive": self = .sensitive
+        default: self = .text
+        }
+    }
+}
+
 nonisolated struct FieldDefinition: Decodable, Equatable, Sendable {
     let key: String
     let label: String
     let kind: String?
     let sensitive: Bool?
     let superSensitive: Bool?
+    var options: [String]?
+    var required: Bool?
+    var maxLength: Int?
 
+    init(
+        key: String,
+        label: String,
+        kind: String?,
+        sensitive: Bool?,
+        superSensitive: Bool?,
+        options: [String]? = nil,
+        required: Bool? = nil,
+        maxLength: Int? = nil
+    ) {
+        self.key = key
+        self.label = label
+        self.kind = kind
+        self.sensitive = sensitive
+        self.superSensitive = superSensitive
+        self.options = options
+        self.required = required
+        self.maxLength = maxLength
+    }
+
+    var fieldKind: FieldKind {
+        FieldKind(gateway: kind)
+    }
+
+    var isRequired: Bool {
+        required == true
+    }
+
+    /// A value kept out of sight until the server agrees to reveal it: a password or sensitive field, or one the
+    /// type marks as sensitive.
     var isSensitive: Bool {
-        sensitive == true || superSensitive == true
+        fieldKind == .password || fieldKind == .sensitive || sensitive == true || superSensitive == true
     }
 }
 
@@ -79,6 +145,8 @@ nonisolated struct SecretType: Decodable, Equatable, Identifiable, Sendable {
     let name: String
     let checkout: Bool?
     let fields: [FieldDefinition]?
+    var heartbeat: Bool?
+    var rotation: Bool?
 
     /// The field most people want when they ask for a secret: the first one that is sensitive.
     var primarySensitiveFieldKey: String? {
@@ -87,6 +155,14 @@ nonisolated struct SecretType: Decodable, Equatable, Identifiable, Sendable {
 
     var supportsCheckout: Bool {
         checkout == true
+    }
+
+    var supportsHeartbeat: Bool {
+        heartbeat == true
+    }
+
+    var supportsRotation: Bool {
+        rotation == true
     }
 }
 
@@ -105,6 +181,7 @@ nonisolated struct SecretDetail: Equatable, Sendable {
     let expiresAt: Date?
     let verifiedAt: Date?
     let nextRotationAt: Date?
+    var lifecycle = SecretLifecycle()
 }
 
 /// Everything the Home dashboard shows, already joined.
@@ -177,6 +254,27 @@ nonisolated struct FolderTree: Sendable {
             current = folder.parentId?.isEmpty == false ? folder.parentId : nil
         }
         return names.reversed().joined(separator: " / ")
+    }
+
+    /// Every folder, in the order of their paths.
+    func everyFolder() -> [Folder] {
+        folders.sorted {
+            (path(of: $0.id) ?? $0.name)
+                .localizedCaseInsensitiveCompare(path(of: $1.id) ?? $1.name) == .orderedAscending
+        }
+    }
+
+    /// The ids of every folder below one, however deep.
+    func descendants(of folderID: String) -> [String] {
+        var found: [String] = []
+        var queue = [folderID]
+        while let next = queue.popLast() {
+            for child in children(of: next) where !found.contains(child.id) && child.id != folderID {
+                found.append(child.id)
+                queue.append(child.id)
+            }
+        }
+        return found
     }
 
     func folder(_ id: String) -> Folder? {

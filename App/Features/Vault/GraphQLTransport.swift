@@ -7,6 +7,8 @@ nonisolated enum GraphQLValue: Equatable, Encodable, Sendable {
     case string(String)
     case int(Int)
     case bool(Bool)
+    case list([GraphQLValue])
+    case object([String: GraphQLValue])
 
     func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
@@ -14,6 +16,8 @@ nonisolated enum GraphQLValue: Equatable, Encodable, Sendable {
         case let .string(value): try container.encode(value)
         case let .int(value): try container.encode(value)
         case let .bool(value): try container.encode(value)
+        case let .list(value): try container.encode(value)
+        case let .object(value): try container.encode(value)
         }
     }
 }

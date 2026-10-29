@@ -137,4 +137,40 @@ struct BrowseModelsTests {
         #expect(model.message == VaultError.noAccess.message)
         #expect(model.visibleSecrets.isEmpty)
     }
+
+    @Test func aFolderIAmNotAllowedToReadIsNotListed() async {
+        vault.folderAccessResult = .success(.none)
+        let model = SecretListModel(folderID: "f1")
+
+        await model.load(makeAccess())
+
+        #expect(model.isNoAccess)
+        #expect(model.hasLoaded)
+        #expect(model.secrets.isEmpty)
+        #expect(vault.contentsCalls.isEmpty)
+    }
+
+    @Test func aFolderIAmAllowedToReadIsListedAndKnowsIfIMayManageIt() async {
+        vault.folderAccessResult = .success(.fixtureFull)
+        vault.contentsResult = .success(FolderContents(secrets: [.fixture()], types: []))
+        let model = SecretListModel(folderID: "f1")
+
+        await model.load(makeAccess())
+
+        #expect(!model.isNoAccess)
+        #expect(model.access.manage)
+        #expect(model.secrets.count == 1)
+    }
+
+    @Test func whenAccessCannotBeReadTheFolderIsStillTried() async {
+        vault.folderAccessResult = .failure(.unreachable)
+        vault.contentsResult = .success(FolderContents(secrets: [.fixture()], types: []))
+        let model = SecretListModel(folderID: "f1")
+
+        await model.load(makeAccess())
+
+        #expect(!model.isNoAccess)
+        #expect(model.access == .none)
+        #expect(model.secrets.count == 1)
+    }
 }

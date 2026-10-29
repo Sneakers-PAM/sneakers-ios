@@ -203,4 +203,62 @@ struct RevealCoordinatorTests {
 
         #expect(coordinator.stepUp?.message == AuthError.rateLimited.message)
     }
+
+    // MARK: Old versions and restore
+
+    @Test func anOldValueIsRevealedUnderItsVersion() async {
+        vault.versionRevealResults = [.success("old-value")]
+        let coordinator = makeCoordinator()
+        let versionKey = RevealKey(secretID: "s1", fieldKey: "password", versionNo: 2)
+
+        await coordinator.show(versionKey)
+
+        #expect(coordinator.revealed[versionKey] == "old-value")
+        #expect(coordinator.revealed[key] == nil)
+        #expect(vault.versionRevealRequests.first?.versionNo == 2)
+        #expect(vault.revealRequests.isEmpty)
+    }
+
+    @Test func anOldValueThatNeedsTheRecoveryRoleSaysSo() async {
+        vault.versionRevealResults = [.failure(.recoveryRoleRequired)]
+        let coordinator = makeCoordinator()
+
+        await coordinator.show(RevealKey(secretID: "s1", fieldKey: "password", versionNo: 1))
+
+        #expect(coordinator.notice == VaultError.recoveryRoleRequired.message)
+    }
+
+    @Test func restoringAVersionTellsTheScreenToReload() async {
+        let coordinator = makeCoordinator()
+
+        await coordinator.restore(secretID: "s1", versionNo: 2)
+
+        #expect(vault.restores.first?.versionNo == 2)
+        #expect(coordinator.restoredCount == 1)
+        #expect(coordinator.notice == "Restored version 2.")
+    }
+
+    @Test func restoringAskedForAFreshCodeIsRetriedOnceItIsGiven() async {
+        vault.restoreResults = [.failure(.stepUpRequired), .success(())]
+        let coordinator = makeCoordinator()
+
+        await coordinator.restore(secretID: "s1", versionNo: 2)
+        #expect(coordinator.stepUp != nil)
+        #expect(coordinator.restoredCount == 0)
+
+        await coordinator.submitStepUp(code: "123456", kind: .totp)
+        #expect(coordinator.stepUp == nil)
+        #expect(coordinator.restoredCount == 1)
+        #expect(vault.restores.count == 2)
+    }
+
+    @Test func aRefusedRestoreSaysWhy() async {
+        vault.restoreResults = [.failure(.recoveryRoleRequired)]
+        let coordinator = makeCoordinator()
+
+        await coordinator.restore(secretID: "s1", versionNo: 2)
+
+        #expect(coordinator.notice == VaultError.recoveryRoleRequired.message)
+        #expect(coordinator.restoredCount == 0)
+    }
 }

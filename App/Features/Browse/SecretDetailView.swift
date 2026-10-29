@@ -11,11 +11,21 @@ struct SecretDetailView: View {
     @Environment(VaultAccess.self) private var access
     @Environment(RevealCoordinator.self) private var reveal
     @State private var model: SecretDetailModel
+    @State private var editing: EditSecretModel?
+    @State private var moving: MoveModel?
 
     init(secretID: String, title: String) {
         self.secretID = secretID
         self.title = title
         _model = State(initialValue: SecretDetailModel(secretID: secretID))
+    }
+
+    private func openMove() async {
+        guard let detail = model.loadedDetail, let folderID = detail.summary.folderId,
+              let folders = try? await access.perform({ try await access.service.folders($0) })
+        else { return }
+        let subject = MoveModel.Subject.secret(id: secretID, name: detail.summary.name, folderID: folderID)
+        moving = MoveModel(subject: subject, tree: FolderTree(folders: folders))
     }
 
     private var userID: String {
@@ -35,6 +45,31 @@ struct SecretDetailView: View {
             .navigationTitle(loadedName ?? title)
             .navigationBarTitleDisplayMode(.inline)
             .task { await model.load(access) }
+            .navigationDestination(for: SharingRoute.self) { route in
+                SharingView(target: .secret(id: route.secretID), canEdit: model.access.manageRuleset)
+            }
+            .navigationDestination(for: HistoryRoute.self) { route in
+                HistoryView(secretID: route.secretID, labels: model.fieldLabels)
+            }
+            .toolbar {
+                if model.canEdit {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Edit") { editing = model.makeEditModel() }
+                            .accessibilityIdentifier("editSecret")
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Move", systemImage: "folder") { Task { await openMove() } }
+                            .labelStyle(.iconOnly)
+                            .accessibilityIdentifier("moveSecret")
+                    }
+                }
+            }
+            .sheet(item: $moving) { move in
+                MoveView(model: move) { Task { await model.load(access) } }
+            }
+            .sheet(item: $editing) { draft in
+                EditSecretView(model: draft) { Task { await model.load(access) } }
+            }
             .safeAreaInset(edge: .bottom) { CopyNotice() }
     }
 
@@ -60,7 +95,6 @@ struct SecretDetailView: View {
     private func loaded(_ detail: SecretDetail) -> some View {
         List {
             Section {
-                LabeledContent("Health", value: detail.summary.health.label)
                 if let path = detail.folderPath {
                     LabeledContent("Folder", value: path)
                 }
@@ -71,11 +105,24 @@ struct SecretDetailView: View {
                         .accessibilityIdentifier("noAccess")
                 }
             } else {
+                HeartbeatCard(model: model)
+                RotationCard(model: model)
                 leaseSection
                 Section("Fields") {
                     ForEach(model.fieldRows) { row in
                         FieldRowView(secretID: secretID, row: row)
                     }
+                }
+                LifecycleCard(model: model)
+                Section {
+                    NavigationLink(value: SharingRoute(secretID: secretID)) {
+                        Label("Who has access", systemImage: "person.2")
+                    }
+                    .accessibilityIdentifier("sharing")
+                    NavigationLink(value: HistoryRoute(secretID: secretID)) {
+                        Label("History", systemImage: "clock.arrow.circlepath")
+                    }
+                    .accessibilityIdentifier("history")
                 }
             }
             if let message = model.message {
@@ -141,9 +188,9 @@ private struct FieldRowView: View {
     @ViewBuilder
     private var value: some View {
         if let plain = row.plainValue {
-            Text(plain)
+            FieldValueText(kind: row.kind, value: plain)
         } else if let shown = reveal.revealed[key] {
-            Text(shown)
+            FieldValueText(kind: row.kind == .multiline ? .multiline : .text, value: shown)
                 .textSelection(.disabled)
                 .accessibilityIdentifier("revealedValue")
         } else {

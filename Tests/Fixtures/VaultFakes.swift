@@ -44,6 +44,42 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var checkoutResult: Result<Lease, VaultError> = .failure(.unexpected)
     var checkinResult: Result<Void, VaultError> = .success(())
 
+    var folderAccessResult: Result<Access, VaultError> = .success(.fixtureFull)
+    var secretAccessResult: Result<Access, VaultError> = .success(.fixtureFull)
+    var updateResult: Result<Void, VaultError> = .success(())
+
+    var versionsResult: Result<[SecretVersion], VaultError> = .success([])
+    var versionRevealResults: [Result<String, VaultError>] = []
+    var restoreResults: [Result<Void, VaultError>] = []
+
+    var lifecycleResult: Result<Void, VaultError> = .success(())
+
+    var folderResult: Result<Folder, VaultError> = .success(
+        Folder(id: "new", name: "New", parentId: nil, subtreeSecretCount: 0)
+    )
+    var folderActionResult: Result<Void, VaultError> = .success(())
+    var typesResult: Result<[SecretType], VaultError> = .success([])
+    var createdSecretID = "s-new"
+
+    private(set) var createdFolders: [(parentID: String?, name: String)] = []
+    private(set) var renamedFolders: [(id: String, name: String)] = []
+    private(set) var movedFolders: [(id: String, parentID: String?)] = []
+    private(set) var movedSecrets: [(id: String, folderID: String)] = []
+    private(set) var moveRequests: [MoveRequest] = []
+    private(set) var createdSecrets: [NewSecret] = []
+    var rulesetResult: Result<Ruleset, VaultError> = .success(Ruleset(rules: [], inherited: [], owners: []))
+    var saveRulesResult: Result<Void, VaultError> = .success(())
+    var peopleResult: Result<[Person], VaultError> = .success([])
+
+    private(set) var savedSecretRules: [(secretID: String, rules: [AccessRule])] = []
+    private(set) var savedFolderRules: [(folderID: String, update: RulesUpdate)] = []
+    private(set) var rotations: [String] = []
+    private(set) var retirements: [String] = []
+    private(set) var reinstatements: [String] = []
+    private(set) var automations: [AutomationRequest] = []
+    private(set) var versionRevealRequests: [RevealKey] = []
+    private(set) var restores: [(secretID: String, versionNo: Int)] = []
+    private(set) var updates: [(secretID: String, change: SecretChange)] = []
     private(set) var dashboardCalls = 0
     private(set) var folderCalls = 0
     private(set) var contentsCalls: [String] = []
@@ -84,6 +120,127 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func checkin(secretID _: String, _: ServerContext) async throws {
         checkins += 1
         try checkinResult.get()
+    }
+
+    func access(forFolder _: String, _: ServerContext) async throws -> Access {
+        try folderAccessResult.get()
+    }
+
+    func access(forSecret _: String, _: ServerContext) async throws -> Access {
+        try secretAccessResult.get()
+    }
+
+    func update(secretID: String, _ change: SecretChange, _: ServerContext) async throws {
+        updates.append((secretID, change))
+        try updateResult.get()
+    }
+
+    func rotate(secretID: String, _: ServerContext) async throws {
+        rotations.append(secretID)
+        try lifecycleResult.get()
+    }
+
+    func retire(secretID: String, _: ServerContext) async throws {
+        retirements.append(secretID)
+        try lifecycleResult.get()
+    }
+
+    func reinstate(secretID: String, _: ServerContext) async throws {
+        reinstatements.append(secretID)
+        try lifecycleResult.get()
+    }
+
+    func setAutomation(secretID: String, _ setting: AutomationSetting, _: ServerContext) async throws {
+        automations.append(AutomationRequest(secretID: secretID, setting: setting))
+        try lifecycleResult.get()
+    }
+
+    func ruleset(forSecret _: String, _: ServerContext) async throws -> Ruleset {
+        try rulesetResult.get()
+    }
+
+    func ruleset(forFolder _: String, _: ServerContext) async throws -> Ruleset {
+        try rulesetResult.get()
+    }
+
+    func saveRules(forSecret secretID: String, _ rules: [AccessRule], _: ServerContext) async throws {
+        savedSecretRules.append((secretID, rules))
+        try saveRulesResult.get()
+    }
+
+    func saveRules(forFolder folderID: String, _ update: RulesUpdate, _: ServerContext) async throws {
+        savedFolderRules.append((folderID, update))
+        try saveRulesResult.get()
+    }
+
+    func searchPeople(_: String, _: ServerContext) async throws -> [Person] {
+        try peopleResult.get()
+    }
+
+    func createFolder(parentID: String?, name: String, _: ServerContext) async throws -> Folder {
+        createdFolders.append((parentID, name))
+        return try folderResult.get()
+    }
+
+    func renameFolder(id: String, name: String, _: ServerContext) async throws {
+        renamedFolders.append((id, name))
+        try folderActionResult.get()
+    }
+
+    func moveFolder(id: String, to parentID: String?, _: ServerContext) async throws {
+        movedFolders.append((id, parentID))
+        try folderActionResult.get()
+    }
+
+    func moveSecret(id: String, to folderID: String, _: ServerContext) async throws {
+        movedSecrets.append((id, folderID))
+        try folderActionResult.get()
+    }
+
+    func requestMove(_ request: MoveRequest, _: ServerContext) async throws {
+        moveRequests.append(request)
+        try folderActionResult.get()
+    }
+
+    func secretTypes(_: ServerContext) async throws -> [SecretType] {
+        try typesResult.get()
+    }
+
+    func createSecret(_ secret: NewSecret, _: ServerContext) async throws -> String {
+        createdSecrets.append(secret)
+        try folderActionResult.get()
+        return createdSecretID
+    }
+
+    func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
+        try versionsResult.get()
+    }
+
+    func revealVersion(_ key: RevealKey, _: ServerContext) async throws -> String {
+        versionRevealRequests.append(key)
+        guard !versionRevealResults.isEmpty else { throw VaultError.unexpected }
+        return try versionRevealResults.removeFirst().get()
+    }
+
+    func restore(secretID: String, versionNo: Int, _: ServerContext) async throws {
+        restores.append((secretID, versionNo))
+        guard !restoreResults.isEmpty else { return }
+        try restoreResults.removeFirst().get()
+    }
+}
+
+struct AutomationRequest: Equatable {
+    let secretID: String
+    let setting: AutomationSetting
+}
+
+extension Access {
+    static var fixtureFull: Access {
+        Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+    }
+
+    static var fixtureReadOnly: Access {
+        Access(read: true, reveal: true, manage: false, approve: false, informed: false, manageRuleset: false)
     }
 }
 

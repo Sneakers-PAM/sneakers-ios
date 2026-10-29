@@ -46,6 +46,9 @@ final class SecretListModel {
     private(set) var isLoading = false
     private(set) var hasLoaded = false
     private(set) var message: String?
+    private(set) var access = Access.none
+    /// True when the gateway says I may not read this folder, so it is not listed.
+    private(set) var isNoAccess = false
 
     init(folderID: String) {
         self.folderID = folderID
@@ -67,6 +70,13 @@ final class SecretListModel {
         isLoading = true
         message = nil
         defer { isLoading = false }
+        await readAccess(access)
+        if isNoAccess {
+            secrets = []
+            types = []
+            hasLoaded = true
+            return
+        }
         do {
             let contents = try await access.perform { try await access.service.contents(ofFolder: self.folderID, $0) }
             secrets = contents.secrets
@@ -78,6 +88,17 @@ final class SecretListModel {
             Self.logger.info("folder contents failed: \(String(describing: failure), privacy: .public)")
             secrets = []
             message = failure.message
+        }
+    }
+
+    private func readAccess(_ vault: VaultAccess) async {
+        do {
+            access = try await vault.perform { try await vault.service.access(forFolder: self.folderID, $0) }
+            isNoAccess = !access.read
+        } catch {
+            Self.logger.info("folder access could not be read")
+            access = .none
+            isNoAccess = false
         }
     }
 }

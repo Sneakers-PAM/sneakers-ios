@@ -5,8 +5,11 @@ import Foundation
 
 /// The GraphQL the app sends, the same operations the web app uses against the gateway.
 nonisolated enum Operations {
+    static let folderFields = "id name parentId scope ownerUserId canManage subtreeSecretCount"
+    private static let accessFields = "read reveal manage approve informed manageRuleset"
     private static let leaseFields = "id secretId userId issuedAt expiresAt returned"
-    private static let typeFields = "id name checkout fields { key label kind sensitive superSensitive }"
+    private static let fieldFields = "key label kind options required maxLength sensitive superSensitive"
+    static let typeFields = "id name checkout fields { \(fieldFields) } heartbeat rotation"
 
     static func dashboard(userID: String, limit: Int) -> GraphQLOperation {
         GraphQLOperation(
@@ -40,7 +43,7 @@ nonisolated enum Operations {
 
     static let folders = GraphQLOperation(
         name: "BrowseFolders",
-        query: "query BrowseFolders { folders { id name parentId subtreeSecretCount } }"
+        query: "query BrowseFolders { folders { \(folderFields) } }"
     )
 
     static func contents(folderID: String) -> GraphQLOperation {
@@ -65,6 +68,7 @@ nonisolated enum Operations {
             query SecretDetail($id: ID!, $secretId: String!) {
               secret(id: $id) {
                 id name canRead folderId typeId targetId expiresAt lastHeartbeatResult verifiedAt retired
+                lastRotationResult rotatedAt rotationOptOut heartbeatOptOut heartbeatBlockedReason
                 viewCount lastAccessedAt nextRotationAt
               }
               secretTypes { \(typeFields) }
@@ -113,6 +117,131 @@ nonisolated enum Operations {
             name: "CheckoutsCheckin",
             query: "mutation CheckoutsCheckin($secretId: String!) { checkinSecret(secretId: $secretId) }",
             variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func folderAccess(folderID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "BrowseFolderAccess",
+            query: """
+            query BrowseFolderAccess($folderId: String!) {
+              myFolderAccess(folderId: $folderId) { \(accessFields) }
+            }
+            """,
+            variables: ["folderId": .string(folderID)]
+        )
+    }
+
+    static func secretAccess(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretAccess",
+            query: """
+            query SecretAccess($secretId: String!) {
+              mySecretAccess(secretId: $secretId) { \(accessFields) }
+            }
+            """,
+            variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func update(secretID: String, _ change: SecretChange) -> GraphQLOperation {
+        var input: [String: GraphQLValue] = [:]
+        if let name = change.name {
+            input["name"] = .string(name)
+        }
+        let pairs = change.fields.sorted { $0.key < $1.key }.map { pair in
+            GraphQLValue.object(["key": .string(pair.key), "value": .string(pair.value)])
+        }
+        if !pairs.isEmpty {
+            input["fields"] = .list(pairs)
+        }
+        return GraphQLOperation(
+            name: "EditorsUpdateSecret",
+            query: """
+            mutation EditorsUpdateSecret($id: ID!, $input: UpdateSecretInput!) {
+              updateSecret(id: $id, input: $input) { id }
+            }
+            """,
+            variables: ["id": .string(secretID), "input": .object(input)]
+        )
+    }
+
+    static func versions(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretVersions",
+            query: """
+            query SecretVersions($secretId: ID!) {
+              secretVersions(secretId: $secretId) {
+                versionNo createdBy createdByName createdAt active fieldKeys changedFieldKeys changeLabel
+              }
+            }
+            """,
+            variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func revealVersion(secretID: String, versionNo: Int, fieldKey: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRevealVersion",
+            query: """
+            mutation SecretRevealVersion($secretId: ID!, $versionNo: Int!, $fieldKey: String!) {
+              revealSecretVersionField(secretId: $secretId, versionNo: $versionNo, fieldKey: $fieldKey)
+            }
+            """,
+            variables: ["secretId": .string(secretID), "versionNo": .int(versionNo), "fieldKey": .string(fieldKey)]
+        )
+    }
+
+    static func restore(secretID: String, versionNo: Int) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRestoreVersion",
+            query: """
+            mutation SecretRestoreVersion($secretId: ID!, $versionNo: Int!) {
+              restoreSecretVersion(secretId: $secretId, versionNo: $versionNo) { id }
+            }
+            """,
+            variables: ["secretId": .string(secretID), "versionNo": .int(versionNo)]
+        )
+    }
+
+    static func rotate(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRotate",
+            query: "mutation SecretRotate($secretId: String!) { rotateSecret(secretId: $secretId) }",
+            variables: ["secretId": .string(secretID)]
+        )
+    }
+
+    static func retire(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRetire",
+            query: "mutation SecretRetire($id: String!) { retireSecret(id: $id) { id } }",
+            variables: ["id": .string(secretID)]
+        )
+    }
+
+    static func reinstate(secretID: String) -> GraphQLOperation {
+        GraphQLOperation(
+            name: "SecretRestore",
+            query: "mutation SecretRestore($id: String!) { restoreSecret(id: $id) { id } }",
+            variables: ["id": .string(secretID)]
+        )
+    }
+
+    static func setAutomation(secretID: String, _ setting: AutomationSetting) -> GraphQLOperation {
+        var variables: [String: GraphQLValue] = ["secretId": .string(secretID)]
+        variables["disableRotation"] = .bool(setting.disableRotation)
+        variables["disableHeartbeat"] = .bool(setting.disableHeartbeat)
+        return GraphQLOperation(
+            name: "SecretSetAutomation",
+            query: """
+            mutation SecretSetAutomation($secretId: String!, $disableRotation: Boolean!, $disableHeartbeat: Boolean!) {
+              setSecretAutomation(
+                secretId: $secretId, disableRotation: $disableRotation, disableHeartbeat: $disableHeartbeat
+              ) { id }
+            }
+            """,
+            variables: variables
         )
     }
 }

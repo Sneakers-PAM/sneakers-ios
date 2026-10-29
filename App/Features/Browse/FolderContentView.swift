@@ -16,6 +16,7 @@ struct FolderContentView: View {
     @Environment(RevealCoordinator.self) private var reveal
     @State private var secrets: SecretListModel?
     @State private var search = ""
+    @State private var sheet: FolderSheet?
 
     init(folderID: String?, folders: FoldersModel, selection: Binding<String?>, pushesSecrets: Bool) {
         self.folderID = folderID
@@ -49,10 +50,72 @@ struct FolderContentView: View {
             .toolbar {
                 if folderID == nil {
                     AccountToolbarButton()
+                } else if secrets?.access.manage == true {
+                    ToolbarItem(placement: .primaryAction) { actionsMenu }
                 }
+            }
+            .sheet(item: $sheet) { sheet in
+                sheetContent(sheet)
             }
             .task { await secrets?.load(access) }
             .safeAreaInset(edge: .bottom) { CopyNotice() }
+    }
+
+    private var actionsMenu: some View {
+        Menu("Folder", systemImage: "ellipsis.circle") {
+            Button("New folder", systemImage: "folder.badge.plus") {
+                sheet = .name(FolderNameModel(mode: .create(parentID: folderID)))
+            }
+            .accessibilityIdentifier("newFolder")
+            Button("New secret", systemImage: "key.fill") { Task { await openNewSecret() } }
+                .accessibilityIdentifier("newSecret")
+            Button("Rename folder", systemImage: "pencil") { sheet = renameSheet() }
+                .accessibilityIdentifier("renameFolder")
+            Button("Move folder", systemImage: "folder") { sheet = moveSheet() }
+                .accessibilityIdentifier("moveFolder")
+            Button("Who has access", systemImage: "person.2") { sheet = sharingSheet() }
+                .accessibilityIdentifier("folderSharing")
+        }
+        .accessibilityIdentifier("folderActions")
+    }
+
+    private func renameSheet() -> FolderSheet? {
+        guard let folderID, let folder = folders.tree.folder(folderID) else { return nil }
+        return .name(FolderNameModel(mode: .rename(id: folderID, currentName: folder.name)))
+    }
+
+    private func sharingSheet() -> FolderSheet? {
+        guard let folderID else { return nil }
+        return .sharing(folderID: folderID, canEdit: secrets?.access.manageRuleset == true)
+    }
+
+    private func moveSheet() -> FolderSheet? {
+        guard let folderID, let folder = folders.tree.folder(folderID) else { return nil }
+        let subject = MoveModel.Subject.folder(id: folderID, name: folder.name, parentID: folder.parentId)
+        return .move(MoveModel(subject: subject, tree: folders.tree))
+    }
+
+    private func openNewSecret() async {
+        guard let folderID, let types = await CreateSecretModel.loadTypes(access) else { return }
+        sheet = .newSecret(CreateSecretModel(folderID: folderID, types: types))
+    }
+
+    @ViewBuilder
+    private func sheetContent(_ sheet: FolderSheet) -> some View {
+        switch sheet {
+        case let .name(model): FolderNameView(model: model) { refresh() }
+        case let .newSecret(model): CreateSecretView(model: model) { _ in refresh() }
+        case let .move(model): MoveView(model: model) { refresh() }
+        case let .sharing(folderID, canEdit):
+            NavigationStack { SharingView(target: .folder(id: folderID), canEdit: canEdit) }
+        }
+    }
+
+    private func refresh() {
+        Task {
+            await folders.load(access)
+            await secrets?.load(access)
+        }
     }
 
     @ViewBuilder
@@ -109,12 +172,18 @@ struct FolderContentView: View {
 
     private var isEmpty: Bool {
         guard let secrets else { return folders.tree.children(of: nil).isEmpty }
-        return secrets.hasLoaded && secrets.secrets.isEmpty && folders.tree.children(of: folderID).isEmpty
+        return secrets.hasLoaded && !secrets.isNoAccess && secrets.secrets.isEmpty && folders.tree
+            .children(of: folderID).isEmpty
     }
 
     @ViewBuilder
     private func secretsSection(_ model: SecretListModel) -> some View {
-        if let message = model.message, !model.hasLoaded {
+        if model.isNoAccess {
+            Section("Secrets") {
+                Label("You don't have access to the secrets in this folder.", systemImage: "lock.fill")
+                    .accessibilityIdentifier("folderNoAccess")
+            }
+        } else if let message = model.message, !model.hasLoaded {
             Section("Secrets") {
                 Text(message).foregroundStyle(.red)
                 Button("Try again") { Task { await model.load(access) } }
@@ -197,5 +266,22 @@ private struct SecretRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("secret.\(secret.name)")
+    }
+}
+
+/// The sheet a folder screen is showing, if any.
+private enum FolderSheet: Identifiable {
+    case name(FolderNameModel)
+    case newSecret(CreateSecretModel)
+    case move(MoveModel)
+    case sharing(folderID: String, canEdit: Bool)
+
+    var id: String {
+        switch self {
+        case .name: "name"
+        case .newSecret: "newSecret"
+        case .move: "move"
+        case .sharing: "sharing"
+        }
     }
 }
