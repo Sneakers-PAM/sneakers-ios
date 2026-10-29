@@ -6,6 +6,7 @@ import SwiftUI
 /// Folders: the folder tree, the secrets in a folder and one secret. Three columns on an iPad, a stack on an iPhone.
 struct FoldersView: View {
     @Environment(VaultAccess.self) private var access
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var model = FoldersModel()
     @State private var folderID: String?
     @State private var secretID: String?
@@ -36,7 +37,9 @@ struct FoldersView: View {
         .task { await model.load(access) }
         .onChange(of: folderID) {
             secretID = nil
-            visibility = .doubleColumn
+            if sizeClass == .regular {
+                visibility = .doubleColumn
+            }
         }
     }
 

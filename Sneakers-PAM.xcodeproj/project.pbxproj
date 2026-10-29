@@ -81,6 +81,7 @@
 		BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A853092F28400783AE2 /* SecretDetailView.swift */; };
 		BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A873092F28800783AE2 /* StepUpView.swift */; };
 		BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A893092F2B300783AE2 /* VaultUITests.swift */; };
+		BB5D2A8C30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
 		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
 		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
@@ -209,6 +210,7 @@
 		BB5D2A853092F28400783AE2 /* SecretDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailView.swift; sourceTree = "<group>"; };
 		BB5D2A873092F28800783AE2 /* StepUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUpView.swift; sourceTree = "<group>"; };
 		BB5D2A893092F2B300783AE2 /* VaultUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultUITests.swift; sourceTree = "<group>"; };
+		BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransportTests.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBBD178C30925217005E64B7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */,
 				BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */,
 				BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */,
+				BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				BB5D2A173092E0D500783AE2 /* AppLockModelTests.swift in Sources */,
+				BB5D2A8C30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift in Sources */,
 				BB5D2A263092E1F100783AE2 /* ReminderPolicyTests.swift in Sources */,
 				BB5D2A3B3092E3C300783AE2 /* BrandFontsTests.swift in Sources */,
 				BB5D2A6C3092F17100783AE2 /* BrowseModelsTests.swift in Sources */,

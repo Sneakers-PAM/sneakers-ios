@@ -15,7 +15,10 @@ nonisolated struct HTTPGraphQLTransport: GraphQLTransport {
         let request = try Self.request(for: operation, in: context)
         let started = Date()
         do {
-            let (body, response) = try await session.data(for: request)
+            // Run apart from the caller: a screen that goes away must not abort a request that may have a side effect
+            // (a checkout), and a cancelled read would otherwise show up as an unreachable server.
+            let session = session
+            let (body, response) = try await Task { try await session.data(for: request) }.value
             guard let http = response as? HTTPURLResponse else { throw VaultError.unexpected }
             let seconds = Date().timeIntervalSince(started)
             let status = http.statusCode
@@ -29,7 +32,8 @@ nonisolated struct HTTPGraphQLTransport: GraphQLTransport {
                 )
             throw error
         } catch {
-            Self.logger.info("graphql \(operation.name, privacy: .public) could not reach the server")
+            let code = (error as? URLError)?.code.rawValue ?? 0
+            Self.logger.info("graphql \(operation.name, privacy: .public) could not reach the server (\(code))")
             throw VaultError.unreachable
         }
     }
