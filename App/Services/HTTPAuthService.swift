@@ -67,7 +67,35 @@ nonisolated struct HTTPAuthService: AuthServicing {
         try Self.parseConfirm(response, data: data)
     }
 
+    func stepUp(
+        on url: ServerURL,
+        session stored: AuthenticatedSession,
+        kind: SecondFactorKind,
+        code: String
+    ) async throws {
+        let (data, response) = try await send(Self.stepUpRequest(on: url, session: stored, kind: kind, code: code))
+        try Self.parseStepUp(response, data: data)
+    }
+
+    func sendStepUpEmail(on url: ServerURL, session stored: AuthenticatedSession) async throws {
+        let (data, response) = try await send(Self.stepUpEmailRequest(on: url, session: stored))
+        try Self.parseStepUpEmail(response, data: data)
+    }
+
     // MARK: Requests
+
+    static func stepUpRequest(
+        on server: ServerURL,
+        session: AuthenticatedSession,
+        kind: SecondFactorKind,
+        code: String
+    ) -> URLRequest {
+        signedInPost("/auth/mfa/step-up", on: server, session: session, body: ["kind": kind.rawValue, "code": code])
+    }
+
+    static func stepUpEmailRequest(on server: ServerURL, session: AuthenticatedSession) -> URLRequest {
+        signedInPost("/auth/mfa/step-up/email/send", on: server, session: session, body: [:])
+    }
 
     static func loginRequest(to server: ServerURL, username: String, password: String) -> URLRequest {
         post("/auth/login", on: server, body: ["username": username, "password": password])

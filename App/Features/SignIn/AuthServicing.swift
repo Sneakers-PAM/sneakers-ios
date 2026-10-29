@@ -28,6 +28,12 @@ nonisolated protocol AuthServicing: Sendable {
 
     /// Finishes setup by proving the authenticator app produces the right code.
     func confirmSetup(on server: ServerURL, session: AuthenticatedSession, code: String) async throws
+
+    /// Proves a second factor again, for an action the server wants a fresh proof for, such as revealing a value.
+    func stepUp(on server: ServerURL, session: AuthenticatedSession, kind: SecondFactorKind, code: String) async throws
+
+    /// Emails a code for a step-up.
+    func sendStepUpEmail(on server: ServerURL, session: AuthenticatedSession) async throws
 }
 
 /// Keeps one session per server on this device. It holds a secret, so the real one is the Keychain.

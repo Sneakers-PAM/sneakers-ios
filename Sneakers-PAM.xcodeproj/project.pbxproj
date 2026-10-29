@@ -48,6 +48,40 @@
 		BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */; };
 		BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */; };
 		BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */; };
+		BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */; };
+		BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A493092EFD200783AE2 /* VaultModels.swift */; };
+		BB5D2A4C3092EFED00783AE2 /* VaultFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */; };
+		BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */; };
+		BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */; };
+		BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A513092F01D00783AE2 /* VaultService.swift */; };
+		BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */; };
+		BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */; };
+		BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */; };
+		BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A593092F04200783AE2 /* VaultOperations.swift */; };
+		BB5D2A5C3092F0E700783AE2 /* HTTPAuthStepUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */; };
+		BB5D2A5E3092F10700783AE2 /* RevealFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */; };
+		BB5D2A603092F10800783AE2 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */; };
+		BB5D2A623092F10C00783AE2 /* VaultAccessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */; };
+		BB5D2A643092F11A00783AE2 /* RevealCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */; };
+		BB5D2A663092F12A00783AE2 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A653092F12A00783AE2 /* Clipboard.swift */; };
+		BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A673092F12D00783AE2 /* VaultAccess.swift */; };
+		BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */; };
+		BB5D2A6C3092F17100783AE2 /* BrowseModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */; };
+		BB5D2A6E3092F17C00783AE2 /* SecretDetailModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */; };
+		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
+		BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A733092F19500783AE2 /* BrowseModels.swift */; };
+		BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */; };
+		BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */; };
+		BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */; };
+		BB5D2A7C3092F26800783AE2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7B3092F26800783AE2 /* HomeView.swift */; };
+		BB5D2A7E3092F26A00783AE2 /* AccountToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */; };
+		BB5D2A803092F27100783AE2 /* FoldersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7F3092F27100783AE2 /* FoldersView.swift */; };
+		BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A833092F27800783AE2 /* CopyNotice.swift */; };
+		BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A853092F28400783AE2 /* SecretDetailView.swift */; };
+		BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A873092F28800783AE2 /* StepUpView.swift */; };
+		BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A893092F2B300783AE2 /* VaultUITests.swift */; };
+		BB5D2A8C30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */; };
+		BB5D2A8E30934DA300783AE2 /* FolderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A8D30934DA300783AE2 /* FolderContentView.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
 		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
 		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
@@ -143,6 +177,40 @@
 		BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStoreTests.swift; sourceTree = "<group>"; };
 		BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServerStore.swift; sourceTree = "<group>"; };
 		BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockContentTests.swift; sourceTree = "<group>"; };
+		BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModelsTests.swift; sourceTree = "<group>"; };
+		BB5D2A493092EFD200783AE2 /* VaultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModels.swift; sourceTree = "<group>"; };
+		BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFakes.swift; sourceTree = "<group>"; };
+		BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransportTests.swift; sourceTree = "<group>"; };
+		BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultServiceTests.swift; sourceTree = "<group>"; };
+		BB5D2A513092F01D00783AE2 /* VaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultService.swift; sourceTree = "<group>"; };
+		BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransport.swift; sourceTree = "<group>"; };
+		BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransport.swift; sourceTree = "<group>"; };
+		BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultService.swift; sourceTree = "<group>"; };
+		BB5D2A593092F04200783AE2 /* VaultOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultOperations.swift; sourceTree = "<group>"; };
+		BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuthStepUpTests.swift; sourceTree = "<group>"; };
+		BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealFakes.swift; sourceTree = "<group>"; };
+		BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTests.swift; sourceTree = "<group>"; };
+		BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultAccessTests.swift; sourceTree = "<group>"; };
+		BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCoordinatorTests.swift; sourceTree = "<group>"; };
+		BB5D2A653092F12A00783AE2 /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
+		BB5D2A673092F12D00783AE2 /* VaultAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultAccess.swift; sourceTree = "<group>"; };
+		BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCoordinator.swift; sourceTree = "<group>"; };
+		BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModelsTests.swift; sourceTree = "<group>"; };
+		BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModelTests.swift; sourceTree = "<group>"; };
+		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
+		BB5D2A733092F19500783AE2 /* BrowseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModels.swift; sourceTree = "<group>"; };
+		BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModel.swift; sourceTree = "<group>"; };
+		BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVaultService.swift; sourceTree = "<group>"; };
+		BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultEnvironment.swift; sourceTree = "<group>"; };
+		BB5D2A7B3092F26800783AE2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountToolbarButton.swift; sourceTree = "<group>"; };
+		BB5D2A7F3092F27100783AE2 /* FoldersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersView.swift; sourceTree = "<group>"; };
+		BB5D2A833092F27800783AE2 /* CopyNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyNotice.swift; sourceTree = "<group>"; };
+		BB5D2A853092F28400783AE2 /* SecretDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailView.swift; sourceTree = "<group>"; };
+		BB5D2A873092F28800783AE2 /* StepUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUpView.swift; sourceTree = "<group>"; };
+		BB5D2A893092F2B300783AE2 /* VaultUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultUITests.swift; sourceTree = "<group>"; };
+		BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransportTests.swift; sourceTree = "<group>"; };
+		BB5D2A8D30934DA300783AE2 /* FolderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentView.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBBD178C30925217005E64B7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
@@ -265,6 +333,44 @@
 			path = Typography;
 			sourceTree = "<group>";
 		};
+		BB5D2A463092EFB400783AE2 /* Vault */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A493092EFD200783AE2 /* VaultModels.swift */,
+				BB5D2A513092F01D00783AE2 /* VaultService.swift */,
+				BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */,
+				BB5D2A653092F12A00783AE2 /* Clipboard.swift */,
+				BB5D2A673092F12D00783AE2 /* VaultAccess.swift */,
+				BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */,
+				BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */,
+				BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */,
+				BB5D2A873092F28800783AE2 /* StepUpView.swift */,
+			);
+			path = Vault;
+			sourceTree = "<group>";
+		};
+		BB5D2A6F3092F18900783AE2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A713092F19000783AE2 /* DashboardModel.swift */,
+				BB5D2A7B3092F26800783AE2 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BB5D2A703092F18900783AE2 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A733092F19500783AE2 /* BrowseModels.swift */,
+				BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */,
+				BB5D2A7F3092F27100783AE2 /* FoldersView.swift */,
+				BB5D2A833092F27800783AE2 /* CopyNotice.swift */,
+				BB5D2A853092F28400783AE2 /* SecretDetailView.swift */,
+				BB5D2A8D30934DA300783AE2 /* FolderContentView.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
 		BBBD17A7309257D8005E64B7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +400,16 @@
 				BB5D2A3A3092E3C300783AE2 /* BrandFontsTests.swift */,
 				BB5D2A403092E89600783AE2 /* FileServerStoreTests.swift */,
 				BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */,
+				BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */,
+				BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */,
+				BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */,
+				BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */,
+				BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */,
+				BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */,
+				BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */,
+				BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */,
+				BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */,
+				BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -302,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */,
+				BB5D2A893092F2B300783AE2 /* VaultUITests.swift */,
 			);
 			path = UITests;
 			sourceTree = "<group>";
@@ -329,6 +446,7 @@
 				BBBD17BA3092A866005E64B7 /* SplashContent.swift */,
 				BBBD17BC3092A86A005E64B7 /* SplashView.swift */,
 				BB5D2A393092E3BF00783AE2 /* Typography */,
+				BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */,
 			);
 			path = Shell;
 			sourceTree = "<group>";
@@ -348,6 +466,9 @@
 				BB5D29F03092DB1200783AE2 /* SignIn */,
 				BB5D2A113092E0CA00783AE2 /* Lock */,
 				BB5D2A223092E1D100783AE2 /* Authenticator */,
+				BB5D2A463092EFB400783AE2 /* Vault */,
+				BB5D2A6F3092F18900783AE2 /* Home */,
+				BB5D2A703092F18900783AE2 /* Browse */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -380,6 +501,9 @@
 				BB5D2A1C3092E0E600783AE2 /* LocalAuthenticator.swift */,
 				BB5D2A353092E2AA00783AE2 /* HTTPAuthService+Answers.swift */,
 				BB5D2A423092E8AA00783AE2 /* FileServerStore.swift */,
+				BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */,
+				BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */,
+				BB5D2A593092F04200783AE2 /* VaultOperations.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -390,6 +514,8 @@
 				BBBD17C63092C7B7005E64B7 /* ServerFakes.swift */,
 				BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */,
 				BB5D2A123092E0CA00783AE2 /* LockFakes.swift */,
+				BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */,
+				BB5D2A5D3092F10700783AE2 /* RevealFakes.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -518,29 +644,43 @@
 				BB5D2A0C3092DE0A00783AE2 /* CodeEntryView.swift in Sources */,
 				BBBD17D53092C7F8005E64B7 /* ServerProbing.swift in Sources */,
 				BB5D2A063092DBCC00783AE2 /* SessionManager.swift in Sources */,
+				BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */,
 				BB5D2A1F3092E0FC00783AE2 /* LockView.swift in Sources */,
 				BB5D2A1D3092E0E600783AE2 /* LocalAuthenticator.swift in Sources */,
+				BB5D2A7C3092F26800783AE2 /* HomeView.swift in Sources */,
+				BB5D2A803092F27100783AE2 /* FoldersView.swift in Sources */,
 				BBBD17DD3092C809005E64B7 /* UserDefaultsServerStore.swift in Sources */,
 				BB5D2A213092E10000783AE2 /* AppLockModel+Launch.swift in Sources */,
 				BB5D29FE3092DBA500783AE2 /* AuthModels.swift in Sources */,
+				BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */,
 				BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */,
+				BB5D2A663092F12A00783AE2 /* Clipboard.swift in Sources */,
 				BB5D2A1B3092E0E300783AE2 /* AppLockModel.swift in Sources */,
 				BB5D2A3D3092E3D100783AE2 /* BrandFonts.swift in Sources */,
 				BB5D2A0E3092DE1900783AE2 /* SignInView.swift in Sources */,
 				BB5D2A193092E0DD00783AE2 /* LockModels.swift in Sources */,
 				BB5D2A083092DBD400783AE2 /* SignInModel.swift in Sources */,
+				BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */,
 				BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */,
+				BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */,
+				BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */,
+				BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
 				BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */,
+				BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */,
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
+				BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */,
+				BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */,
 				BB5D2A2E3092E21600783AE2 /* QRCode.swift in Sources */,
 				BBBD17B13092623E005E64B7 /* SectionPlaceholderView.swift in Sources */,
+				BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */,
 				BB5D2A103092DE1E00783AE2 /* SessionManager+Launch.swift in Sources */,
 				BB5D2A023092DBBE00783AE2 /* HTTPAuthService.swift in Sources */,
 				BB5D2A043092DBC300783AE2 /* KeychainSessionStore.swift in Sources */,
 				BBBD17E73092C853005E64B7 /* ServerRegistry+Launch.swift in Sources */,
 				BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */,
 				BBBD17B53092A4FB005E64B7 /* SneakerLoaderProgress.swift in Sources */,
+				BB5D2A7E3092F26A00783AE2 /* AccountToolbarButton.swift in Sources */,
 				BB5D2A003092DBA800783AE2 /* AuthServicing.swift in Sources */,
 				BBBD17DB3092C807005E64B7 /* HTTPServerProbe.swift in Sources */,
 				BB5D2A343092E24D00783AE2 /* SecretFormat.swift in Sources */,
@@ -550,35 +690,49 @@
 				BB5D2A363092E2AA00783AE2 /* HTTPAuthService+Answers.swift in Sources */,
 				BBBD17E53092C849005E64B7 /* AccountView.swift in Sources */,
 				BB5D2A0A3092DE0500783AE2 /* ServersSection.swift in Sources */,
+				BB5D2A8E30934DA300783AE2 /* FolderContentView.swift in Sources */,
 				BBBD17E33092C846005E64B7 /* AddServerView.swift in Sources */,
+				BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */,
 				BBBD17D33092C7F6005E64B7 /* ServerEntry.swift in Sources */,
+				BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */,
+				BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */,
 				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
 				BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */,
+				BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */,
 				BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */,
+				BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */,
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
 				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
+				BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */,
 			);
 		};
 		BBBD179130925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 				BB5D2A173092E0D500783AE2 /* AppLockModelTests.swift in Sources */,
+				BB5D2A8C30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift in Sources */,
 				BB5D2A263092E1F100783AE2 /* ReminderPolicyTests.swift in Sources */,
 				BB5D2A3B3092E3C300783AE2 /* BrandFontsTests.swift in Sources */,
+				BB5D2A6C3092F17100783AE2 /* BrowseModelsTests.swift in Sources */,
 				BB5D2A283092E1F400783AE2 /* QRCodeTests.swift in Sources */,
+				BB5D2A643092F11A00783AE2 /* RevealCoordinatorTests.swift in Sources */,
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
 				BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */,
+				BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */,
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
 				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
+				BB5D2A623092F10C00783AE2 /* VaultAccessTests.swift in Sources */,
 				BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */,
 				BBBD17B93092A85A005E64B7 /* SplashContentTests.swift in Sources */,
+				BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */,
 				BB5D2A153092E0CD00783AE2 /* LockPolicyTests.swift in Sources */,
 				BBBD17CD3092C7CD005E64B7 /* HTTPServerProbeTests.swift in Sources */,
 				BBBD17B33092A4EE005E64B7 /* SneakerLoaderProgressTests.swift in Sources */,
 				BB5D29FA3092DB5900783AE2 /* SessionManagerTests.swift in Sources */,
 				BB5D29F23092DB2E00783AE2 /* AuthFakes.swift in Sources */,
 				BB5D2A323092E24C00783AE2 /* SecretFormatTests.swift in Sources */,
+				BB5D2A4C3092EFED00783AE2 /* VaultFakes.swift in Sources */,
 				BBBD17C73092C7B7005E64B7 /* ServerFakes.swift in Sources */,
 				BBBD17DF3092C835005E64B7 /* AddServerOutcomeMessageTests.swift in Sources */,
 				BB5D29F43092DB3200783AE2 /* AuthErrorMessageTests.swift in Sources */,
@@ -587,14 +741,20 @@
 				BBBD17AD30926228005E64B7 /* AppSectionTests.swift in Sources */,
 				BB5D2A133092E0CA00783AE2 /* LockFakes.swift in Sources */,
 				BB5D29FC3092DB6A00783AE2 /* SignInModelTests.swift in Sources */,
+				BB5D2A6E3092F17C00783AE2 /* SecretDetailModelTests.swift in Sources */,
 				BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */,
+				BB5D2A5E3092F10700783AE2 /* RevealFakes.swift in Sources */,
+				BB5D2A5C3092F0E700783AE2 /* HTTPAuthStepUpTests.swift in Sources */,
 				BB5D29F83092DB5200783AE2 /* KeychainSessionStoreTests.swift in Sources */,
+				BB5D2A603092F10800783AE2 /* ClipboardTests.swift in Sources */,
 				BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */,
+				BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */,
 			);
 		};
 		BBBD179C30925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */,
 				BBBD17A330925620005E64B7 /* SneakersPAMUITests.swift in Sources */,
 			);
 		};
@@ -760,6 +920,7 @@
 				INFOPLIST_FILE = App/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Sneakers-PAM uses Face ID to unlock the app and keep your secrets private.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -803,6 +964,7 @@
 				INFOPLIST_FILE = App/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Sneakers-PAM uses Face ID to unlock the app and keep your secrets private.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

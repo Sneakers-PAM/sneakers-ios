@@ -85,6 +85,34 @@ extension HTTPAuthService {
         }
     }
 
+    static func parseStepUp(_ response: HTTPURLResponse, data: Data) throws {
+        switch response.statusCode {
+        case 200:
+            return
+        case 401 where errorKey(data) == "invalid_code":
+            throw AuthError.invalidCode
+        case 401:
+            throw AuthError.sessionEnded
+        case 429:
+            throw AuthError.rateLimited
+        default:
+            throw failure(for: response.statusCode)
+        }
+    }
+
+    static func parseStepUpEmail(_ response: HTTPURLResponse, data _: Data) throws {
+        switch response.statusCode {
+        case 200:
+            return
+        case 401:
+            throw AuthError.sessionEnded
+        case 429:
+            throw AuthError.rateLimited
+        default:
+            throw failure(for: response.statusCode)
+        }
+    }
+
     static func parseCurrentSession(
         _ response: HTTPURLResponse,
         data: Data,

@@ -12,6 +12,10 @@ final class FakeAuthService: AuthServicing, @unchecked Sendable {
     var currentResult: Result<AuthenticatedSession?, AuthError> = .success(nil)
     var enrollResult: Result<AuthenticatorEnrollment, AuthError> = .failure(.unexpected)
     var confirmResult: Result<Void, AuthError> = .success(())
+    var stepUpResult: Result<Void, AuthError> = .success(())
+    var stepUpEmailResult: Result<Void, AuthError> = .success(())
+    private(set) var stepUps: [(kind: SecondFactorKind, code: String)] = []
+    private(set) var stepUpEmailSends = 0
     private(set) var enrollStarts = 0
     private(set) var confirmCodes: [String] = []
 
@@ -58,6 +62,16 @@ final class FakeAuthService: AuthServicing, @unchecked Sendable {
     func confirmSetup(on _: ServerURL, session _: AuthenticatedSession, code: String) async throws {
         confirmCodes.append(code)
         try confirmResult.get()
+    }
+
+    func stepUp(on _: ServerURL, session _: AuthenticatedSession, kind: SecondFactorKind, code: String) async throws {
+        stepUps.append((kind, code))
+        try stepUpResult.get()
+    }
+
+    func sendStepUpEmail(on _: ServerURL, session _: AuthenticatedSession) async throws {
+        stepUpEmailSends += 1
+        try stepUpEmailResult.get()
     }
 }
 
