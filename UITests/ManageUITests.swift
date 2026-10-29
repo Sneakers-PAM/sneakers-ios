@@ -222,4 +222,44 @@ final class ManageUITests: VaultUITestCase {
         eve.tap()
         XCTAssertTrue(element(app, "rule.1").waitForExistence(timeout: 5), "the person was not added")
     }
+
+    @MainActor
+    func testARevealThatNeedsApprovalWaitsAndThenShowsTheValue() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Platform")
+        openFolder(app, "Databases")
+        tapSecret(app, "Deploy key")
+
+        let reveal = element(app, "reveal.password")
+        XCTAssertTrue(reveal.waitForExistence(timeout: 8), "the Reveal button is missing")
+        reveal.tap()
+
+        XCTAssertTrue(element(app, "heldReveal").waitForExistence(timeout: 8), "the waiting state did not show")
+        XCTAssertFalse(element(app, "revealedValue").exists, "nothing may show before it is approved")
+        XCTAssertTrue(
+            element(app, "revealedValue").waitForExistence(timeout: 30),
+            "the value did not show once approved"
+        )
+    }
+
+    @MainActor
+    func testAHeldRevealCanBeCancelled() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Platform")
+        openFolder(app, "Databases")
+        tapSecret(app, "Deploy key")
+
+        element(app, "reveal.password").tap()
+        let cancel = element(app, "cancelHeld")
+        XCTAssertTrue(cancel.waitForExistence(timeout: 8), "the waiting state did not show")
+        cancel.tap()
+
+        XCTAssertTrue(
+            element(app, "reveal.password").waitForExistence(timeout: 5),
+            "the Reveal button did not come back"
+        )
+        XCTAssertFalse(element(app, "heldReveal").exists)
+    }
 }

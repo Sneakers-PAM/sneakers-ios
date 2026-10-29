@@ -112,7 +112,10 @@
             )
         }
 
-        func reveal(secretID _: String, fieldKey _: String, _: ServerContext) async throws -> String {
+        func reveal(secretID: String, fieldKey _: String, _: ServerContext) async throws -> String {
+            if secretID == "s2" {
+                throw VaultError.approvalRequired
+            }
             let attempt = state.withLock { state -> Int in
                 state.revealAttempts += 1
                 return state.revealAttempts
