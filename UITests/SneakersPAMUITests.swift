@@ -17,11 +17,13 @@ final class SneakersPAMUITests: XCTestCase {
         return app
     }
 
-    private func skipOnIPad() throws {
-        try XCTSkipIf(
-            UIDevice.current.userInterfaceIdiom == .pad,
-            "On an iPad the top tab bar hides Account behind its overflow chevron; the iPad layouts issue covers it."
-        )
+    /// Account is a tab on an iPhone and a toolbar button on an iPad.
+    private func openAccount(in app: XCUIApplication) {
+        let account = app.buttons["Account"].firstMatch
+        let button = app.buttons["accountButton"].firstMatch
+        let found = UIDevice.current.userInterfaceIdiom == .pad ? button : account
+        XCTAssertTrue(found.waitForExistence(timeout: 8), "the way into Account is missing")
+        found.tap()
     }
 
     // MARK: First launch
@@ -140,13 +142,10 @@ final class SneakersPAMUITests: XCTestCase {
     }
 
     @MainActor
-    func testSigningOutBringsBackTheSignInScreenAndHidesTheTabs() throws {
-        try skipOnIPad()
+    func testSigningOutBringsBackTheSignInScreenAndHidesTheTabs() {
         let app = launch("-uiTestingSignedIn")
 
-        let account = app.buttons["Account"].firstMatch
-        XCTAssertTrue(account.waitForExistence(timeout: 8), "the Account tab is missing")
-        account.tap()
+        openAccount(in: app)
         let signOut = app.buttons["signOut"]
         XCTAssertTrue(signOut.waitForExistence(timeout: 5), "the Sign out button is missing")
         signOut.tap()
@@ -156,13 +155,10 @@ final class SneakersPAMUITests: XCTestCase {
     }
 
     @MainActor
-    func testTheAddServerSheetCanBeCancelled() throws {
-        try skipOnIPad()
+    func testTheAddServerSheetCanBeCancelled() {
         let app = launch("-uiTestingSignedIn")
 
-        let account = app.buttons["Account"].firstMatch
-        XCTAssertTrue(account.waitForExistence(timeout: 8), "the Account tab is missing")
-        account.tap()
+        openAccount(in: app)
 
         let add = app.descendants(matching: .any).matching(identifier: "Add server").firstMatch
         XCTAssertTrue(add.waitForExistence(timeout: 5), "the Add server button is missing")

@@ -66,6 +66,21 @@
 		BB5D2A663092F12A00783AE2 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A653092F12A00783AE2 /* Clipboard.swift */; };
 		BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A673092F12D00783AE2 /* VaultAccess.swift */; };
 		BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */; };
+		BB5D2A6C3092F17100783AE2 /* BrowseModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */; };
+		BB5D2A6E3092F17C00783AE2 /* SecretDetailModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */; };
+		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
+		BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A733092F19500783AE2 /* BrowseModels.swift */; };
+		BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */; };
+		BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */; };
+		BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */; };
+		BB5D2A7C3092F26800783AE2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7B3092F26800783AE2 /* HomeView.swift */; };
+		BB5D2A7E3092F26A00783AE2 /* AccountToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */; };
+		BB5D2A803092F27100783AE2 /* FoldersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A7F3092F27100783AE2 /* FoldersView.swift */; };
+		BB5D2A823092F27600783AE2 /* SecretListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A813092F27600783AE2 /* SecretListView.swift */; };
+		BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A833092F27800783AE2 /* CopyNotice.swift */; };
+		BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A853092F28400783AE2 /* SecretDetailView.swift */; };
+		BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A873092F28800783AE2 /* StepUpView.swift */; };
+		BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A893092F2B300783AE2 /* VaultUITests.swift */; };
 		BBBD178E30925217005E64B7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178C30925217005E64B7 /* RootView.swift */; };
 		BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */; };
 		BBBD179030925217005E64B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBBD178B30925217005E64B7 /* Assets.xcassets */; };
@@ -179,6 +194,21 @@
 		BB5D2A653092F12A00783AE2 /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
 		BB5D2A673092F12D00783AE2 /* VaultAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultAccess.swift; sourceTree = "<group>"; };
 		BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCoordinator.swift; sourceTree = "<group>"; };
+		BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModelsTests.swift; sourceTree = "<group>"; };
+		BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModelTests.swift; sourceTree = "<group>"; };
+		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
+		BB5D2A733092F19500783AE2 /* BrowseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModels.swift; sourceTree = "<group>"; };
+		BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModel.swift; sourceTree = "<group>"; };
+		BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVaultService.swift; sourceTree = "<group>"; };
+		BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultEnvironment.swift; sourceTree = "<group>"; };
+		BB5D2A7B3092F26800783AE2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountToolbarButton.swift; sourceTree = "<group>"; };
+		BB5D2A7F3092F27100783AE2 /* FoldersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersView.swift; sourceTree = "<group>"; };
+		BB5D2A813092F27600783AE2 /* SecretListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretListView.swift; sourceTree = "<group>"; };
+		BB5D2A833092F27800783AE2 /* CopyNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyNotice.swift; sourceTree = "<group>"; };
+		BB5D2A853092F28400783AE2 /* SecretDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailView.swift; sourceTree = "<group>"; };
+		BB5D2A873092F28800783AE2 /* StepUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUpView.swift; sourceTree = "<group>"; };
+		BB5D2A893092F2B300783AE2 /* VaultUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultUITests.swift; sourceTree = "<group>"; };
 		BBBD178B30925217005E64B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBBD178C30925217005E64B7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BBBD178D30925217005E64B7 /* SneakersPAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SneakersPAMApp.swift; sourceTree = "<group>"; };
@@ -310,8 +340,33 @@
 				BB5D2A653092F12A00783AE2 /* Clipboard.swift */,
 				BB5D2A673092F12D00783AE2 /* VaultAccess.swift */,
 				BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */,
+				BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */,
+				BB5D2A793092F1F500783AE2 /* VaultEnvironment.swift */,
+				BB5D2A873092F28800783AE2 /* StepUpView.swift */,
 			);
 			path = Vault;
+			sourceTree = "<group>";
+		};
+		BB5D2A6F3092F18900783AE2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A713092F19000783AE2 /* DashboardModel.swift */,
+				BB5D2A7B3092F26800783AE2 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BB5D2A703092F18900783AE2 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D2A733092F19500783AE2 /* BrowseModels.swift */,
+				BB5D2A753092F19D00783AE2 /* SecretDetailModel.swift */,
+				BB5D2A7F3092F27100783AE2 /* FoldersView.swift */,
+				BB5D2A813092F27600783AE2 /* SecretListView.swift */,
+				BB5D2A833092F27800783AE2 /* CopyNotice.swift */,
+				BB5D2A853092F28400783AE2 /* SecretDetailView.swift */,
+			);
+			path = Browse;
 			sourceTree = "<group>";
 		};
 		BBBD17A7309257D8005E64B7 /* Tests */ = {
@@ -350,6 +405,8 @@
 				BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */,
 				BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */,
 				BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */,
+				BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */,
+				BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -358,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */,
+				BB5D2A893092F2B300783AE2 /* VaultUITests.swift */,
 			);
 			path = UITests;
 			sourceTree = "<group>";
@@ -385,6 +443,7 @@
 				BBBD17BA3092A866005E64B7 /* SplashContent.swift */,
 				BBBD17BC3092A86A005E64B7 /* SplashView.swift */,
 				BB5D2A393092E3BF00783AE2 /* Typography */,
+				BB5D2A7D3092F26A00783AE2 /* AccountToolbarButton.swift */,
 			);
 			path = Shell;
 			sourceTree = "<group>";
@@ -405,6 +464,8 @@
 				BB5D2A113092E0CA00783AE2 /* Lock */,
 				BB5D2A223092E1D100783AE2 /* Authenticator */,
 				BB5D2A463092EFB400783AE2 /* Vault */,
+				BB5D2A6F3092F18900783AE2 /* Home */,
+				BB5D2A703092F18900783AE2 /* Browse */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -580,8 +641,11 @@
 				BB5D2A0C3092DE0A00783AE2 /* CodeEntryView.swift in Sources */,
 				BBBD17D53092C7F8005E64B7 /* ServerProbing.swift in Sources */,
 				BB5D2A063092DBCC00783AE2 /* SessionManager.swift in Sources */,
+				BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */,
 				BB5D2A1F3092E0FC00783AE2 /* LockView.swift in Sources */,
 				BB5D2A1D3092E0E600783AE2 /* LocalAuthenticator.swift in Sources */,
+				BB5D2A7C3092F26800783AE2 /* HomeView.swift in Sources */,
+				BB5D2A803092F27100783AE2 /* FoldersView.swift in Sources */,
 				BBBD17DD3092C809005E64B7 /* UserDefaultsServerStore.swift in Sources */,
 				BB5D2A213092E10000783AE2 /* AppLockModel+Launch.swift in Sources */,
 				BB5D29FE3092DBA500783AE2 /* AuthModels.swift in Sources */,
@@ -595,6 +659,9 @@
 				BB5D2A083092DBD400783AE2 /* SignInModel.swift in Sources */,
 				BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */,
 				BB5D2A433092E8AA00783AE2 /* FileServerStore.swift in Sources */,
+				BB5D2A7A3092F1F500783AE2 /* VaultEnvironment.swift in Sources */,
+				BB5D2A843092F27800783AE2 /* CopyNotice.swift in Sources */,
+				BB5D2A763092F19D00783AE2 /* SecretDetailModel.swift in Sources */,
 				BBBD17AF3092623D005E64B7 /* AppSection.swift in Sources */,
 				BB5D2A303092E24200783AE2 /* AuthenticatorSetupView.swift in Sources */,
 				BB5D2A683092F12D00783AE2 /* VaultAccess.swift in Sources */,
@@ -603,12 +670,14 @@
 				BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */,
 				BB5D2A2E3092E21600783AE2 /* QRCode.swift in Sources */,
 				BBBD17B13092623E005E64B7 /* SectionPlaceholderView.swift in Sources */,
+				BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */,
 				BB5D2A103092DE1E00783AE2 /* SessionManager+Launch.swift in Sources */,
 				BB5D2A023092DBBE00783AE2 /* HTTPAuthService.swift in Sources */,
 				BB5D2A043092DBC300783AE2 /* KeychainSessionStore.swift in Sources */,
 				BBBD17E73092C853005E64B7 /* ServerRegistry+Launch.swift in Sources */,
 				BBBD178F30925217005E64B7 /* SneakersPAMApp.swift in Sources */,
 				BBBD17B53092A4FB005E64B7 /* SneakerLoaderProgress.swift in Sources */,
+				BB5D2A7E3092F26A00783AE2 /* AccountToolbarButton.swift in Sources */,
 				BB5D2A003092DBA800783AE2 /* AuthServicing.swift in Sources */,
 				BBBD17DB3092C807005E64B7 /* HTTPServerProbe.swift in Sources */,
 				BB5D2A343092E24D00783AE2 /* SecretFormat.swift in Sources */,
@@ -616,15 +685,19 @@
 				BBBD17D93092C803005E64B7 /* ServerRegistry.swift in Sources */,
 				BBBD17E13092C840005E64B7 /* AddServerOutcome+Message.swift in Sources */,
 				BB5D2A363092E2AA00783AE2 /* HTTPAuthService+Answers.swift in Sources */,
+				BB5D2A823092F27600783AE2 /* SecretListView.swift in Sources */,
 				BBBD17E53092C849005E64B7 /* AccountView.swift in Sources */,
 				BB5D2A0A3092DE0500783AE2 /* ServersSection.swift in Sources */,
 				BBBD17E33092C846005E64B7 /* AddServerView.swift in Sources */,
+				BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */,
 				BBBD17D33092C7F6005E64B7 /* ServerEntry.swift in Sources */,
 				BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */,
+				BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */,
 				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
 				BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */,
 				BB5D2A5A3092F04200783AE2 /* VaultOperations.swift in Sources */,
 				BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */,
+				BB5D2A783092F1F200783AE2 /* DemoVaultService.swift in Sources */,
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
 				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
 				BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */,
@@ -636,6 +709,7 @@
 				BB5D2A173092E0D500783AE2 /* AppLockModelTests.swift in Sources */,
 				BB5D2A263092E1F100783AE2 /* ReminderPolicyTests.swift in Sources */,
 				BB5D2A3B3092E3C300783AE2 /* BrandFontsTests.swift in Sources */,
+				BB5D2A6C3092F17100783AE2 /* BrowseModelsTests.swift in Sources */,
 				BB5D2A283092E1F400783AE2 /* QRCodeTests.swift in Sources */,
 				BB5D2A643092F11A00783AE2 /* RevealCoordinatorTests.swift in Sources */,
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
@@ -663,6 +737,7 @@
 				BBBD17AD30926228005E64B7 /* AppSectionTests.swift in Sources */,
 				BB5D2A133092E0CA00783AE2 /* LockFakes.swift in Sources */,
 				BB5D29FC3092DB6A00783AE2 /* SignInModelTests.swift in Sources */,
+				BB5D2A6E3092F17C00783AE2 /* SecretDetailModelTests.swift in Sources */,
 				BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */,
 				BB5D2A5E3092F10700783AE2 /* RevealFakes.swift in Sources */,
 				BB5D2A5C3092F0E700783AE2 /* HTTPAuthStepUpTests.swift in Sources */,
@@ -675,6 +750,7 @@
 		BBBD179C30925620005E64B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */,
 				BBBD17A330925620005E64B7 /* SneakersPAMUITests.swift in Sources */,
 			);
 		};

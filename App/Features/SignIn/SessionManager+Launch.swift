@@ -58,7 +58,10 @@ extension SessionManager {
     }
 
     /// Never reaches a server. A saved session is taken as still good, and every sign-in attempt fails as unreachable.
-    private struct OfflineAuthService: AuthServicing {
+    struct OfflineAuthService: AuthServicing {
+        /// The one step-up code the demo vault accepts.
+        static let demoCode = "123456"
+
         func login(to _: ServerURL, username _: String, password _: String) async throws -> LoginOutcome {
             throw AuthError.unreachable
         }
@@ -94,9 +97,11 @@ extension SessionManager {
             on _: ServerURL,
             session _: AuthenticatedSession,
             kind _: SecondFactorKind,
-            code _: String
+            code: String
         ) async throws {
-            throw AuthError.unreachable
+            if code != Self.demoCode {
+                throw AuthError.invalidCode
+            }
         }
 
         func sendStepUpEmail(on _: ServerURL, session _: AuthenticatedSession) async throws {

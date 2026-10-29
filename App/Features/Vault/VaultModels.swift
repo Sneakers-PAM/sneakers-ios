@@ -172,6 +172,26 @@ nonisolated struct FolderTree: Sendable {
     func folder(_ id: String) -> Folder? {
         byID[id]
     }
+
+    /// The folders nested for an outline. A folder that is only reachable through a cycle is left out.
+    func nodes() -> [FolderNode] {
+        nodes(under: nil, visited: [])
+    }
+
+    private func nodes(under parentID: String?, visited: Set<String>) -> [FolderNode] {
+        children(of: parentID).compactMap { folder in
+            guard !visited.contains(folder.id) else { return nil }
+            let inner = nodes(under: folder.id, visited: visited.union([folder.id]))
+            return FolderNode(id: folder.id, name: folder.name, children: inner.isEmpty ? nil : inner)
+        }
+    }
+}
+
+/// A folder with its subfolders, in the shape an outline list wants. Leaves have no children.
+nonisolated struct FolderNode: Identifiable, Hashable, Sendable {
+    let id: String
+    let name: String
+    let children: [FolderNode]?
 }
 
 /// The gateway sends timestamps as RFC 3339 text, and sometimes as seconds since 1970.

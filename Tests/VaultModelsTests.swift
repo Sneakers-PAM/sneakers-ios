@@ -35,6 +35,24 @@ struct VaultModelsTests {
         #expect(tree.children(of: "2").isEmpty)
     }
 
+    @Test func theTreeNestsFoldersForTheSidebar() {
+        let platform = folder("1", "Platform")
+        let databases = folder("2", "Databases", parent: "1")
+        let apps = folder("3", "Apps")
+        let nodes = FolderTree(folders: [platform, databases, apps]).nodes()
+
+        #expect(nodes.map(\.name) == ["Apps", "Platform"])
+        #expect(nodes[0].children == nil)
+        #expect(nodes[1].children?.map(\.name) == ["Databases"])
+    }
+
+    @Test func nestingNeverLoopsOnACycle() {
+        let first = folder("1", "A", parent: "2")
+        let second = folder("2", "B", parent: "1")
+
+        #expect(FolderTree(folders: [first, second]).nodes().isEmpty)
+    }
+
     @Test func aPathWalksUpToTheRoot() {
         let tree = FolderTree(folders: [folder("1", "Platform"), folder("2", "Databases", parent: "1")])
 

@@ -15,6 +15,8 @@ struct RootView: View {
     @Environment(ServerRegistry.self) private var registry
     @Environment(SessionManager.self) private var sessions
     @Environment(AppLockModel.self) private var lock
+    @Environment(RevealCoordinator.self) private var reveal
+    @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var selection = AppSection.initial
     @State private var showsLoader = true
     @State private var checkedServers: Set<UUID> = []
@@ -42,10 +44,17 @@ struct RootView: View {
             case .active:
                 lock.becameActive(at: .now)
             case .inactive, .background:
+                reveal.hideAll()
                 lock.movedToBackground(at: .now)
             @unknown default:
                 break
             }
+        }
+        .onChange(of: lock.isLocked) {
+            reveal.hideAll()
+        }
+        .onChange(of: registry.active.map { sessions.isSignedIn($0.id) }) {
+            reveal.hideAll()
         }
         .onChange(of: sessions.interactiveSignIns) {
             lock.signedInJustNow()
@@ -96,18 +105,38 @@ struct RootView: View {
         TabView(selection: $selection) {
             ForEach(AppSection.allCases) { section in
                 Tab(section.title, systemImage: section.systemImage, value: section) {
-                    if section == .account {
-                        AccountView()
-                    } else {
-                        SectionPlaceholderView(section: section)
-                    }
+                    sectionView(section)
                 }
+                .hidden(section == .account && sizeClass == .regular)
             }
         }
         .tabViewStyle(.sidebarAdaptable)
+        .sheet(isPresented: stepUpBinding) {
+            StepUpView()
+        }
         .onChange(of: selection) { _, newSection in
             Self.logger.debug("section selected: \(newSection.rawValue, privacy: .public)")
         }
+    }
+}
+
+private extension RootView {
+    @ViewBuilder
+    func sectionView(_ section: AppSection) -> some View {
+        switch section {
+        case .home: HomeView()
+        case .folders: FoldersView()
+        case .account: AccountView()
+        case .requests, .approvals: SectionPlaceholderView(section: section)
+        }
+    }
+
+    var stepUpBinding: Binding<Bool> {
+        Binding(get: { reveal.stepUp != nil }, set: {
+            if !$0 {
+                reveal.cancelStepUp()
+            }
+        })
     }
 }
 

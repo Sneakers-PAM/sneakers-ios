@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import Foundation
+import Observation
 
 /// How the vault screens reach the server: the service, and the active server and signed-in session at the moment of
 /// each call. When the server says the session is over, it tells the app so the sign-in screen can come back.
-@MainActor
+@MainActor @Observable
 final class VaultAccess {
     let service: VaultServicing
     private let currentContext: () -> ServerContext?
