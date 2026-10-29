@@ -40,6 +40,17 @@ final class RequestsModel {
         board.awaiting.count + usesToDecide.count
     }
 
+    /// Forgets everything, for when the signed-in person or server changes.
+    func reset() {
+        phase = .loading
+        board = RequestBoard(
+            RequestsOverview(requests: [], secretNames: [:], secretsIMayApprove: [], people: [:]), for: ""
+        )
+        usesToDecide = []
+        myUses = []
+        message = nil
+    }
+
     func load(_ access: VaultAccess) async {
         do {
             let userID = try access.context().session.userID

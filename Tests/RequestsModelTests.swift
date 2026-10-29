@@ -140,4 +140,14 @@ struct RequestsModelTests {
         #expect(vault.comments.count == 1)
         #expect(vault.comments.first?.body == "Looks fine")
     }
+
+    @Test func resettingForgetsEverythingTheLastPersonSaw() async {
+        let model = await loaded()
+
+        model.reset()
+
+        #expect(model.phase == .loading)
+        #expect(model.awaitingCount == 0)
+        #expect(model.board.awaiting.isEmpty)
+    }
 }

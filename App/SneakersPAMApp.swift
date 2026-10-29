@@ -10,6 +10,7 @@ struct SneakersPAMApp: App {
     @State private var lock = AppLockModel.live()
     @State private var access: VaultAccess
     @State private var reveal: RevealCoordinator
+    @State private var requests: RequestsModel
 
     init() {
         BrandFonts.registerAll()
@@ -20,6 +21,7 @@ struct SneakersPAMApp: App {
         _sessions = State(initialValue: sessions)
         _access = State(initialValue: vault.access)
         _reveal = State(initialValue: vault.reveal)
+        _requests = State(initialValue: RequestsModel(authenticator: VaultEnvironment.authenticator()))
     }
 
     var body: some Scene {
@@ -30,6 +32,7 @@ struct SneakersPAMApp: App {
                 .environment(lock)
                 .environment(access)
                 .environment(reveal)
+                .environment(requests)
         }
     }
 }
