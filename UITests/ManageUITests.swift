@@ -262,4 +262,23 @@ final class ManageUITests: VaultUITestCase {
         )
         XCTAssertFalse(element(app, "heldReveal").exists)
     }
+
+    @MainActor
+    func testALockedSecretCanBeAskedFor() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Apps")
+        tapSecret(app, "Vendor key")
+
+        let ask = element(app, "requestAccess")
+        XCTAssertTrue(ask.waitForExistence(timeout: 8), "Request access is missing")
+        ask.tap()
+        let reason = element(app, "requestReason")
+        XCTAssertTrue(reason.waitForExistence(timeout: 5), "the reason field is missing")
+        reason.tap()
+        reason.typeText("On call tonight")
+        element(app, "requestSend").tap()
+
+        XCTAssertTrue(element(app, "requestSent").waitForExistence(timeout: 8), "the request did not report")
+    }
 }

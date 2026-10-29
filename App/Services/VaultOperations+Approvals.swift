@@ -26,4 +26,21 @@ nonisolated extension Operations {
             variables: ["id": .string(useID)]
         )
     }
+
+    static func requestAccess(secretID: String, reason: String) -> GraphQLOperation {
+        var variables: [String: GraphQLValue] = ["secretId": .string(secretID)]
+        let trimmed = reason.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmed.isEmpty {
+            variables["reason"] = .string(trimmed)
+        }
+        return GraphQLOperation(
+            name: "RequestsCreate",
+            query: """
+            mutation RequestsCreate($secretId: String!, $reason: String) {
+              createAccessRequest(secretId: $secretId, reason: $reason) { id }
+            }
+            """,
+            variables: variables
+        )
+    }
 }

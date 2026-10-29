@@ -76,6 +76,7 @@ nonisolated protocol VaultServicing: Sendable {
     func requestMove(_ request: MoveRequest, _ context: ServerContext) async throws
     func secretTypes(_ context: ServerContext) async throws -> [SecretType]
     func createSecret(_ secret: NewSecret, _ context: ServerContext) async throws -> String
+    func requestAccess(secretID: String, reason: String, _ context: ServerContext) async throws
     func prepareReveal(_ key: RevealKey, runID: String, _ context: ServerContext) async throws -> HeldReveal
     func redeemReveal(useID: String, _ context: ServerContext) async throws -> String
     func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion]

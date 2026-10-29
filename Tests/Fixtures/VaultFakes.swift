@@ -76,6 +76,9 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var prepareResults: [Result<HeldReveal, VaultError>] = []
     var redeemResults: [Result<String, VaultError>] = []
 
+    var requestAccessResult: Result<Void, VaultError> = .success(())
+
+    private(set) var accessRequests: [(secretID: String, reason: String)] = []
     private(set) var prepared: [PreparedReveal] = []
     private(set) var redeemed: [String] = []
     private(set) var rotations: [String] = []
@@ -215,6 +218,11 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         createdSecrets.append(secret)
         try folderActionResult.get()
         return createdSecretID
+    }
+
+    func requestAccess(secretID: String, reason: String, _: ServerContext) async throws {
+        accessRequests.append((secretID, reason))
+        try requestAccessResult.get()
     }
 
     func prepareReveal(_ key: RevealKey, runID: String, _: ServerContext) async throws -> HeldReveal {

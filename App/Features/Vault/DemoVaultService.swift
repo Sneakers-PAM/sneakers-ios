@@ -199,6 +199,8 @@
             return "s-new"
         }
 
+        func requestAccess(secretID _: String, reason _: String, _: ServerContext) async throws {}
+
         func prepareReveal(_ key: RevealKey, runID: String, _: ServerContext) async throws -> HeldReveal {
             HeldReveal(
                 id: "use-\(key.secretID)", state: "PENDING", confirm: false,

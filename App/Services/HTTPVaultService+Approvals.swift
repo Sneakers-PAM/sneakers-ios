@@ -15,6 +15,12 @@ extension HTTPVaultService {
         )
     }
 
+    func requestAccess(secretID: String, reason: String, _ context: ServerContext) async throws {
+        _ = try await run(
+            Operations.requestAccess(secretID: secretID, reason: reason), as: RequestAccessResponse.self, in: context
+        )
+    }
+
     func redeemReveal(useID: String, _ context: ServerContext) async throws -> String {
         try await run(Operations.redeemReveal(useID: useID), as: RedeemResponse.self, in: context).redeemSecretReveal
     }
@@ -29,6 +35,10 @@ extension HTTPVaultService {
 
     private struct PrepareResponse: Decodable {
         let prepareSecretReveal: WireUse
+    }
+
+    private struct RequestAccessResponse: Decodable {
+        let createAccessRequest: UpdatedSecret
     }
 
     private struct RedeemResponse: Decodable {

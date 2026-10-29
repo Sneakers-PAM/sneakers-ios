@@ -13,6 +13,7 @@ struct SecretDetailView: View {
     @State private var model: SecretDetailModel
     @State private var editing: EditSecretModel?
     @State private var moving: MoveModel?
+    @State private var requesting: AccessRequestModel?
 
     init(secretID: String, title: String) {
         self.secretID = secretID
@@ -64,6 +65,9 @@ struct SecretDetailView: View {
                     }
                 }
             }
+            .sheet(item: $requesting) { request in
+                AccessRequestView(model: request)
+            }
             .sheet(item: $moving) { move in
                 MoveView(model: move) { Task { await model.load(access) } }
             }
@@ -103,6 +107,10 @@ struct SecretDetailView: View {
                 Section {
                     Label("You can see this secret exists but can't read it.", systemImage: "lock.fill")
                         .accessibilityIdentifier("noAccess")
+                    Button("Request access", systemImage: "hand.raised") {
+                        requesting = AccessRequestModel(secretID: secretID)
+                    }
+                    .accessibilityIdentifier("requestAccess")
                 }
             } else {
                 HeartbeatCard(model: model)
