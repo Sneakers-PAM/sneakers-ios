@@ -105,6 +105,35 @@ final class SecretDetailModel {
         return access.manage && detail.summary.isReadable
     }
 
+    var lifecycle: SecretLifecycle {
+        detail?.lifecycle ?? SecretLifecycle()
+    }
+
+    private var isRetired: Bool {
+        detail?.summary.retired == true
+    }
+
+    var canRotate: Bool {
+        access.manage && detail?.type?.supportsRotation == true && !isRetired && !lifecycle.rotationOptOut
+    }
+
+    var canRetire: Bool {
+        access.manage && detail != nil && !isRetired
+    }
+
+    var canReinstate: Bool {
+        access.manage && isRetired
+    }
+
+    var canToggleHeartbeat: Bool {
+        access.manage && detail?.type?.supportsHeartbeat == true && !isRetired
+            && lifecycle.heartbeatBlockedReason == nil
+    }
+
+    var canToggleRotation: Bool {
+        access.manage && detail?.type?.supportsRotation == true && !isRetired
+    }
+
     var canCheckOut: Bool {
         guard let detail else { return false }
         return detail.summary.isReadable && detail.type?.supportsCheckout == true && detail.lease == nil
@@ -135,6 +164,51 @@ final class SecretDetailModel {
             Self.logger.info("secret access could not be read")
             return .none
         }
+    }
+
+    func rotateNow(_ access: VaultAccess) async {
+        await change(access) { try await $0.rotate(secretID: self.secretID, $1) }
+    }
+
+    func retire(_ access: VaultAccess) async {
+        await change(access) { try await $0.retire(secretID: self.secretID, $1) }
+    }
+
+    func reinstate(_ access: VaultAccess) async {
+        await change(access) { try await $0.reinstate(secretID: self.secretID, $1) }
+    }
+
+    func setHeartbeat(on isOn: Bool, _ access: VaultAccess) async {
+        let rotationOff = lifecycle.rotationOptOut
+        await change(access) {
+            let setting = AutomationSetting(disableRotation: rotationOff, disableHeartbeat: !isOn)
+            try await $0.setAutomation(secretID: self.secretID, setting, $1)
+        }
+    }
+
+    func setRotation(on isOn: Bool, _ access: VaultAccess) async {
+        let heartbeatOff = lifecycle.heartbeatOptOut
+        await change(access) {
+            let setting = AutomationSetting(disableRotation: !isOn, disableHeartbeat: heartbeatOff)
+            try await $0.setAutomation(secretID: self.secretID, setting, $1)
+        }
+    }
+
+    /// Runs one action on the secret, says why if the server refused it, and reads the secret again.
+    private func change(
+        _ access: VaultAccess,
+        _ work: @escaping (VaultServicing, ServerContext) async throws -> Void
+    ) async {
+        isWorking = true
+        message = nil
+        defer { isWorking = false }
+        do {
+            try await access.perform { try await work(access.service, $0) }
+        } catch {
+            message = (error as? VaultError ?? .unexpected).message
+            return
+        }
+        await load(access)
     }
 
     func checkOut(_ access: VaultAccess) async {

@@ -11,6 +11,10 @@
         private struct State {
             var revealAttempts = 0
             var lease: Lease?
+            var retired = false
+            var rotatedAt: Date?
+            var rotationOptOut = false
+            var heartbeatOptOut = false
             var editedName: String?
             var editedFields: [String: String] = [:]
         }
@@ -71,16 +75,23 @@
                     folderPath: "Apps", expiresAt: nil, verifiedAt: nil, nextRotationAt: nil
                 )
             }
+            let lifecycle = SecretLifecycle(
+                rotation: edited.rotatedAt == nil ? nil : .succeeded,
+                rotatedAt: edited.rotatedAt,
+                rotationOptOut: edited.rotationOptOut,
+                heartbeatOptOut: edited.heartbeatOptOut
+            )
             return SecretDetail(
-                summary: summary(id, name, views: 3),
+                summary: summary(id, name, views: 3, retired: edited.retired),
                 type: Self.databaseType,
                 values: ["username": "app_admin"]
                     .merging(edited.editedFields.filter { $0.key == "username" }) { _, new in new },
                 lease: held,
                 folderPath: "Platform / Databases",
                 expiresAt: nil,
-                verifiedAt: nil,
-                nextRotationAt: nil
+                verifiedAt: Date().addingTimeInterval(-300),
+                nextRotationAt: Date().addingTimeInterval(86400 * 7),
+                lifecycle: lifecycle
             )
         }
 
@@ -117,6 +128,25 @@
                 return .none
             }
             return Access(read: true, reveal: true, manage: true, approve: false, informed: false, manageRuleset: false)
+        }
+
+        func rotate(secretID _: String, _: ServerContext) async throws {
+            state.withLock { $0.rotatedAt = Date() }
+        }
+
+        func retire(secretID _: String, _: ServerContext) async throws {
+            state.withLock { $0.retired = true }
+        }
+
+        func reinstate(secretID _: String, _: ServerContext) async throws {
+            state.withLock { $0.retired = false }
+        }
+
+        func setAutomation(secretID _: String, _ setting: AutomationSetting, _: ServerContext) async throws {
+            state.withLock {
+                $0.rotationOptOut = setting.disableRotation
+                $0.heartbeatOptOut = setting.disableHeartbeat
+            }
         }
 
         func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
@@ -157,10 +187,10 @@
             lastHeartbeatResult: nil, retired: false, canRead: false, viewCount: 0, lastAccessedAt: nil
         )
 
-        private func summary(_ id: String, _ name: String, views: Int) -> SecretSummary {
+        private func summary(_ id: String, _ name: String, views: Int, retired: Bool = false) -> SecretSummary {
             SecretSummary(
                 id: id, name: name, folderId: "2", typeId: "t1", targetId: "tg1", lastHeartbeatResult: "ok",
-                retired: false, canRead: true, viewCount: views, lastAccessedAt: nil
+                retired: retired, canRead: true, viewCount: views, lastAccessedAt: nil
             )
         }
 
@@ -183,7 +213,10 @@
                 sensitive: true,
                 superSensitive: false
             )
-            return SecretType(id: "t1", name: "Database account", checkout: true, fields: [username, password])
+            return SecretType(
+                id: "t1", name: "Database account", checkout: true, fields: [username, password],
+                heartbeat: true, rotation: true
+            )
         }()
     }
 #endif

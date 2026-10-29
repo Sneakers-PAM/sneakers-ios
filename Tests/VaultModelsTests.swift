@@ -224,4 +224,38 @@ struct VaultModelsTests {
 
         #expect(sorted.map(\.versionNo) == [3, 2, 1])
     }
+
+    @Test func aHostKeyProblemIsExplainedAndAnythingElseHasNoNote() {
+        func note(_ result: String?) -> String? {
+            SecretSummary(
+                id: "1", name: "n", folderId: nil, typeId: nil, targetId: "t", lastHeartbeatResult: result,
+                retired: false, canRead: true, viewCount: nil, lastAccessedAt: nil
+            ).heartbeatNote
+        }
+        #expect(note("hostKeyNotPinned") != nil)
+        #expect(note("hostKeyMismatch") != nil)
+        #expect(note("ok") == nil)
+        #expect(note("failed") == nil)
+        #expect(note(nil) == nil)
+    }
+
+    @Test func aRotationStateHasALabelAndAnUnknownOneIsUnknown() {
+        #expect(RotationState(gateway: "ok") == .succeeded)
+        #expect(RotationState(gateway: "rotating") == .rotating)
+        #expect(RotationState(gateway: "failed") == .failed)
+        #expect(RotationState(gateway: "degraded") == .degraded)
+        #expect(RotationState(gateway: nil) == .unknown)
+        #expect(RotationState(gateway: "??") == .unknown)
+        #expect(RotationState.succeeded.label == "Rotated")
+        #expect(RotationState.degraded.label == "Degraded")
+    }
+
+    @Test func aTypeSaysWhetherItCanBeRotatedAndCheckedForHealth() throws {
+        let json = #"{"id":"t1","name":"T","checkout":true,"heartbeat":true,"rotation":false,"fields":[]}"#
+        let type = try JSONDecoder().decode(SecretType.self, from: Data(json.utf8))
+
+        #expect(type.supportsHeartbeat)
+        #expect(!type.supportsRotation)
+        #expect(!SecretType(id: "t", name: "T", checkout: nil, fields: nil).supportsHeartbeat)
+    }
 }

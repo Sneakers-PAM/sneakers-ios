@@ -32,6 +32,10 @@ nonisolated protocol VaultServicing: Sendable {
     func access(forFolder folderID: String, _ context: ServerContext) async throws -> Access
     func access(forSecret secretID: String, _ context: ServerContext) async throws -> Access
     func update(secretID: String, _ change: SecretChange, _ context: ServerContext) async throws
+    func rotate(secretID: String, _ context: ServerContext) async throws
+    func retire(secretID: String, _ context: ServerContext) async throws
+    func reinstate(secretID: String, _ context: ServerContext) async throws
+    func setAutomation(secretID: String, _ setting: AutomationSetting, _ context: ServerContext) async throws
     func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion]
     /// An earlier version's value: the key names the secret, the field and the version.
     func revealVersion(_ key: RevealKey, _ context: ServerContext) async throws -> String

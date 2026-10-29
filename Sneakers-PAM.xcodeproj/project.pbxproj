@@ -50,9 +50,11 @@
 		BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */; };
 		BB5D2A483092EFBA00783AE2 /* VaultModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */; };
 		BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A493092EFD200783AE2 /* VaultModels.swift */; };
+		BB3F0452528DD28BD5053A16 /* VaultAccessModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6FDF5FA6DC9AE1A74FA2 /* VaultAccessModels.swift */; };
 		BB5D2A4C3092EFED00783AE2 /* VaultFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */; };
 		BB5D2A4E3092EFFC00783AE2 /* GraphQLTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */; };
 		BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */; };
+		BBEC3F51728B7B709561BA0F /* HTTPVaultLifecycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF9839DE6DBD956A74A3CBA /* HTTPVaultLifecycleTests.swift */; };
 		BB5D2A523092F01D00783AE2 /* VaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A513092F01D00783AE2 /* VaultService.swift */; };
 		BB5D2A543092F02200783AE2 /* GraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */; };
 		BB5D2A563092F02600783AE2 /* HTTPGraphQLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */; };
@@ -68,6 +70,7 @@
 		BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */; };
 		BB5D2A6C3092F17100783AE2 /* BrowseModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */; };
 		BB5D2A6E3092F17C00783AE2 /* SecretDetailModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */; };
+		BBB2997C4DFB0A5964B1E975 /* SecretLifecycleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC15068DBA795AFF8CBEC75 /* SecretLifecycleModelTests.swift */; };
 		BB95406C8D16E5B858A6BE4B /* HistoryModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFACB16D556AFD90F4BE860 /* HistoryModelTests.swift */; };
 		BB473A3F9D7AC55E6443DDD4 /* EditSecretModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE9B5365F4541A475E3B309 /* EditSecretModelTests.swift */; };
 		BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A713092F19000783AE2 /* DashboardModel.swift */; };
@@ -186,9 +189,11 @@
 		BB5D2A443092E9BF00783AE2 /* LockContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockContentTests.swift; sourceTree = "<group>"; };
 		BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModelsTests.swift; sourceTree = "<group>"; };
 		BB5D2A493092EFD200783AE2 /* VaultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultModels.swift; sourceTree = "<group>"; };
+		BB5B6FDF5FA6DC9AE1A74FA2 /* VaultAccessModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultAccessModels.swift; sourceTree = "<group>"; };
 		BB5D2A4B3092EFED00783AE2 /* VaultFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFakes.swift; sourceTree = "<group>"; };
 		BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransportTests.swift; sourceTree = "<group>"; };
 		BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultServiceTests.swift; sourceTree = "<group>"; };
+		BBF9839DE6DBD956A74A3CBA /* HTTPVaultLifecycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPVaultLifecycleTests.swift; sourceTree = "<group>"; };
 		BB5D2A513092F01D00783AE2 /* VaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultService.swift; sourceTree = "<group>"; };
 		BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLTransport.swift; sourceTree = "<group>"; };
 		BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPGraphQLTransport.swift; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 		BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealCoordinator.swift; sourceTree = "<group>"; };
 		BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseModelsTests.swift; sourceTree = "<group>"; };
 		BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailModelTests.swift; sourceTree = "<group>"; };
+		BBC15068DBA795AFF8CBEC75 /* SecretLifecycleModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretLifecycleModelTests.swift; sourceTree = "<group>"; };
 		BBFACB16D556AFD90F4BE860 /* HistoryModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModelTests.swift; sourceTree = "<group>"; };
 		BBE9B5365F4541A475E3B309 /* EditSecretModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSecretModelTests.swift; sourceTree = "<group>"; };
 		BB5D2A713092F19000783AE2 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
@@ -351,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5D2A493092EFD200783AE2 /* VaultModels.swift */,
+				BB5B6FDF5FA6DC9AE1A74FA2 /* VaultAccessModels.swift */,
 				BB5D2A513092F01D00783AE2 /* VaultService.swift */,
 				BB5D2A533092F02200783AE2 /* GraphQLTransport.swift */,
 				BB5D2A653092F12A00783AE2 /* Clipboard.swift */,
@@ -422,12 +429,14 @@
 				BB5D2A473092EFBA00783AE2 /* VaultModelsTests.swift */,
 				BB5D2A4D3092EFFC00783AE2 /* GraphQLTransportTests.swift */,
 				BB5D2A4F3092F00D00783AE2 /* HTTPVaultServiceTests.swift */,
+				BBF9839DE6DBD956A74A3CBA /* HTTPVaultLifecycleTests.swift */,
 				BB5D2A5B3092F0E700783AE2 /* HTTPAuthStepUpTests.swift */,
 				BB5D2A5F3092F10800783AE2 /* ClipboardTests.swift */,
 				BB5D2A613092F10C00783AE2 /* VaultAccessTests.swift */,
 				BB5D2A633092F11A00783AE2 /* RevealCoordinatorTests.swift */,
 				BB5D2A6B3092F17100783AE2 /* BrowseModelsTests.swift */,
 				BB5D2A6D3092F17C00783AE2 /* SecretDetailModelTests.swift */,
+				BBC15068DBA795AFF8CBEC75 /* SecretLifecycleModelTests.swift */,
 				BBFACB16D556AFD90F4BE860 /* HistoryModelTests.swift */,
 				BBE9B5365F4541A475E3B309 /* EditSecretModelTests.swift */,
 				BB5D2A8B30934BEE00783AE2 /* HTTPGraphQLTransportTests.swift */,
@@ -721,6 +730,7 @@
 				BB5D2A743092F19500783AE2 /* BrowseModels.swift in Sources */,
 				BBBD17D33092C7F6005E64B7 /* ServerEntry.swift in Sources */,
 				BB5D2A4A3092EFD200783AE2 /* VaultModels.swift in Sources */,
+				BB3F0452528DD28BD5053A16 /* VaultAccessModels.swift in Sources */,
 				BB5D2A723092F19000783AE2 /* DashboardModel.swift in Sources */,
 				BBBD17B73092A51D005E64B7 /* SneakerLoaderView.swift in Sources */,
 				BB5D2A2A3092E21200783AE2 /* AuthenticatorSetupModel.swift in Sources */,
@@ -745,6 +755,7 @@
 				BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */,
 				BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */,
 				BB5D2A503092F00D00783AE2 /* HTTPVaultServiceTests.swift in Sources */,
+				BBEC3F51728B7B709561BA0F /* HTTPVaultLifecycleTests.swift in Sources */,
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
 				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
@@ -768,6 +779,7 @@
 				BB5D2A133092E0CA00783AE2 /* LockFakes.swift in Sources */,
 				BB5D29FC3092DB6A00783AE2 /* SignInModelTests.swift in Sources */,
 				BB5D2A6E3092F17C00783AE2 /* SecretDetailModelTests.swift in Sources */,
+				BBB2997C4DFB0A5964B1E975 /* SecretLifecycleModelTests.swift in Sources */,
 				BB95406C8D16E5B858A6BE4B /* HistoryModelTests.swift in Sources */,
 				BB473A3F9D7AC55E6443DDD4 /* EditSecretModelTests.swift in Sources */,
 				BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */,

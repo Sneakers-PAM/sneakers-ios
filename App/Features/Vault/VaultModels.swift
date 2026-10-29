@@ -40,6 +40,15 @@ nonisolated struct SecretSummary: Decodable, Equatable, Identifiable, Sendable {
     let viewCount: Int?
     let lastAccessedAt: String?
 
+    /// The one thing worth saying about a failed check beyond its status: a host key problem.
+    var heartbeatNote: String? {
+        switch lastHeartbeatResult {
+        case "hostKeyNotPinned": "The target has no pinned host key, so it is not being checked."
+        case "hostKeyMismatch": "The host offered a different key than the one that is pinned."
+        default: nil
+        }
+    }
+
     var health: HealthStatus {
         HealthStatus(heartbeatResult: lastHeartbeatResult, hasTarget: targetId?.isEmpty == false)
     }
@@ -124,66 +133,13 @@ nonisolated struct FieldDefinition: Decodable, Equatable, Sendable {
     }
 }
 
-/// One saved version of a secret. It names who changed what and when, and never carries a value.
-nonisolated struct SecretVersion: Decodable, Equatable, Identifiable, Sendable {
-    let versionNo: Int
-    let createdBy: String
-    let createdByName: String
-    let createdAt: String
-    let active: Bool
-    let fieldKeys: [String]
-    let changedFieldKeys: [String]
-    let changeLabel: String?
-
-    var id: Int {
-        versionNo
-    }
-
-    var createdAtDate: Date? {
-        GatewayDate.parse(createdAt)
-    }
-
-    /// A line for the history list. The server's own description of a type change wins, then the changed fields by
-    /// their labels.
-    func summary(labels: [String: String]) -> String {
-        if let changeLabel, !changeLabel.isEmpty {
-            return changeLabel
-        }
-        if versionNo == 1 {
-            return "Created"
-        }
-        if changedFieldKeys.isEmpty {
-            return "No value changed"
-        }
-        return "Changed: " + changedFieldKeys.map { labels[$0] ?? $0 }.joined(separator: ", ")
-    }
-}
-
-extension [SecretVersion] {
-    nonisolated func sortedNewestFirst() -> [SecretVersion] {
-        sorted { $0.versionNo > $1.versionNo }
-    }
-}
-
-/// What the signed-in person may do in a folder or on a secret, as the gateway works it out.
-nonisolated struct Access: Decodable, Equatable, Sendable {
-    let read: Bool
-    let reveal: Bool
-    let manage: Bool
-    let approve: Bool
-    let informed: Bool
-    let manageRuleset: Bool
-
-    static let none = Access(
-        read: false, reveal: false, manage: false, approve: false, informed: false, manageRuleset: false
-    )
-}
-
 nonisolated struct SecretType: Decodable, Equatable, Identifiable, Sendable {
     let id: String
     let name: String
     let checkout: Bool?
     let fields: [FieldDefinition]?
+    var heartbeat: Bool?
+    var rotation: Bool?
 
     /// The field most people want when they ask for a secret: the first one that is sensitive.
     var primarySensitiveFieldKey: String? {
@@ -192,6 +148,14 @@ nonisolated struct SecretType: Decodable, Equatable, Identifiable, Sendable {
 
     var supportsCheckout: Bool {
         checkout == true
+    }
+
+    var supportsHeartbeat: Bool {
+        heartbeat == true
+    }
+
+    var supportsRotation: Bool {
+        rotation == true
     }
 }
 
@@ -210,6 +174,7 @@ nonisolated struct SecretDetail: Equatable, Sendable {
     let expiresAt: Date?
     let verifiedAt: Date?
     let nextRotationAt: Date?
+    var lifecycle = SecretLifecycle()
 }
 
 /// Everything the Home dashboard shows, already joined.

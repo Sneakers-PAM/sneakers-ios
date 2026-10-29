@@ -52,6 +52,12 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var versionRevealResults: [Result<String, VaultError>] = []
     var restoreResults: [Result<Void, VaultError>] = []
 
+    var lifecycleResult: Result<Void, VaultError> = .success(())
+
+    private(set) var rotations: [String] = []
+    private(set) var retirements: [String] = []
+    private(set) var reinstatements: [String] = []
+    private(set) var automations: [AutomationRequest] = []
     private(set) var versionRevealRequests: [RevealKey] = []
     private(set) var restores: [(secretID: String, versionNo: Int)] = []
     private(set) var updates: [(secretID: String, change: SecretChange)] = []
@@ -110,6 +116,26 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         try updateResult.get()
     }
 
+    func rotate(secretID: String, _: ServerContext) async throws {
+        rotations.append(secretID)
+        try lifecycleResult.get()
+    }
+
+    func retire(secretID: String, _: ServerContext) async throws {
+        retirements.append(secretID)
+        try lifecycleResult.get()
+    }
+
+    func reinstate(secretID: String, _: ServerContext) async throws {
+        reinstatements.append(secretID)
+        try lifecycleResult.get()
+    }
+
+    func setAutomation(secretID: String, _ setting: AutomationSetting, _: ServerContext) async throws {
+        automations.append(AutomationRequest(secretID: secretID, setting: setting))
+        try lifecycleResult.get()
+    }
+
     func versions(secretID _: String, _: ServerContext) async throws -> [SecretVersion] {
         try versionsResult.get()
     }
@@ -125,6 +151,11 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
         guard !restoreResults.isEmpty else { return }
         try restoreResults.removeFirst().get()
     }
+}
+
+struct AutomationRequest: Equatable {
+    let secretID: String
+    let setting: AutomationSetting
 }
 
 extension Access {

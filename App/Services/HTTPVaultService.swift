@@ -55,7 +55,8 @@ nonisolated struct HTTPVaultService: VaultServicing {
             folderPath: secret.folderId.flatMap { tree.path(of: $0) },
             expiresAt: secret.expiresAt.flatMap(GatewayDate.parse),
             verifiedAt: secret.verifiedAt.flatMap(GatewayDate.parse),
-            nextRotationAt: secret.nextRotationAt.flatMap(GatewayDate.parse)
+            nextRotationAt: secret.nextRotationAt.flatMap(GatewayDate.parse),
+            lifecycle: secret.lifecycle
         )
     }
 
@@ -84,6 +85,23 @@ nonisolated struct HTTPVaultService: VaultServicing {
 
     func update(secretID: String, _ change: SecretChange, _ context: ServerContext) async throws {
         _ = try await run(Operations.update(secretID: secretID, change), as: UpdateResponse.self, in: context)
+    }
+
+    func rotate(secretID: String, _ context: ServerContext) async throws {
+        _ = try await run(Operations.rotate(secretID: secretID), as: RotateResponse.self, in: context)
+    }
+
+    func retire(secretID: String, _ context: ServerContext) async throws {
+        _ = try await run(Operations.retire(secretID: secretID), as: RetireResponse.self, in: context)
+    }
+
+    func reinstate(secretID: String, _ context: ServerContext) async throws {
+        _ = try await run(Operations.reinstate(secretID: secretID), as: ReinstateResponse.self, in: context)
+    }
+
+    func setAutomation(secretID: String, _ setting: AutomationSetting, _ context: ServerContext) async throws {
+        let operation = Operations.setAutomation(secretID: secretID, setting)
+        _ = try await run(operation, as: AutomationResponse.self, in: context)
     }
 
     func versions(secretID: String, _ context: ServerContext) async throws -> [SecretVersion] {
@@ -158,6 +176,21 @@ nonisolated struct HTTPVaultService: VaultServicing {
         let viewCount: Int?
         let lastAccessedAt: String?
         let nextRotationAt: String?
+        let lastRotationResult: String?
+        let rotatedAt: String?
+        let rotationOptOut: Bool?
+        let heartbeatOptOut: Bool?
+        let heartbeatBlockedReason: String?
+
+        var lifecycle: SecretLifecycle {
+            SecretLifecycle(
+                rotation: lastRotationResult.map { RotationState(gateway: $0) },
+                rotatedAt: rotatedAt.flatMap(GatewayDate.parse),
+                rotationOptOut: rotationOptOut == true,
+                heartbeatOptOut: heartbeatOptOut == true,
+                heartbeatBlockedReason: heartbeatBlockedReason
+            )
+        }
 
         var isReadable: Bool {
             canRead ?? true
@@ -205,6 +238,22 @@ nonisolated struct HTTPVaultService: VaultServicing {
 
     private struct UpdateResponse: Decodable {
         let updateSecret: UpdatedSecret
+    }
+
+    private struct RotateResponse: Decodable {
+        let rotateSecret: Bool
+    }
+
+    private struct RetireResponse: Decodable {
+        let retireSecret: UpdatedSecret
+    }
+
+    private struct ReinstateResponse: Decodable {
+        let restoreSecret: UpdatedSecret
+    }
+
+    private struct AutomationResponse: Decodable {
+        let setSecretAutomation: UpdatedSecret
     }
 
     private struct VersionsResponse: Decodable {
