@@ -12,6 +12,11 @@
 - 🏠 **Home:** what you have checked out with a live countdown, the four counts, and the most accessed secrets.
 - 📁 **Folders and secrets:** browse the folder tree, filter a folder by name, open a secret, and check it out or in. On an iPad the folders, the list and the secret sit side by side, and Account is a toolbar button.
 - 👁 **Reveal and copy:** a sensitive value is shown or copied only after the server agrees, asking for a fresh code when it wants one. Revealed values hide after 20 seconds, on lock and in the background. A copy stays on this device and clears after 60 seconds.
+- ✏️ **Edit a secret:** change its name and fields with a control for each kind of field. Only what changed is sent, and a sensitive value you type is cleared once it is saved.
+- 🕘 **History:** every saved version with who changed it and when, reading an old value through the same audited reveal, and restoring a version.
+- 💓 **Heartbeat and rotation:** whether a secret's target still accepts the stored value, when it was last checked, rotate now, automatic checking and rotation switches, and retire or restore a secret.
+- 📂 **Create and move:** make folders and secrets, rename a folder, and move a secret or folder, with a request when the vault needs a site admin's approval.
+- 👥 **Who has access:** the rules for a secret or folder, including the ones from folders above, and for people who may change them, setting each cell to allow, deny or blank and adding a person.
 - 🎨 **Laces design:** the brand icon, the opening screen and the brand fonts.
 
 Passkey and single sign-on sign-in, access requests and approvals are still to come.

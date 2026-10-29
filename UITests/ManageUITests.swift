@@ -19,10 +19,8 @@ final class ManageUITests: VaultUITestCase {
         let username = app.textFields["Username"]
         XCTAssertTrue(username.waitForExistence(timeout: 5), "the username control is missing")
         username.tap()
-        username.press(forDuration: 1.0)
-        if app.menuItems["Select All"].waitForExistence(timeout: 2) {
-            app.menuItems["Select All"].tap()
-        }
+        let existing = (username.value as? String) ?? ""
+        username.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: existing.count))
         username.typeText("bob")
         element(app, "editSave").tap()
 
