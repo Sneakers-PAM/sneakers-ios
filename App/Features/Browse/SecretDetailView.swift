@@ -54,8 +54,9 @@ struct SecretDetailView: View {
                         Button("Edit") { editing = model.makeEditModel() }
                             .accessibilityIdentifier("editSecret")
                     }
-                    ToolbarItem(placement: .secondaryAction) {
+                    ToolbarItem(placement: .primaryAction) {
                         Button("Move", systemImage: "folder") { Task { await openMove() } }
+                            .labelStyle(.iconOnly)
                             .accessibilityIdentifier("moveSecret")
                     }
                 }
