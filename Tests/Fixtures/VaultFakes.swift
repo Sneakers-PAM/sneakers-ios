@@ -74,6 +74,9 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var groupsResult: Result<[RuleGroup], VaultError> = .success([])
     var previewResult: Result<AccessPreview, VaultError> = .failure(.unexpected)
 
+    var exportResult: Result<CertificateFile, VaultError> = .failure(.unexpected)
+
+    private(set) var exports: [CertificateExportRequest] = []
     private(set) var previews: [PreviewRequest] = []
     private(set) var savedSecretRules: [(secretID: String, rules: [AccessRule])] = []
     private(set) var savedFolderRules: [(folderID: String, update: RulesUpdate)] = []
@@ -193,6 +196,11 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func saveRules(forFolder folderID: String, _ update: RulesUpdate, _: ServerContext) async throws {
         savedFolderRules.append((folderID, update))
         try saveRulesResult.get()
+    }
+
+    func exportCertificate(_ request: CertificateExportRequest, _: ServerContext) async throws -> CertificateFile {
+        exports.append(request)
+        return try exportResult.get()
     }
 
     func groups(_: ServerContext) async throws -> [RuleGroup] {

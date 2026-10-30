@@ -23,6 +23,13 @@
             state.withLock { $0.savedRules = update.rules }
         }
 
+        func exportCertificate(_ request: CertificateExportRequest, _: ServerContext) async throws -> CertificateFile {
+            CertificateFile(
+                data: Data("-----BEGIN CERTIFICATE-----".utf8), filename: "edge.\(request.format)",
+                contentType: "application/x-pem-file"
+            )
+        }
+
         func groups(_: ServerContext) async throws -> [RuleGroup] {
             [RuleGroup(id: "g1", name: "DB team")]
         }
