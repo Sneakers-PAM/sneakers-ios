@@ -159,7 +159,11 @@ final class RevealCoordinator {
         } catch VaultError.approvalRequired {
             await hold(action)
         } catch let error as VaultError {
-            notice = error.message
+            if case .restore = action {
+                notice = error.forAChange.message
+            } else {
+                notice = error.message
+            }
         } catch {
             notice = VaultError.unexpected.message
         }

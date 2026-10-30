@@ -210,7 +210,7 @@ final class SecretDetailModel {
         do {
             try await access.perform { try await work(access.service, $0) }
         } catch {
-            message = (error as? VaultError ?? .unexpected).message
+            message = (error as? VaultError ?? .unexpected).forAChange.message
             return
         }
         await load(access)

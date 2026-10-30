@@ -54,7 +54,7 @@ nonisolated extension Operations {
         )
     }
 
-    private static func ruleInput(_ rule: AccessRule) -> GraphQLValue {
+    static func ruleInput(_ rule: AccessRule) -> GraphQLValue {
         var input: [String: GraphQLValue] = ["subjectKind": .string(rule.subjectKind)]
         input["subjectName"] = .string(rule.subjectName)
         if let subjectId = rule.subjectId {
@@ -91,5 +91,43 @@ nonisolated extension Operations {
             """,
             variables: variables
         )
+    }
+
+    static let groups = GraphQLOperation(
+        name: "SharingGroups",
+        query: "query SharingGroups { groups { id name } }"
+    )
+
+    private static let decisionFields = """
+    read readReason reveal revealReason manage manageReason approve approveReason informed informedReason
+    """
+
+    static func preview(_ request: PreviewRequest) -> GraphQLOperation {
+        var variables: [String: GraphQLValue] = ["userId": .string(request.userID)]
+        variables["draftRules"] = .list(request.rules.map(ruleInput))
+        switch request.target {
+        case let .secret(id):
+            variables["secretId"] = .string(id)
+            return GraphQLOperation(
+                name: "SharingSimulateSecret",
+                query: """
+                query SharingSimulateSecret($secretId: String!, $userId: String!, $draftRules: [RaciRuleInput!]!) {
+                  simulateSecret(secretId: $secretId, userId: $userId, draftRules: $draftRules) { \(decisionFields) }
+                }
+                """,
+                variables: variables
+            )
+        case let .folder(id):
+            variables["folderId"] = .string(id)
+            return GraphQLOperation(
+                name: "SharingSimulateFolder",
+                query: """
+                query SharingSimulateFolder($folderId: String!, $userId: String!, $draftRules: [RaciRuleInput!]!) {
+                  simulateFolder(folderId: $folderId, userId: $userId, draftRules: $draftRules) { \(decisionFields) }
+                }
+                """,
+                variables: variables
+            )
+        }
     }
 }

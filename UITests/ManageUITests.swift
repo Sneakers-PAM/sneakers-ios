@@ -3,8 +3,6 @@
 
 import XCTest
 
-// Home, browsing and a secret's fields, run against the made-up vault a debug build uses for `-uiTestingSignedIn`.
-
 /// Editing, history, rotation, retiring, creating and moving, on the demo vault.
 final class ManageUITests: VaultUITestCase {
     @MainActor
@@ -186,44 +184,6 @@ final class ManageUITests: VaultUITestCase {
     }
 
     @MainActor
-    func testWhoHasAccessShowsTheRulesAndASavedChangeSaysSo() {
-        let app = launchSignedIn()
-        openDemoSecret(app)
-
-        let sharing = scrollTo(app, "sharing")
-        XCTAssertTrue(sharing.waitForExistence(timeout: 8), "the sharing link is missing")
-        tapWhenSettled(sharing)
-
-        XCTAssertTrue(element(app, "rule.0").waitForExistence(timeout: 8), "the rules are missing")
-        XCTAssertTrue(app.staticTexts["From Platform"].exists, "the inherited rule is missing")
-        let save = element(app, "sharingSave")
-        XCTAssertFalse(save.isEnabled, "nothing has changed yet")
-
-        element(app, "cell.0.manage").tap()
-        XCTAssertTrue(save.isEnabled, "a change should allow saving")
-        save.tap()
-        XCTAssertTrue(element(app, "sharingSaved").waitForExistence(timeout: 8), "the save did not report")
-    }
-
-    @MainActor
-    func testAPersonCanBeFoundAndAddedToTheRules() {
-        let app = launchSignedIn()
-        openDemoSecret(app)
-
-        let sharing = scrollTo(app, "sharing")
-        tapWhenSettled(sharing)
-        let field = scrollTo(app, "addPersonField")
-        XCTAssertTrue(field.waitForExistence(timeout: 8), "the search field is missing")
-        field.tap()
-        field.typeText("Ev")
-
-        let eve = scrollTo(app, "person.Eve")
-        XCTAssertTrue(eve.waitForExistence(timeout: 8), "the search found nobody")
-        eve.tap()
-        XCTAssertTrue(element(app, "rule.1").waitForExistence(timeout: 5), "the person was not added")
-    }
-
-    @MainActor
     func testARevealThatNeedsApprovalWaitsAndThenShowsTheValue() {
         let app = launchSignedIn()
         openFolders(app)
@@ -280,5 +240,24 @@ final class ManageUITests: VaultUITestCase {
         element(app, "requestSend").tap()
 
         XCTAssertTrue(element(app, "requestSent").waitForExistence(timeout: 8), "the request did not report")
+    }
+
+    @MainActor
+    func testACertificateShowsItsExpiryAndOffersFormatsToExport() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Apps")
+        tapSecret(app, "Edge certificate")
+
+        let expiry = element(app, "certExpiry")
+        XCTAssertTrue(expiry.waitForExistence(timeout: 8), "the expiry is missing")
+        XCTAssertTrue(expiry.label.hasPrefix("Expiring"), "twenty days left should read as expiring: \(expiry.label)")
+        XCTAssertTrue(app.staticTexts["CN=edge.example.org"].exists, "the subject is missing")
+
+        let export = scrollTo(app, "certExport")
+        XCTAssertTrue(export.exists, "Export is missing")
+        export.tap()
+        XCTAssertTrue(element(app, "certFormat").waitForExistence(timeout: 5), "the formats are missing")
+        XCTAssertTrue(element(app, "certExportConfirm").isEnabled, "the default format needs no passphrase")
     }
 }

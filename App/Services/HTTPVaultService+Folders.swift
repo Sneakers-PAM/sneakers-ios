@@ -30,6 +30,13 @@ extension HTTPVaultService {
         _ = try await run(Operations.requestMove(request), as: MoveRequestResponse.self, in: context)
     }
 
+    func exportCertificate(_ request: CertificateExportRequest, _ ctx: ServerContext) async throws -> CertificateFile {
+        let wire = try await run(Operations.exportCertificate(request), as: ExportResponse.self, in: ctx)
+            .exportCertificate
+        guard let data = Data(base64Encoded: wire.fileBase64) else { throw VaultError.unexpected }
+        return CertificateFile(data: data, filename: wire.filename, contentType: wire.contentType)
+    }
+
     func secretTypes(_ context: ServerContext) async throws -> [SecretType] {
         try await run(Operations.secretTypes, as: TypesResponse.self, in: context).secretTypes
     }
@@ -54,6 +61,16 @@ extension HTTPVaultService {
     struct MoveRequestResponse: Decodable {
         let createSecretMoveRequest: UpdatedSecret?
         let createFolderMoveRequest: UpdatedSecret?
+    }
+
+    struct WireFile: Decodable {
+        let fileBase64: String
+        let filename: String
+        let contentType: String
+    }
+
+    struct ExportResponse: Decodable {
+        let exportCertificate: WireFile
     }
 
     struct TypesResponse: Decodable {

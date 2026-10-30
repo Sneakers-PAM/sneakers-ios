@@ -10,10 +10,7 @@ import os
 @MainActor
 @Observable
 final class SharingModel {
-    enum Target: Equatable {
-        case secret(id: String)
-        case folder(id: String)
-    }
+    typealias Target = SharingTarget
 
     enum Phase: Equatable {
         case loading
@@ -31,6 +28,9 @@ final class SharingModel {
     private(set) var ruleset: Ruleset?
     private(set) var draft: RulesetDraft?
     private(set) var people: [Person] = []
+    private(set) var groups: [RuleGroup] = []
+    /// What a person could do under the rules as edited, once asked for. Any change to the rules clears it.
+    private(set) var preview: AccessPreview?
     private(set) var isSaving = false
     private(set) var didSave = false
     private(set) var message: String?
@@ -68,12 +68,14 @@ final class SharingModel {
         guard canEdit else { return }
         draft?.cycle(rule: index, action)
         didSave = false
+        preview = nil
     }
 
     func remove(at index: Int) {
         guard canEdit else { return }
         draft?.remove(at: index)
         didSave = false
+        preview = nil
     }
 
     func search(_ access: VaultAccess) async {
@@ -85,12 +87,45 @@ final class SharingModel {
         people = await (try? access.perform { try await access.service.searchPeople(query, $0) }) ?? []
     }
 
+    func loadGroups(_ access: VaultAccess) async {
+        guard canEdit else { return }
+        groups = await (try? access.perform { try await access.service.groups($0) }) ?? []
+    }
+
+    func add(_ group: RuleGroup) {
+        guard canEdit else { return }
+        draft?.addGroup(id: group.id, name: group.name)
+        didSave = false
+        preview = nil
+    }
+
+    func addEveryone() {
+        guard canEdit else { return }
+        draft?.addEveryone()
+        didSave = false
+        preview = nil
+    }
+
+    /// Asks the server what the person on one rule could do if the rules being edited were saved.
+    func preview(rule index: Int, _ access: VaultAccess) async {
+        guard let draft, draft.rules.indices.contains(index), draft.rules[index].subjectKind == "user" else { return }
+        let request = PreviewRequest(target: target, userID: draft.rules[index].subjectName, rules: draft.rules)
+        message = nil
+        do {
+            preview = try await access.perform { try await access.service.preview(request, $0) }
+        } catch {
+            preview = nil
+            message = (error as? VaultError ?? .unexpected).message
+        }
+    }
+
     func add(_ person: Person) {
         guard canEdit else { return }
         draft?.addUser(id: person.id, label: person.name)
         people = []
         searchQuery = ""
         didSave = false
+        preview = nil
     }
 
     func save(_ access: VaultAccess) async {

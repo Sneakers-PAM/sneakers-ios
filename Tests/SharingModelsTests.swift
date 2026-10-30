@@ -81,4 +81,32 @@ struct SharingModelsTests {
         draft.cycle(rule: 0, .reveal)
         #expect(!draft.isChanged)
     }
+
+    @Test func aDraftCanAddAGroupOnceAndEveryoneOnce() {
+        var draft = RulesetDraft(rules: [])
+
+        draft.addGroup(id: "g1", name: "DB team")
+        draft.addGroup(id: "g1", name: "DB team")
+        draft.addEveryone()
+        draft.addEveryone()
+
+        #expect(draft.rules.map(\.subjectKind) == ["group", "everyone"])
+        #expect(draft.rules[0].subjectName == "DB team")
+        #expect(draft.rules[0].subjectId == "g1")
+        #expect(draft.rules[1].displayName == "Everyone")
+    }
+
+    @Test func aPreviewSaysWhatAPersonCouldDoAndWhy() {
+        let preview = AccessPreview(
+            read: Decision(allowed: true, reason: "Allowed by DB team"),
+            reveal: Decision(allowed: false, reason: "Denied by Everyone"),
+            manage: Decision(allowed: false, reason: "No rule"),
+            approve: Decision(allowed: false, reason: "No rule"),
+            informed: Decision(allowed: true, reason: "Inherited")
+        )
+
+        #expect(preview.lines.map(\.label) == ["Read", "Reveal", "Manage", "Approve", "Informed"])
+        #expect(preview.lines[1].decision.reason == "Denied by Everyone")
+        #expect(preview.lines[0].decision.allowed)
+    }
 }

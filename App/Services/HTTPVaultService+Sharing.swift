@@ -30,6 +30,18 @@ extension HTTPVaultService {
         _ = try await run(operation, as: SaveFolderRulesResponse.self, in: context)
     }
 
+    func groups(_ context: ServerContext) async throws -> [RuleGroup] {
+        try await run(Operations.groups, as: GroupsResponse.self, in: context).groups
+    }
+
+    func preview(_ request: PreviewRequest, _ context: ServerContext) async throws -> AccessPreview {
+        let data = try await transport.execute(Operations.preview(request), in: context)
+        guard let decision = try? JSONDecoder().decode([String: WireDecision].self, from: data).values.first else {
+            throw VaultError.unexpected
+        }
+        return decision.preview
+    }
+
     func searchPeople(_ query: String, _ context: ServerContext) async throws -> [Person] {
         try await run(Operations.searchUsers(query: query), as: SearchResponse.self, in: context).searchUsers
     }
@@ -51,6 +63,33 @@ extension HTTPVaultService {
             )
         }
         return Ruleset(rules: mine, inherited: above, owners: owners, labels: labels)
+    }
+
+    private struct WireDecision: Decodable {
+        let read: Bool
+        let readReason: String
+        let reveal: Bool
+        let revealReason: String
+        let manage: Bool
+        let manageReason: String
+        let approve: Bool
+        let approveReason: String
+        let informed: Bool
+        let informedReason: String
+
+        var preview: AccessPreview {
+            AccessPreview(
+                read: Decision(allowed: read, reason: readReason),
+                reveal: Decision(allowed: reveal, reason: revealReason),
+                manage: Decision(allowed: manage, reason: manageReason),
+                approve: Decision(allowed: approve, reason: approveReason),
+                informed: Decision(allowed: informed, reason: informedReason)
+            )
+        }
+    }
+
+    private struct GroupsResponse: Decodable {
+        let groups: [RuleGroup]
     }
 
     private struct WireGrant: Decodable {

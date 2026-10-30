@@ -133,4 +133,23 @@ nonisolated extension Operations {
             variables: ["input": .object(input)]
         )
     }
+
+    static func exportCertificate(_ request: CertificateExportRequest) -> GraphQLOperation {
+        var variables: [String: GraphQLValue] = ["secretId": .string(request.secretID)]
+        variables["format"] = .string(request.format)
+        if let passphrase = request.passphrase {
+            variables["newPassphrase"] = .string(passphrase)
+        }
+        return GraphQLOperation(
+            name: "SecretExportCertificate",
+            query: """
+            mutation SecretExportCertificate($secretId: String!, $format: String!, $newPassphrase: String) {
+              exportCertificate(secretId: $secretId, format: $format, newPassphrase: $newPassphrase) {
+                fileBase64 filename contentType
+              }
+            }
+            """,
+            variables: variables
+        )
+    }
 }

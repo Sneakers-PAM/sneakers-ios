@@ -73,8 +73,8 @@
                     lastHeartbeatResult: nil, retired: false, canRead: false, viewCount: 0, lastAccessedAt: nil
                 )
                 return FolderContents(
-                    secrets: [summary("s1", "DB admin", views: 42), vendor] + added,
-                    types: [Self.databaseType]
+                    secrets: [summary("s1", "DB admin", views: 42), vendor, certificateSummary] + added,
+                    types: [Self.databaseType, Self.certificateType]
                 )
             case "2":
                 return FolderContents(
@@ -86,6 +86,9 @@
         }
 
         func secret(id: String, _: ServerContext) async throws -> SecretDetail {
+            if id == "s5" {
+                return certificateDetail()
+            }
             let (held, edited) = state.withLock { ($0.lease, $0) }
             let name = edited.editedName ?? (id == "s2" ? "Deploy key" : "DB admin")
             if id == "s8" {
