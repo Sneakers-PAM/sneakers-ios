@@ -7,6 +7,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment(VaultAccess.self) private var access
     @State private var model = DashboardModel()
+    @Binding var scan: ScanRequest?
 
     var body: some View {
         NavigationStack {
@@ -15,7 +16,10 @@ struct HomeView: View {
                 .navigationDestination(for: SecretRoute.self) { route in
                     SecretDetailView(secretID: route.id, title: route.name)
                 }
-                .toolbar { AccountToolbarButton() }
+                .toolbar {
+                    ScanToolbarButton(presenting: $scan, server: (try? access.context().server))
+                    AccountToolbarButton()
+                }
         }
         .task { await model.load(access) }
     }

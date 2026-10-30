@@ -22,6 +22,7 @@
 - 🔎 **Preview and groups:** see what a person would be allowed to do before saving a rule, and add a group or everyone as a rule.
 - 📜 **Certificates:** a certificate secret shows its subject, issuer, fingerprint and expiry, and exports to a file in PEM, PKCS#12, DER or JKS, asking for a passphrase where the format needs one. Its fields stay read-only.
 - 🚦 **Plain refusals:** a secret that is checked out, a rotation under way, or a decision you may not make each say so in words.
+- 📷 **Scan a secret:** the Scan button on Home reads a secret's QR code, or a pasted link, and opens that secret through the usual access checks. Only links on the signed-in server are followed. The simulator has no camera, so it shows the paste field only.
 - 🎨 **Laces design:** the brand icon, the opening screen and the brand fonts.
 
 Passkey and single sign-on sign-in are still to come.

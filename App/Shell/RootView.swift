@@ -22,6 +22,7 @@ struct RootView: View {
     @State private var selection = AppSection.initial
     @State private var showsLoader = true
     @State private var checkedServers: Set<UUID> = []
+    @State private var scan: ScanRequest?
 
     var body: some View {
         ZStack {
@@ -118,6 +119,15 @@ struct RootView: View {
         .sheet(isPresented: stepUpBinding) {
             StepUpView()
         }
+        .sheet(item: $scan) { request in
+            if let server = registry.active?.url {
+                ScanView(server: server, link: request.link)
+            }
+        }
+        .onOpenURL { url in
+            Self.logger.debug("a link opened the app")
+            scan = ScanRequest(link: url.absoluteString)
+        }
         .task { await requests.load(vaultAccess) }
         .onChange(of: selection) { _, newSection in
             Self.logger.debug("section selected: \(newSection.rawValue, privacy: .public)")
@@ -129,7 +139,7 @@ private extension RootView {
     @ViewBuilder
     func sectionView(_ section: AppSection) -> some View {
         switch section {
-        case .home: HomeView()
+        case .home: HomeView(scan: $scan)
         case .folders: FoldersView()
         case .account: AccountView()
         case .requests: RequestsView()

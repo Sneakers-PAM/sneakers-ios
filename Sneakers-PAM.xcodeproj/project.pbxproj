@@ -133,6 +133,7 @@
 		BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A873092F28800783AE2 /* StepUpView.swift */; };
 		BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A893092F2B300783AE2 /* VaultUITests.swift */; };
 		BB2FAE50B185DDB451D00142 /* SharingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB23A1E7FA25B35E66714461 /* SharingUITests.swift */; };
+		BB769320059187FA617CB3A1 /* ScanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBA3FD06B018B4F4FC8927F /* ScanUITests.swift */; };
 		BB779AE69F617AEB3CB2C9D6 /* RequestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5197C211EBE80BF3CAA9D3 /* RequestsUITests.swift */; };
 		BBDA2DA80F670A09406C6FA7 /* ManageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB51C71C2384F931319F73DE /* ManageUITests.swift */; };
 		BBA0B0F3E416B61294DC9E45 /* VaultUITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */; };
@@ -153,12 +154,18 @@
 		BBBD17BB3092A866005E64B7 /* SplashContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17BA3092A866005E64B7 /* SplashContent.swift */; };
 		BBBD17BD3092A86A005E64B7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17BC3092A86A005E64B7 /* SplashView.swift */; };
 		BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17C13092C7A2005E64B7 /* ServerURLTests.swift */; };
+		BB409CB90940D7DAD94E2720 /* ScanModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA5F88E28029861417F66E4 /* ScanModelTests.swift */; };
+		BB75A13CD55A459C8A54652B /* SecretLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB78E9662AAEEDD650BD46D4 /* SecretLinkTests.swift */; };
 		BBBD17C43092C7A7005E64B7 /* ServerSupportPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17C33092C7A7005E64B7 /* ServerSupportPolicyTests.swift */; };
 		BBBD17C73092C7B7005E64B7 /* ServerFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17C63092C7B7005E64B7 /* ServerFakes.swift */; };
 		BBBD17C93092C7C3005E64B7 /* ServerRegistryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17C83092C7C3005E64B7 /* ServerRegistryTests.swift */; };
 		BBBD17CB3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17CA3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift */; };
 		BBBD17CD3092C7CD005E64B7 /* HTTPServerProbeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17CC3092C7CD005E64B7 /* HTTPServerProbeTests.swift */; };
 		BBBD17CF3092C7EF005E64B7 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17CE3092C7EF005E64B7 /* ServerURL.swift */; };
+		BB26505D459A9949878E5DC8 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBADB520AF6E0840B669440D /* ScanModel.swift */; };
+		BBECAF2719DD3E45FCEDCC57 /* SecretLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB96815C26306DA1E7F0ECE4 /* SecretLink.swift */; };
+		BBEACA204A866E95044CFF58 /* CodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1648B7B87B64CAE8F7FF96 /* CodeScanner.swift */; };
+		BB4D6E3DA042864B66E0DAD0 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD63C040AC848B1371D54CA /* ScanView.swift */; };
 		BBBD17D13092C7F5005E64B7 /* ServerVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17D03092C7F5005E64B7 /* ServerVersion.swift */; };
 		BBBD17D33092C7F6005E64B7 /* ServerEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17D23092C7F6005E64B7 /* ServerEntry.swift */; };
 		BBBD17D53092C7F8005E64B7 /* ServerProbing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBD17D43092C7F8005E64B7 /* ServerProbing.swift */; };
@@ -318,6 +325,7 @@
 		BB5D2A873092F28800783AE2 /* StepUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUpView.swift; sourceTree = "<group>"; };
 		BB5D2A893092F2B300783AE2 /* VaultUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultUITests.swift; sourceTree = "<group>"; };
 		BB23A1E7FA25B35E66714461 /* SharingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharingUITests.swift"; sourceTree = "<group>"; };
+		BBBA3FD06B018B4F4FC8927F /* ScanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScanUITests.swift"; sourceTree = "<group>"; };
 		BB5197C211EBE80BF3CAA9D3 /* RequestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestsUITests.swift"; sourceTree = "<group>"; };
 		BB51C71C2384F931319F73DE /* ManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManageUITests.swift"; sourceTree = "<group>"; };
 		BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultUITestCase.swift"; sourceTree = "<group>"; };
@@ -340,12 +348,18 @@
 		BBBD17BA3092A866005E64B7 /* SplashContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashContent.swift; sourceTree = "<group>"; };
 		BBBD17BC3092A86A005E64B7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		BBBD17C13092C7A2005E64B7 /* ServerURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURLTests.swift; sourceTree = "<group>"; };
+		BBA5F88E28029861417F66E4 /* ScanModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScanModelTests.swift"; sourceTree = "<group>"; };
+		BB78E9662AAEEDD650BD46D4 /* SecretLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecretLinkTests.swift"; sourceTree = "<group>"; };
 		BBBD17C33092C7A7005E64B7 /* ServerSupportPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSupportPolicyTests.swift; sourceTree = "<group>"; };
 		BBBD17C63092C7B7005E64B7 /* ServerFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFakes.swift; sourceTree = "<group>"; };
 		BBBD17C83092C7C3005E64B7 /* ServerRegistryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRegistryTests.swift; sourceTree = "<group>"; };
 		BBBD17CA3092C7CA005E64B7 /* UserDefaultsServerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServerStoreTests.swift; sourceTree = "<group>"; };
 		BBBD17CC3092C7CD005E64B7 /* HTTPServerProbeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerProbeTests.swift; sourceTree = "<group>"; };
 		BBBD17CE3092C7EF005E64B7 /* ServerURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
+		BBADB520AF6E0840B669440D /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScanModel.swift"; sourceTree = "<group>"; };
+		BB96815C26306DA1E7F0ECE4 /* SecretLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecretLink.swift"; sourceTree = "<group>"; };
+		BB1648B7B87B64CAE8F7FF96 /* CodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodeScanner.swift"; sourceTree = "<group>"; };
+		BBD63C040AC848B1371D54CA /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScanView.swift"; sourceTree = "<group>"; };
 		BBBD17D03092C7F5005E64B7 /* ServerVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerVersion.swift; sourceTree = "<group>"; };
 		BBBD17D23092C7F6005E64B7 /* ServerEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerEntry.swift; sourceTree = "<group>"; };
 		BBBD17D43092C7F8005E64B7 /* ServerProbing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProbing.swift; sourceTree = "<group>"; };
@@ -422,6 +436,17 @@
 				BB5D2A203092E10000783AE2 /* AppLockModel+Launch.swift */,
 			);
 			path = Lock;
+			sourceTree = "<group>";
+		};
+		BB5C4A9E2F10A1B200783AE2 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				BB96815C26306DA1E7F0ECE4 /* SecretLink.swift */,
+				BB1648B7B87B64CAE8F7FF96 /* CodeScanner.swift */,
+				BBD63C040AC848B1371D54CA /* ScanView.swift */,
+				BBADB520AF6E0840B669440D /* ScanModel.swift */,
+			);
+			path = Scan;
 			sourceTree = "<group>";
 		};
 		BB5D2A223092E1D100783AE2 /* Authenticator */ = {
@@ -518,6 +543,8 @@
 				BBBD17B23092A4EE005E64B7 /* SneakerLoaderProgressTests.swift */,
 				BBBD17B83092A85A005E64B7 /* SplashContentTests.swift */,
 				BBBD17C13092C7A2005E64B7 /* ServerURLTests.swift */,
+				BBA5F88E28029861417F66E4 /* ScanModelTests.swift */,
+				BB78E9662AAEEDD650BD46D4 /* SecretLinkTests.swift */,
 				BBBD17C33092C7A7005E64B7 /* ServerSupportPolicyTests.swift */,
 				BBBD17C53092C7B2005E64B7 /* Fixtures */,
 				BBBD17C83092C7C3005E64B7 /* ServerRegistryTests.swift */,
@@ -576,6 +603,7 @@
 				BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */,
 				BB5D2A893092F2B300783AE2 /* VaultUITests.swift */,
 				BB23A1E7FA25B35E66714461 /* SharingUITests.swift */,
+				BBBA3FD06B018B4F4FC8927F /* ScanUITests.swift */,
 				BB5197C211EBE80BF3CAA9D3 /* RequestsUITests.swift */,
 				BB51C71C2384F931319F73DE /* ManageUITests.swift */,
 				BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */,
@@ -626,6 +654,7 @@
 				BB5D29F03092DB1200783AE2 /* SignIn */,
 				BB5D2A113092E0CA00783AE2 /* Lock */,
 				BB5D2A223092E1D100783AE2 /* Authenticator */,
+				BB5C4A9E2F10A1B200783AE2 /* Scan */,
 				BB5D2A463092EFB400783AE2 /* Vault */,
 				BB5D2A6F3092F18900783AE2 /* Home */,
 				BB5D2A703092F18900783AE2 /* Browse */,
@@ -808,6 +837,10 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				BBBD17CF3092C7EF005E64B7 /* ServerURL.swift in Sources */,
+				BB26505D459A9949878E5DC8 /* ScanModel.swift in Sources */,
+				BBECAF2719DD3E45FCEDCC57 /* SecretLink.swift in Sources */,
+				BBEACA204A866E95044CFF58 /* CodeScanner.swift in Sources */,
+				BB4D6E3DA042864B66E0DAD0 /* ScanView.swift in Sources */,
 				BBBD17BB3092A866005E64B7 /* SplashContent.swift in Sources */,
 				BB5D2A0C3092DE0A00783AE2 /* CodeEntryView.swift in Sources */,
 				BBBD17D53092C7F8005E64B7 /* ServerProbing.swift in Sources */,
@@ -928,6 +961,8 @@
 				BBEC3F51728B7B709561BA0F /* HTTPVaultLifecycleTests.swift in Sources */,
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
+				BB409CB90940D7DAD94E2720 /* ScanModelTests.swift in Sources */,
+				BB75A13CD55A459C8A54652B /* SecretLinkTests.swift in Sources */,
 				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
 				BB5D2A623092F10C00783AE2 /* VaultAccessTests.swift in Sources */,
 				BB5D2A413092E89600783AE2 /* FileServerStoreTests.swift in Sources */,
@@ -976,6 +1011,7 @@
 			files = (
 				BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */,
 				BB2FAE50B185DDB451D00142 /* SharingUITests.swift in Sources */,
+				BB769320059187FA617CB3A1 /* ScanUITests.swift in Sources */,
 				BB779AE69F617AEB3CB2C9D6 /* RequestsUITests.swift in Sources */,
 				BBDA2DA80F670A09406C6FA7 /* ManageUITests.swift in Sources */,
 				BBA0B0F3E416B61294DC9E45 /* VaultUITestCase.swift in Sources */,
@@ -1145,6 +1181,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Sneakers-PAM uses Face ID to unlock the app and keep your secrets private.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Sneakers-PAM uses the camera only to read a secret's QR code.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -1189,6 +1226,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Sneakers PAM";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Sneakers-PAM uses Face ID to unlock the app and keep your secrets private.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Sneakers-PAM uses the camera only to read a secret's QR code.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
