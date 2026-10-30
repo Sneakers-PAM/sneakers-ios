@@ -96,6 +96,16 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
     case stepUpRequired
     case approvalRequired
     case approvalPending
+    case checkedOut
+    case rotationInProgress
+    case rotationNotSupported
+    case rotationOptedOut
+    case selfApproval
+    case notApprover
+    case noApprover
+    case alreadyDecided
+    case notSiteAdmin
+    case notFolderOwner
     case recoveryRoleRequired
     case retired
     case leaseHeld
@@ -113,6 +123,16 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
         case .stepUpRequired: "Confirm it's you with a code to continue."
         case .approvalRequired: "This secret needs approval before it can be revealed."
         case .approvalPending: "Still waiting for approval."
+        case .checkedOut: "This secret is checked out, so it can't be changed until it is checked in."
+        case .rotationInProgress: "A rotation of this secret is running. Try again when it has finished."
+        case .rotationNotSupported: "This kind of secret can't be rotated."
+        case .rotationOptedOut: "Rotation is switched off for this secret."
+        case .selfApproval: "You can't approve your own request."
+        case .notApprover: "You aren't one of the approvers for this."
+        case .noApprover: "Nobody is set up to approve this."
+        case .alreadyDecided: "That request has already been decided."
+        case .notSiteAdmin: "Only a site admin can do that."
+        case .notFolderOwner: "Only an owner of the folder can do that."
         case .recoveryRoleRequired: "Reading or restoring an earlier version needs the recovery role."
         case .retired: "This secret is retired."
         case .leaseHeld: "Someone else has this checked out."
@@ -144,6 +164,15 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
         table["RETIRED"] = .retired
         table["CHECKOUT_LEASE_HELD"] = .leaseHeld
         table["CHECKOUT_TYPE_DISABLED"] = .checkoutNotAllowed
+        table["ROTATION_IN_PROGRESS"] = .rotationInProgress
+        table["ROTATION_NOT_SUPPORTED"] = .rotationNotSupported
+        table["ROTATION_OPTED_OUT"] = .rotationOptedOut
+        table["SELF_APPROVAL"] = .selfApproval
+        table["NOT_APPROVER"] = .notApprover
+        table["NO_APPROVER"] = .noApprover
+        table["REQUEST_NOT_PENDING"] = .alreadyDecided
+        table["NOT_SITE_ADMIN"] = .notSiteAdmin
+        table["NOT_FOLDER_OWNER"] = .notFolderOwner
         return table
     }()
 
@@ -156,4 +185,12 @@ nonisolated enum VaultError: Error, Equatable, Sendable {
         table["DEADLINE_EXCEEDED"] = .unreachable
         return table
     }()
+}
+
+extension VaultError {
+    /// The same refusal when what was asked was a change to a secret. A lease on it, mine or anyone's, blocks the
+    /// change, and the checkout wording ("someone else has it") would be wrong then.
+    var forAChange: VaultError {
+        self == .leaseHeld ? .checkedOut : self
+    }
 }

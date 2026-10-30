@@ -96,7 +96,7 @@ final class EditSecretModel {
             didSave = true
             Self.logger.info("secret saved")
         } catch {
-            let failure = error as? VaultError ?? .unexpected
+            let failure = (error as? VaultError ?? .unexpected).forAChange
             Self.logger.info("secret save failed: \(String(describing: failure), privacy: .public)")
             message = failure.message
         }
