@@ -80,7 +80,7 @@ nonisolated enum PassphraseRule: Equatable, Sendable {
 }
 
 /// A way to export a certificate, as the web offers them.
-nonisolated struct CertificateExportFormat: Equatable, Identifiable, Sendable {
+nonisolated struct CertificateExportFormat: Equatable, Hashable, Identifiable, Sendable {
     let value: String
     let label: String
     let hint: String

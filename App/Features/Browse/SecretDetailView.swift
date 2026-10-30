@@ -113,6 +113,11 @@ struct SecretDetailView: View {
                     .accessibilityIdentifier("requestAccess")
                 }
             } else {
+                if CertificateInfo.isCertificate(typeID: detail.summary.typeId) {
+                    CertificateCard(
+                        info: CertificateInfo(values: detail.values), secretID: secretID, canExport: model.access.reveal
+                    )
+                }
                 HeartbeatCard(model: model)
                 RotationCard(model: model)
                 leaseSection

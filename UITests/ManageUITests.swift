@@ -241,4 +241,23 @@ final class ManageUITests: VaultUITestCase {
 
         XCTAssertTrue(element(app, "requestSent").waitForExistence(timeout: 8), "the request did not report")
     }
+
+    @MainActor
+    func testACertificateShowsItsExpiryAndOffersFormatsToExport() {
+        let app = launchSignedIn()
+        openFolders(app)
+        openFolder(app, "Apps")
+        tapSecret(app, "Edge certificate")
+
+        let expiry = element(app, "certExpiry")
+        XCTAssertTrue(expiry.waitForExistence(timeout: 8), "the expiry is missing")
+        XCTAssertTrue(expiry.label.hasPrefix("Expiring"), "twenty days left should read as expiring: \(expiry.label)")
+        XCTAssertTrue(app.staticTexts["CN=edge.example.org"].exists, "the subject is missing")
+
+        let export = scrollTo(app, "certExport")
+        XCTAssertTrue(export.exists, "Export is missing")
+        export.tap()
+        XCTAssertTrue(element(app, "certFormat").waitForExistence(timeout: 5), "the formats are missing")
+        XCTAssertTrue(element(app, "certExportConfirm").isEnabled, "the default format needs no passphrase")
+    }
 }
