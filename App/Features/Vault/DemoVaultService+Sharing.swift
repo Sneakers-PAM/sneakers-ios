@@ -23,6 +23,21 @@
             state.withLock { $0.savedRules = update.rules }
         }
 
+        func groups(_: ServerContext) async throws -> [RuleGroup] {
+            [RuleGroup(id: "g1", name: "DB team")]
+        }
+
+        func preview(_ request: PreviewRequest, _: ServerContext) async throws -> AccessPreview {
+            let manages = request.rules.contains { $0.value(for: .manage) == .allow }
+            let reveal = Decision(allowed: true, reason: "Allowed by DB team")
+            let none = Decision(allowed: false, reason: "No rule says so")
+            return AccessPreview(
+                read: reveal, reveal: reveal,
+                manage: manages ? Decision(allowed: true, reason: "Allowed by this rule") : none,
+                approve: none, informed: none
+            )
+        }
+
         func searchPeople(_ query: String, _: ServerContext) async throws -> [Person] {
             [Person(id: "u-eve", name: "Eve", username: "eve")].filter {
                 $0.name.localizedCaseInsensitiveContains(query)

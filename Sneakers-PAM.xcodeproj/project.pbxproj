@@ -127,6 +127,7 @@
 		BB5D2A863092F28400783AE2 /* SecretDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A853092F28400783AE2 /* SecretDetailView.swift */; };
 		BB5D2A883092F28800783AE2 /* StepUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A873092F28800783AE2 /* StepUpView.swift */; };
 		BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2A893092F2B300783AE2 /* VaultUITests.swift */; };
+		BB2FAE50B185DDB451D00142 /* SharingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB23A1E7FA25B35E66714461 /* SharingUITests.swift */; };
 		BB779AE69F617AEB3CB2C9D6 /* RequestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5197C211EBE80BF3CAA9D3 /* RequestsUITests.swift */; };
 		BBDA2DA80F670A09406C6FA7 /* ManageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB51C71C2384F931319F73DE /* ManageUITests.swift */; };
 		BBA0B0F3E416B61294DC9E45 /* VaultUITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */; };
@@ -306,6 +307,7 @@
 		BB5D2A853092F28400783AE2 /* SecretDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDetailView.swift; sourceTree = "<group>"; };
 		BB5D2A873092F28800783AE2 /* StepUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUpView.swift; sourceTree = "<group>"; };
 		BB5D2A893092F2B300783AE2 /* VaultUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultUITests.swift; sourceTree = "<group>"; };
+		BB23A1E7FA25B35E66714461 /* SharingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharingUITests.swift"; sourceTree = "<group>"; };
 		BB5197C211EBE80BF3CAA9D3 /* RequestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestsUITests.swift"; sourceTree = "<group>"; };
 		BB51C71C2384F931319F73DE /* ManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManageUITests.swift"; sourceTree = "<group>"; };
 		BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VaultUITestCase.swift"; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 			children = (
 				BBBD17A230925620005E64B7 /* SneakersPAMUITests.swift */,
 				BB5D2A893092F2B300783AE2 /* VaultUITests.swift */,
+				BB23A1E7FA25B35E66714461 /* SharingUITests.swift */,
 				BB5197C211EBE80BF3CAA9D3 /* RequestsUITests.swift */,
 				BB51C71C2384F931319F73DE /* ManageUITests.swift */,
 				BB23C55D8EC46F1327568E39 /* VaultUITestCase.swift */,
@@ -952,6 +955,7 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				BB5D2A8A3092F2B300783AE2 /* VaultUITests.swift in Sources */,
+				BB2FAE50B185DDB451D00142 /* SharingUITests.swift in Sources */,
 				BB779AE69F617AEB3CB2C9D6 /* RequestsUITests.swift in Sources */,
 				BBDA2DA80F670A09406C6FA7 /* ManageUITests.swift in Sources */,
 				BBA0B0F3E416B61294DC9E45 /* VaultUITestCase.swift in Sources */,

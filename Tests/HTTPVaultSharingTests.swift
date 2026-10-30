@@ -111,4 +111,49 @@ struct HTTPVaultSharingTests {
             try await service.saveRules(forSecret: "s1", [], .fixture)
         }
     }
+
+    @Test func theGroupsRulesCanBeAboutAreListed() async throws {
+        transport.answer("SharingGroups", #"{"groups":[{"id":"g1","name":"DB team"},{"id":"g2","name":"Platform"}]}"#)
+
+        let groups = try await service.groups(.fixture)
+
+        #expect(groups.map(\.name) == ["DB team", "Platform"])
+        #expect(groups.first?.id == "g1")
+    }
+
+    private let decisionJSON = """
+    {"read":true,"readReason":"Allowed by DB team","reveal":false,"revealReason":"Denied by Everyone",
+     "manage":false,"manageReason":"No rule","approve":false,"approveReason":"No rule",
+     "informed":true,"informedReason":"Inherited"}
+    """
+
+    @Test func aSecretPreviewSendsTheDraftRulesForThatPerson() async throws {
+        transport.answer("SharingSimulateSecret", #"{"simulateSecret":\#(decisionJSON)}"#)
+        var rule = AccessRule(id: "n", subjectKind: "user", subjectName: "u9", subjectId: nil, grants: [])
+        rule.cycle(.reveal)
+
+        let preview = try await service.preview(
+            PreviewRequest(target: .secret(id: "s1"), userID: "u9", rules: [rule]),
+            .fixture
+        )
+
+        #expect(preview.read.allowed)
+        #expect(preview.reveal.reason == "Denied by Everyone")
+        let variables = transport.operation(named: "SharingSimulateSecret")?.variables
+        #expect(variables?["secretId"] == .string("s1"))
+        #expect(variables?["userId"] == .string("u9"))
+        guard case let .list(rules)? = variables?["draftRules"] else {
+            Issue.record("the draft rules are missing")
+            return
+        }
+        #expect(rules.count == 1)
+    }
+
+    @Test func aFolderPreviewUsesTheFolderOperation() async throws {
+        transport.answer("SharingSimulateFolder", #"{"simulateFolder":\#(decisionJSON)}"#)
+
+        _ = try await service.preview(PreviewRequest(target: .folder(id: "f1"), userID: "u9", rules: []), .fixture)
+
+        #expect(transport.operation(named: "SharingSimulateFolder")?.variables["folderId"] == .string("f1"))
+    }
 }

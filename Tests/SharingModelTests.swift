@@ -132,4 +132,49 @@ struct SharingModelTests {
 
         #expect(model.people.isEmpty)
     }
+
+    @Test func addingEveryoneOrAGroupAddsARule() async {
+        vault.rulesetResult = .success(ruleset)
+        vault.groupsResult = .success([RuleGroup(id: "g1", name: "DB team")])
+        let model = SharingModel(target: .secret(id: "s1"), canEdit: true)
+        await model.load(makeAccess())
+
+        await model.loadGroups(makeAccess())
+        model.add(model.groups[0])
+        model.addEveryone()
+
+        #expect(model.draft?.rules.map(\.subjectKind) == ["user", "group", "everyone"])
+    }
+
+    @Test func aPreviewAsksTheServerWithTheDraftNotTheSavedRules() async {
+        vault.rulesetResult = .success(ruleset)
+        vault.previewResult = .success(AccessPreview(
+            read: Decision(allowed: true, reason: "ok"), reveal: Decision(allowed: true, reason: "ok"),
+            manage: Decision(allowed: false, reason: "no"), approve: Decision(allowed: false, reason: "no"),
+            informed: Decision(allowed: false, reason: "no")
+        ))
+        let model = SharingModel(target: .secret(id: "s1"), canEdit: true)
+        await model.load(makeAccess())
+        model.cycle(rule: 0, .manage)
+
+        await model.preview(rule: 0, makeAccess())
+
+        #expect(vault.previews.first?.userID == "u9")
+        #expect(vault.previews.first?.rules.first?.value(for: .manage) == .allow)
+        #expect(model.preview?.read.allowed == true)
+    }
+
+    @Test func onlyAPersonsRuleCanBePreviewed() async {
+        vault.rulesetResult = .success(Ruleset(
+            rules: [AccessRule(id: "e", subjectKind: "everyone", subjectName: "", subjectId: nil, grants: [])],
+            inherited: [], owners: []
+        ))
+        let model = SharingModel(target: .secret(id: "s1"), canEdit: true)
+        await model.load(makeAccess())
+
+        await model.preview(rule: 0, makeAccess())
+
+        #expect(vault.previews.isEmpty)
+        #expect(model.preview == nil)
+    }
 }

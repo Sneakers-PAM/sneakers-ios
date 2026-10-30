@@ -68,6 +68,8 @@ nonisolated protocol VaultServicing: Sendable {
     func ruleset(forFolder folderID: String, _ context: ServerContext) async throws -> Ruleset
     func saveRules(forSecret secretID: String, _ rules: [AccessRule], _ context: ServerContext) async throws
     func saveRules(forFolder folderID: String, _ update: RulesUpdate, _ context: ServerContext) async throws
+    func groups(_ context: ServerContext) async throws -> [RuleGroup]
+    func preview(_ request: PreviewRequest, _ context: ServerContext) async throws -> AccessPreview
     func searchPeople(_ query: String, _ context: ServerContext) async throws -> [Person]
     func createFolder(parentID: String?, name: String, _ context: ServerContext) async throws -> Folder
     func renameFolder(id: String, name: String, _ context: ServerContext) async throws

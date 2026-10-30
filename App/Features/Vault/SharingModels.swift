@@ -102,6 +102,55 @@ nonisolated struct AccessRule: Equatable, Identifiable, Sendable {
     }
 }
 
+/// Something rules are about: a secret or a folder.
+nonisolated enum SharingTarget: Equatable, Sendable {
+    case secret(id: String)
+    case folder(id: String)
+}
+
+/// A question for the preview: what could this person do on this target if these rules were in effect.
+nonisolated struct PreviewRequest: Equatable, Sendable {
+    let target: SharingTarget
+    let userID: String
+    let rules: [AccessRule]
+}
+
+/// A group a rule can be about.
+nonisolated struct RuleGroup: Decodable, Equatable, Identifiable, Sendable {
+    let id: String
+    let name: String
+}
+
+/// One answer in a preview: allowed or not, and the rule or inheritance that decided it.
+nonisolated struct Decision: Equatable, Sendable {
+    let allowed: Bool
+    let reason: String
+}
+
+/// What a person could do if the rules being edited were saved, with the reason for each answer. Nothing is saved to
+/// get it.
+nonisolated struct AccessPreview: Equatable, Sendable {
+    struct Line: Equatable {
+        let label: String
+        let decision: Decision
+    }
+
+    let read: Decision
+    let reveal: Decision
+    let manage: Decision
+    let approve: Decision
+    let informed: Decision
+
+    var lines: [Line] {
+        var all = [Line(label: "Read", decision: read)]
+        all.append(Line(label: "Reveal", decision: reveal))
+        all.append(Line(label: "Manage", decision: manage))
+        all.append(Line(label: "Approve", decision: approve))
+        all.append(Line(label: "Informed", decision: informed))
+        return all
+    }
+}
+
 /// What a folder's rules save as: the rules, and the owners kept alongside them.
 nonisolated struct RulesUpdate: Equatable, Sendable {
     var rules: [AccessRule]
@@ -156,6 +205,28 @@ nonisolated struct RulesetDraft: Equatable, Sendable {
         guard !rules.contains(where: { $0.subjectKind == "user" && $0.subjectName == id }) else { return }
         labels[id] = label
         rules.append(AccessRule(id: "new-\(id)", subjectKind: "user", subjectName: id, subjectId: nil, grants: []))
+    }
+
+    mutating func addGroup(id: String, name: String) {
+        guard !rules.contains(where: { $0.subjectKind == "group" && $0.subjectId == id }) else { return }
+        rules.append(AccessRule(
+            id: "new-group-\(id)",
+            subjectKind: "group",
+            subjectName: name,
+            subjectId: id,
+            grants: []
+        ))
+    }
+
+    mutating func addEveryone() {
+        guard !rules.contains(where: { $0.subjectKind == "everyone" }) else { return }
+        rules.append(AccessRule(
+            id: "new-everyone",
+            subjectKind: "everyone",
+            subjectName: "",
+            subjectId: nil,
+            grants: []
+        ))
     }
 
     private static func normalised(_ rules: [AccessRule]) -> [String] {

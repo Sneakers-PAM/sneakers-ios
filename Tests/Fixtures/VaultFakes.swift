@@ -71,6 +71,10 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     var saveRulesResult: Result<Void, VaultError> = .success(())
     var peopleResult: Result<[Person], VaultError> = .success([])
 
+    var groupsResult: Result<[RuleGroup], VaultError> = .success([])
+    var previewResult: Result<AccessPreview, VaultError> = .failure(.unexpected)
+
+    private(set) var previews: [PreviewRequest] = []
     private(set) var savedSecretRules: [(secretID: String, rules: [AccessRule])] = []
     private(set) var savedFolderRules: [(folderID: String, update: RulesUpdate)] = []
     var prepareResults: [Result<HeldReveal, VaultError>] = []
@@ -189,6 +193,15 @@ final class FakeVaultService: VaultServicing, @unchecked Sendable {
     func saveRules(forFolder folderID: String, _ update: RulesUpdate, _: ServerContext) async throws {
         savedFolderRules.append((folderID, update))
         try saveRulesResult.get()
+    }
+
+    func groups(_: ServerContext) async throws -> [RuleGroup] {
+        try groupsResult.get()
+    }
+
+    func preview(_ request: PreviewRequest, _: ServerContext) async throws -> AccessPreview {
+        previews.append(request)
+        return try previewResult.get()
     }
 
     func searchPeople(_: String, _: ServerContext) async throws -> [Person] {

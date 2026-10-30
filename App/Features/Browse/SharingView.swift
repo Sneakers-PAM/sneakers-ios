@@ -22,7 +22,10 @@ struct SharingView: View {
         content
             .navigationTitle("Who has access")
             .navigationBarTitleDisplayMode(.inline)
-            .task { await model.load(access) }
+            .task {
+                await model.load(access)
+                await model.loadGroups(access)
+            }
             .toolbar {
                 if model.canEdit {
                     ToolbarItem(placement: .confirmationAction) {
@@ -62,6 +65,7 @@ struct SharingView: View {
             }
             rulesSection
             inheritedSection
+            previewSection
             if model.canEdit {
                 addSection
             }
@@ -82,7 +86,16 @@ struct SharingView: View {
             }
             ForEach(Array(rules.enumerated()), id: \.element.id) { index, rule in
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(model.name(for: rule)).font(.headline).accessibilityIdentifier("rule.\(index)")
+                    HStack {
+                        Text(model.name(for: rule)).font(.headline).accessibilityIdentifier("rule.\(index)")
+                        Spacer()
+                        if rule.subjectKind == "user" {
+                            Button("Preview") { Task { await model.preview(rule: index, access) } }
+                                .font(.footnote)
+                                .buttonStyle(.borderless)
+                                .accessibilityIdentifier("preview.\(index)")
+                        }
+                    }
                     HStack(spacing: 8) {
                         ForEach(RuleAction.allCases, id: \.self) { action in
                             CellButton(
@@ -119,8 +132,32 @@ struct SharingView: View {
         }
     }
 
+    @ViewBuilder
+    private var previewSection: some View {
+        if let preview = model.preview {
+            Section("What they could do with these rules") {
+                ForEach(preview.lines, id: \.label) { line in
+                    VStack(alignment: .leading, spacing: 2) {
+                        Label(
+                            "\(line.label): \(line.decision.allowed ? "yes" : "no")",
+                            systemImage: line.decision.allowed ? "checkmark.circle" : "xmark.circle"
+                        )
+                        Text(line.decision.reason).font(.footnote).foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .accessibilityIdentifier("previewCard")
+        }
+    }
+
     private var addSection: some View {
-        Section("Add a person") {
+        Section("Add a person, a group or everyone") {
+            Button("Everyone", systemImage: "globe") { model.addEveryone() }
+                .accessibilityIdentifier("addEveryone")
+            ForEach(model.groups) { group in
+                Button(group.name, systemImage: "person.3") { model.add(group) }
+                    .accessibilityIdentifier("group.\(group.name)")
+            }
             TextField("Search by name", text: $model.searchQuery)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
