@@ -19,6 +19,9 @@
 - 📨 **Requests and approvals:** ask for access to a secret you can see but not read, follow what you asked for, and approve or deny what waits on you, each confirmed with Face ID, Touch ID or the device passcode first. A badge on Approvals shows how many are waiting, and both screens refresh while they are open.
 - ⏳ **Reveals that need approval:** a reveal the vault holds shows a waiting state with a countdown, can be cancelled, and the value is read once it is approved. It is never read before then.
 - 👥 **Who has access:** the rules for a secret or folder, including the ones from folders above, and for people who may change them, setting each cell to allow, deny or blank and adding a person.
+- 🔎 **Preview and groups:** see what a person would be allowed to do before saving a rule, and add a group or everyone as a rule.
+- 📜 **Certificates:** a certificate secret shows its subject, issuer, fingerprint and expiry, and exports to a file in PEM, PKCS#12, DER or JKS, asking for a passphrase where the format needs one. Its fields stay read-only.
+- 🚦 **Plain refusals:** a secret that is checked out, a rotation under way, or a decision you may not make each say so in words.
 - 🎨 **Laces design:** the brand icon, the opening screen and the brand fonts.
 
 Passkey and single sign-on sign-in are still to come.
