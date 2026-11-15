@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import SwiftUI
+import UIKit
 
 @main
 struct SneakersPAMApp: App {
@@ -11,6 +12,7 @@ struct SneakersPAMApp: App {
     @State private var access: VaultAccess
     @State private var reveal: RevealCoordinator
     @State private var requests: RequestsModel
+    @State private var capture: ScreenCaptureMonitor
 
     init() {
         BrandFonts.registerAll()
@@ -21,6 +23,12 @@ struct SneakersPAMApp: App {
         _sessions = State(initialValue: sessions)
         _access = State(initialValue: vault.access)
         _reveal = State(initialValue: vault.reveal)
+        _capture = State(initialValue: ScreenCaptureMonitor(
+            access: vault.access,
+            reporter: HTTPScreenCaptureReporter(),
+            revealedSecretIDs: { [reveal = vault.reveal] in reveal.revealed.keys.map(\.secretID) },
+            deviceName: UIDevice.current.model
+        ))
         _requests = State(initialValue: RequestsModel(authenticator: VaultEnvironment.authenticator()))
     }
 
@@ -33,6 +41,7 @@ struct SneakersPAMApp: App {
                 .environment(access)
                 .environment(reveal)
                 .environment(requests)
+                .environment(capture)
         }
     }
 }
