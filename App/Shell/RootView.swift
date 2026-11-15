@@ -3,6 +3,7 @@
 
 import os
 import SwiftUI
+import UIKit
 
 /// The app's navigation shell: a tab bar on iPhone that becomes a sidebar on iPad. It opens on the sneaker loader,
 /// then asks for a server if there is none, then for a sign-in. The tabs only exist once the active server has a
@@ -18,6 +19,7 @@ struct RootView: View {
     @Environment(RevealCoordinator.self) private var reveal
     @Environment(RequestsModel.self) private var requests
     @Environment(VaultAccess.self) private var vaultAccess
+    @Environment(ScreenCaptureMonitor.self) private var capture
     @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var selection = AppSection.initial
     @State private var showsLoader = true
@@ -52,6 +54,13 @@ struct RootView: View {
             @unknown default:
                 break
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification)) { _ in
+            Task { await capture.screenshotTaken() }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIScreen.capturedDidChangeNotification)) { note in
+            guard let screen = note.object as? UIScreen else { return }
+            Task { await capture.recordingChanged(isCaptured: screen.isCaptured) }
         }
         .onChange(of: lock.isLocked) {
             reveal.hideAll()

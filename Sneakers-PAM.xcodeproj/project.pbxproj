@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBB855A6E07E122153140D85 /* HTTPScreenCaptureReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB465F94DBB04B419B38384E /* HTTPScreenCaptureReporter.swift */; };
+		BB755D1773E79347633B2852 /* ScreenCaptureMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24DB394BC70291E026EF79 /* ScreenCaptureMonitor.swift */; };
+		BBFFEEE7020B271DE00CD945 /* HTTPScreenCaptureReporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB70D91D7442ECA5166CC13F /* HTTPScreenCaptureReporterTests.swift */; };
+		BBFAB00F9B03208BD43A4B5B /* ScreenCaptureMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DDD4E37F4FBC6A8C7BF79 /* ScreenCaptureMonitorTests.swift */; };
 		BB5D29F23092DB2E00783AE2 /* AuthFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */; };
 		BB5D29F43092DB3200783AE2 /* AuthErrorMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F33092DB3200783AE2 /* AuthErrorMessageTests.swift */; };
 		BB5D29F63092DB4800783AE2 /* HTTPAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D29F53092DB4800783AE2 /* HTTPAuthServiceTests.swift */; };
@@ -198,6 +202,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB465F94DBB04B419B38384E /* HTTPScreenCaptureReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPScreenCaptureReporter.swift"; sourceTree = "<group>"; };
+		BB24DB394BC70291E026EF79 /* ScreenCaptureMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenCaptureMonitor.swift"; sourceTree = "<group>"; };
+		BB70D91D7442ECA5166CC13F /* HTTPScreenCaptureReporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPScreenCaptureReporterTests.swift"; sourceTree = "<group>"; };
+		BB7DDD4E37F4FBC6A8C7BF79 /* ScreenCaptureMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenCaptureMonitorTests.swift"; sourceTree = "<group>"; };
 		000000000000000000000120 /* Sneakers-PAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sneakers-PAM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5D29F13092DB2E00783AE2 /* AuthFakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFakes.swift; sourceTree = "<group>"; };
 		BB5D29F33092DB3200783AE2 /* AuthErrorMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorMessageTests.swift; sourceTree = "<group>"; };
@@ -483,6 +491,7 @@
 				BB5D2A653092F12A00783AE2 /* Clipboard.swift */,
 				BB5D2A673092F12D00783AE2 /* VaultAccess.swift */,
 				BB5D2A693092F13700783AE2 /* RevealCoordinator.swift */,
+				BB24DB394BC70291E026EF79 /* ScreenCaptureMonitor.swift */,
 				BBA988DCAE939F0C632A206F /* RevealCoordinator+Held.swift */,
 				BB5D2A773092F1F200783AE2 /* DemoVaultService.swift */,
 				BB5B40649F34A535ADD17726 /* DemoVaultService+Certificate.swift */,
@@ -544,6 +553,8 @@
 				BBBD17B83092A85A005E64B7 /* SplashContentTests.swift */,
 				BBBD17C13092C7A2005E64B7 /* ServerURLTests.swift */,
 				BBA5F88E28029861417F66E4 /* ScanModelTests.swift */,
+				BB70D91D7442ECA5166CC13F /* HTTPScreenCaptureReporterTests.swift */,
+				BB7DDD4E37F4FBC6A8C7BF79 /* ScreenCaptureMonitorTests.swift */,
 				BB78E9662AAEEDD650BD46D4 /* SecretLinkTests.swift */,
 				BBBD17C33092C7A7005E64B7 /* ServerSupportPolicyTests.swift */,
 				BBBD17C53092C7B2005E64B7 /* Fixtures */,
@@ -693,6 +704,7 @@
 				BB5D2A553092F02600783AE2 /* HTTPGraphQLTransport.swift */,
 				BB5D2A573092F03B00783AE2 /* HTTPVaultService.swift */,
 				BB16510186CEE43A1C20B2DA /* HTTPVaultService+Requests.swift */,
+				BB465F94DBB04B419B38384E /* HTTPScreenCaptureReporter.swift */,
 				BBEDBE76F9D9816056032A83 /* HTTPVaultService+Approvals.swift */,
 				BBB8D61F87DF86B30CC44E88 /* HTTPVaultService+Sharing.swift */,
 				BB70920357F783002DE6776A /* HTTPVaultService+Folders.swift */,
@@ -888,6 +900,7 @@
 				BBBD178E30925217005E64B7 /* RootView.swift in Sources */,
 				BB5D2A583092F03B00783AE2 /* HTTPVaultService.swift in Sources */,
 				BB96641C4D2F69EC14EB1AFF /* HTTPVaultService+Requests.swift in Sources */,
+				BBB855A6E07E122153140D85 /* HTTPScreenCaptureReporter.swift in Sources */,
 				BB3113B420BCCF0484FAEAB9 /* HTTPVaultService+Approvals.swift in Sources */,
 				BBAEADE703FC7A54C0521BAA /* HTTPVaultService+Sharing.swift in Sources */,
 				BBA9F6842914585B1C78F0D2 /* HTTPVaultService+Folders.swift in Sources */,
@@ -939,6 +952,7 @@
 				BBBD17D73092C7F9005E64B7 /* ServerStoring.swift in Sources */,
 				BB5D2A3F3092E3D500783AE2 /* LacesTextStyle.swift in Sources */,
 				BB5D2A6A3092F13700783AE2 /* RevealCoordinator.swift in Sources */,
+				BB755D1773E79347633B2852 /* ScreenCaptureMonitor.swift in Sources */,
 				BB145B4C890810F8746D8C08 /* RevealCoordinator+Held.swift in Sources */,
 			);
 		};
@@ -962,6 +976,8 @@
 				BB5D2A383092E2D200783AE2 /* HTTPAuthAnswerTests.swift in Sources */,
 				BBBD17C23092C7A2005E64B7 /* ServerURLTests.swift in Sources */,
 				BB409CB90940D7DAD94E2720 /* ScanModelTests.swift in Sources */,
+				BBFFEEE7020B271DE00CD945 /* HTTPScreenCaptureReporterTests.swift in Sources */,
+				BBFAB00F9B03208BD43A4B5B /* ScreenCaptureMonitorTests.swift in Sources */,
 				BB75A13CD55A459C8A54652B /* SecretLinkTests.swift in Sources */,
 				BB5D2A453092E9BF00783AE2 /* LockContentTests.swift in Sources */,
 				BB5D2A623092F10C00783AE2 /* VaultAccessTests.swift in Sources */,
